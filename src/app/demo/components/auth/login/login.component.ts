@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginComponent {
 	email: string = '';
 	password: string = '';
 
-	constructor(private layoutService: LayoutService, private http: HttpClient) {}
+	constructor(private layoutService: LayoutService, private http: HttpClient, private authService: AuthService) {}
 
 	get filledInput(): boolean {
 		return this.layoutService.config().inputStyle === 'filled';
@@ -20,9 +21,8 @@ export class LoginComponent {
 	
 	login() {
 		const credentials = { email: this.email, password: this.password };
-		const url = 'http://localhost:8080/authenticate';
+		const url = 'http://localhost:8080/api/v1/auth/authenticate';
 		const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
 		this.http.post(url, credentials, { headers })
 			.pipe(
 				catchError((error) => {
@@ -36,6 +36,7 @@ export class LoginComponent {
 					console.log('Login bem-sucedido', response);
 				}
 			);
+
 	}
 
 }
