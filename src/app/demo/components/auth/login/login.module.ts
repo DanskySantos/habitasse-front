@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { AppConfigModule } from 'src/app/layout/config/config.module';
 import { RippleModule } from 'primeng/ripple';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { RippleModule } from 'primeng/ripple';
         ButtonModule,
         InputTextModule,
         RippleModule,
-        AppConfigModule
+        AppConfigModule,
+        FormsModule,
     ],
     declarations: [LoginComponent]
 })
