@@ -1,42 +1,31 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { AuthService } from '../services/auth.service';
-
+import { HttpClient} from '@angular/common/http';
+import { Credentials } from '../models/credentials.model';
+import { Router } from '@angular/router';
 
 @Component({
-	templateUrl: './login.component.html'
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
-	email: string = '';
-	password: string = '';
+  email: string = '';
+  password: string = '';
 
-	constructor(private layoutService: LayoutService, private http: HttpClient, private authService: AuthService) {}
+  constructor(private authService: AuthService, private http: HttpClient, private router: Router) {}
 
-	get filledInput(): boolean {
-		return this.layoutService.config().inputStyle === 'filled';
-	}
+  login() {
+    const credentials: Credentials = { email: this.email, password: this.password };
+    this.authService.login(credentials).subscribe(
+      (response) => {
+		this.authService.loginSuccess(response.token);
+      },
+      () => {
+		this.authService.loginFailed();
+      }
+    );
+  }
 
-	
-	login() {
-		const credentials = { email: this.email, password: this.password };
-		const url = 'http://localhost:8080/api/v1/auth/authenticate';
-		const headers = new HttpHeaders().set('Content-Type', 'application/json');
-		this.http.post(url, credentials, { headers })
-			.pipe(
-				catchError((error) => {
-					
-					console.error('Erro durante o login', error);
-					return throwError(error);
-				})
-			)
-			.subscribe(
-				(response) => {
-					console.log('Login bem-sucedido', response);
-				}
-			);
-
-	}
-
+  get filledInput(): boolean {
+    return false; // You need to implement this logic as per your requirement
+  }
 }

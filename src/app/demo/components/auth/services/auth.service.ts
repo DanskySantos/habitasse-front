@@ -3,9 +3,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { CookieService as NgxCookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { Credentials } from 'src/app/demo/components/auth/models/credentials.model';
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
 import { JwtHelperService } from '@auth0/angular-jwt';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,16 +14,28 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   isLoggedIn$ = this.loggedIn.asObservable();
-  http: any;
 
-  constructor(private cookieService: NgxCookieService, private router: Router) { }
+  constructor(private cookieService: NgxCookieService, private router: Router, private http: HttpClient) { }
 
   apiURL: string = environment.apiUrl
-  tokenURL: string = environment.apiUrl + environment.obterTokenUrl
+  tokenURL: string = environment.apiUrl;  
   clientID: string = environment.clientId;
   clientSecret: string = environment.clientSecret;
   jwtHelper: JwtHelperService = new JwtHelperService();
  
+  loginSuccess(token: string): void {
+    this.cookieService.set('token', token);
+    this.loggedIn.next(true);
+    console.log('Login bem-sucedido');
+    this.router.navigate(['/']);
+  }
+
+  loginFailed(): void {
+    this.cookieService.delete('token');
+    this.loggedIn.next(false);
+    console.error('Erro durante o login');
+    this.router.navigate(['/auth/login']);
+  }
 
   logout(): void {
     this.cookieService.delete('token');
@@ -30,21 +43,19 @@ export class AuthService {
     this.router.navigate(['/auth/login']);
   }
 
-  logins(Credentials: Credentials): Observable<any> {
+  login(credentials: Credentials): Observable<any> {
     const params = new HttpParams()
-        .set('email', Credentials.email)
-        .set('password', Credentials.password)
+        .set('email', credentials.email)
+        .set('password', credentials.password)
         .set('grant_type', 'password')
 
-    const headers = {
+    const headers = new HttpHeaders({
       'Authorization': 'Basic ' + btoa(`${this.clientID}:${this.clientSecret}`),
       'Content-Type': 'application/x-www-form-urlencoded'
-    }
+    });
 
-    return this.http.post(this.tokenURL, params.toString(), { headers })
-
+    return this.http.post(this.tokenURL, params.toString(), { headers });
   }
-
 
   getUsuarioAutenticado() {
     const token = this.cookieService.get('token')
@@ -55,16 +66,13 @@ export class AuthService {
     return null;
   }
 
-
-
   obterTokenUsuario() {
     if(this.cookieService.get('token')) {
-      return  this.cookieService.get('token')
+      return this.cookieService.get('token')
     }
-     return null;
+    return null;
   }
   
- 
   isAutenticated(): boolean {
     const token = this.obterTokenUsuario()
     if( token ) {
@@ -74,4 +82,3 @@ export class AuthService {
     return false;
   }
 }
-
