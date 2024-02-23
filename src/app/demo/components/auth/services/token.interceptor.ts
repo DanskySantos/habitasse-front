@@ -19,7 +19,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     const url = request.url;
 
-    if(this.cookieService.get('token')
+   /* if(this.cookieService.get('token')
         && !url.endsWith('/seguranca/oauth/token')
         && !url.startsWith('https://viacep.com.br/ws/')) {
       const token = this.cookieService.get('token');
@@ -29,6 +29,7 @@ export class TokenInterceptor implements HttpInterceptor {
         }
       })
     }
+    */
 
     return next.handle(request);
   }
