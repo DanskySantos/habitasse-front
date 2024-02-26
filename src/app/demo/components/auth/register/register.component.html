@@ -1,37 +1,56 @@
-<div class="surface-ground h-screen w-screen flex align-items-center justify-content-center" [ngClass]="{'p-input-filled': filledInput}">
+<form [formGroup]="registerForm" #formDir="ngForm" class="surface-ground h-screen w-screen flex align-items-center justify-content-center">
     <div class="surface-card py-7 px-5 sm:px-7 shadow-2 flex flex-column w-11 sm:w-30rem" style="border-radius:14px">
         <h1 class="font-bold text-2xl mt-0 mb-2">Register</h1>
         <p class="text-color-secondary mb-4">Bem vindo a <strong>Habitasse</strong>, onde a mágica acontece, faça registro para continuar.</p>
-
-
         <span class="p-input-icon-left mb-4">
             <i class="pi pi-user"></i>
-            <input type="text" pInputText placeholder="Nome Completo" class="w-full">         
+            <input type="text" pInputText placeholder="Nome Completo" class="w-full" formControlName="name" required>
+            <div *ngIf="name.invalid && formDir.submitted" class="validation-error">
+               <!--<p *ngIf="name.errors?.['required']">
+                    O Nome é obrigatório
+                </p>--> 
+            </div>
         </span>
         
         <span class="p-input-icon-left mb-4">
             <i class="pi pi-user"></i>
-            <input type="text" pInputText placeholder="Username" class="w-full">         
+            <input type="text" pInputText placeholder="Username" formControlName="username" class="w-full" required>
+            <div *ngIf="username.invalid && formDir.submitted" class="validation-error">
+               <!-- <p *ngIf="username.errors?.['required']">
+                    O Username é obrigatório
+                </p>--> 
+            </div>
         </span>
 
         <span class="p-input-icon-left mb-4">
             <i class="pi pi-envelope"></i>
-            <input type="text" pInputText placeholder="Email" class="w-full">         
+            <input type="text" pInputText placeholder="Email" formControlName="email" class="w-full" required>   
+            <div *ngIf="email.invalid && formDir.submitted" class="validation-error">
+                <!--<p *ngIf="email.errors?.['required']">
+                    O Email é obrigatório
+                </p>--> 
+            </div>      
         </span>
         
         <span class="p-input-icon-left mb-4">
             <i class="pi pi-key"></i>
-            <input type="password" pInputText placeholder="Password" id="password" name="password"  class="w-full">
+            <input type="password" pInputText placeholder="Password" id="password" name="password" formControlName="password" class="w-full" required>
+            <div *ngIf="password.invalid && formDir.submitted" class="validation-error">
+               <!--<p *ngIf="password.errors?.['required']">
+                    A senha é obrigatória
+                </p>--> 
+            </div>
         </span>
 
         <span class="p-input-icon-left mb-4">
             <i class="pi pi-calendar"></i>
             <input type="date" pInputText placeholder="Data de Nascimento" class="w-full" maxlength="4">         
         </span>
-        <button [routerLink]="['/']" pButton pRipple label="Sign Up" class="mb-4"></button>
+        <p-button type="submit" (click)="submit()" [disabled]="registerForm.invalid" label="Cadastrar" [loading]="loading" (onClick)="load()" class="mb-4 w-full max-w-full"></p-button>
 
         <span class="text-color-secondary text-center mb-4">Já possui conta?  <a routerLink="/auth/login">Login</a></span>
     </div>
-</div>
+</form>
 
 <app-config [minimal]="true"></app-config>
+
