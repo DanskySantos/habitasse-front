@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
-    templateUrl: './demand.component.html'
+  selector: 'app-demand-demo',
+  templateUrl: './demand.component.html',
 })
-export class DemandDemoComponent { }
+export class DemandDemoComponent {
+    demandForm!: FormGroup;
+}
