@@ -47,14 +47,14 @@ export class LoginComponent implements OnInit {
             email: this.emailControl.value,
             password: this.passwordControl.value
         };
-        this.authService.login(credentials).subscribe(
-            (response) => {
-                this.authService.loginSuccess(response.token);
-            },
-            () => {
-                this.authService.loginFailed();
-            }
-        );
+        this.authService.login(credentials);
+        //     (response) => {
+        //         this.authService.loginSuccess(response.token);
+        //     },
+        //     () => {
+        //         this.authService.loginFailed();
+        //     }
+        // );
     }
 
     get filledInput(): boolean {

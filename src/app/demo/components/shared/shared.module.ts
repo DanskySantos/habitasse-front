@@ -13,7 +13,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { PanelModule} from  'primeng/panel';
 import { InputMaskModule } from 'primeng/inputmask';
-import {FormFieldErrorComponent} from "./form-field-error/form-field-error.component";
+import {FormFieldErrorComponent} from "./components/form-field-error/form-field-error.component";
 
 @NgModule({
   declarations: [
