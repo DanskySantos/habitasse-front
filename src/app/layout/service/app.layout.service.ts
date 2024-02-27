@@ -31,11 +31,11 @@ interface LayoutState {
 })
 export class LayoutService {
     _config: AppConfig = {
-        ripple: false,
+        ripple: true,
         inputStyle: 'outlined',
-        menuMode: 'slim',
+        menuMode: 'slim-plus',
         colorScheme: 'light',
-        theme: 'indigo',
+        theme: 'green',
         layoutTheme: 'colorScheme',
         scale: 14,
     };
@@ -45,7 +45,7 @@ export class LayoutService {
     state: LayoutState = {
         staticMenuDesktopInactive: false,
         overlayMenuActive: false,
-        profileSidebarVisible: false,
+        profileSidebarVisible: true,
         configSidebarVisible: false,
         staticMenuMobileActive: false,
         menuHoverActive: false,

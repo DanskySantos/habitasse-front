@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AppConfigModule } from 'src/app/layout/config/config.module';
 import { PasswordModule } from 'primeng/password';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         PasswordModule,
         AppConfigModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        SharedModule
     ],
     declarations: [RegisterComponent]
 })
