@@ -23,6 +23,9 @@ import {SharedModule} from "../../shared/shared.module";
         FormsModule,
         SharedModule
     ],
+    exports: [
+        RegisterComponent
+    ],
     declarations: [RegisterComponent]
 })
 export class RegisterModule { }

@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from "../services/auth.service";
-import { ActivatedRoute } from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from "../services/auth.service";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     templateUrl: './register.component.html',
@@ -9,25 +9,18 @@ import { ActivatedRoute } from '@angular/router';
 
 })
 export class RegisterComponent implements OnInit {
-    //@Input() userRoles?: string;
+
+    @Input()
+    userRoles?: string;
 
     loading: boolean = false;
     registerForm!: FormGroup;
     maxDate: Date = new Date();
-    userRoles: string = '';
 
     constructor(private authService: AuthService, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
-
-        this.route.queryParams.subscribe(params => {
-            this.userRoles = params['type'];  
-            console.log('Tipo de usuário:', this.userRoles);  
-        });
-
-        this.createForm();
-
         this.createForm();
     }
 

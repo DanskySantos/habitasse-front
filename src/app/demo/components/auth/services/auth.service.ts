@@ -6,18 +6,21 @@ import {environment} from 'src/environments/environments';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {RegisterModel} from "../models/register.model";
 import {SharedService} from "../../shared/service/SharedService";
+import {AuthModel} from "../models/auth.model";
+import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService extends SharedService {
 
-    constructor(private http: HttpClient) {
-        super();
-    }
-
     apiURL: string = environment.apiUrl;
     jwtHelper: JwtHelperService = new JwtHelperService();
+
+    constructor(private http: HttpClient,
+                private cookieService: NgxCookieService) {
+        super();
+    }
 
     login(credentials: Credentials): Observable<any> {
         const headers = this.setHeaders();
@@ -64,7 +67,7 @@ export class AuthService extends SharedService {
     }
 
     obterTokenUsuario() {
-        if (this.cookieService?.get('token')) {
+        if (this.cookieService.get('token')) {
             return this.cookieService.get('token')
         }
         return null;
@@ -77,5 +80,13 @@ export class AuthService extends SharedService {
             return !expired
         }
         return false;
+    }
+
+    setCookies(response: any) {
+        const auth = Object.assign(new AuthModel(), response);
+        this.cookieService.set('access_token', auth.access_token);
+        this.cookieService.set('refresh_token', auth.refresh_token);
+        this.cookieService.set('username', auth.username);
+        return auth;
     }
 }

@@ -6,6 +6,7 @@ import {AppLayoutModule} from './layout/app.layout.module';
 import {FormsModule} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CookieService} from "ngx-cookie-service";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
     ],
     providers: [
+        CookieService,
         {provide: LOCALE_ID, useValue: 'pt-BR'},
         {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],

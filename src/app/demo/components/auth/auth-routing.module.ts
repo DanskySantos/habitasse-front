@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
     imports: [RouterModule.forChild([
@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
         { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
         { path: 'forgotpassword', loadChildren: () => import('./forgotpassword/forgotpassword.module').then(m => m.ForgotPasswordModule) },
         { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) },
-        { path: 'demand', loadChildren: () => import('./demand/demand.module').then(m => m.DemandDemoModule) },
+        { path: 'user-type', loadChildren: () => import('./user-type/user-type.module').then(m => m.UserTypeModule) },
         { path: 'newpassword', loadChildren: () => import('./newpassword/newpassword.module').then(m => m.NewPasswordModule) },
         { path: 'verification', loadChildren: () => import('./verification/verification.module').then(m => m.VerificationModule) },
         { path: 'lockscreen', loadChildren: () => import('./lockscreen/lockscreen.module').then(m => m.LockScreenModule) },
