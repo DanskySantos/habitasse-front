@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
     templateUrl: './profilecreate.component.html'
 })
-export class ProfileCreateComponent implements OnInit { 
+export class ProfileCreateComponent implements OnInit {
 
     countries: any[] = [];
 
@@ -19,7 +19,7 @@ export class ProfileCreateComponent implements OnInit {
             {name: 'Japan', code: 'JP'},
             {name: 'Spain', code: 'ES'},
             {name: 'United States', code: 'US'}
-        ]; 
+        ];
     }
-    
+
 }

@@ -1,19 +1,29 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
+import {RegisterComponent} from "./register/register.component";
+import {ErrorComponent} from "./error/error.component";
+import {AccessdeniedComponent} from "./accessdenied/accessdenied.component";
+import {ForgotPasswordComponent} from "./forgotpassword/forgotpassword.component";
+import {LockScreenComponent} from "./lockscreen/lockscreen.component";
+import {LoginComponent} from "./login/login.component";
+import {NewPasswordComponent} from "./newpassword/newpassword.component";
+import {UserType} from "./user-type/user-type";
+import {VerificationComponent} from "./verification/verification.component";
 
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: 'error', loadChildren: () => import('./error/error.module').then(m => m.ErrorModule) },
-        { path: 'access', loadChildren: () => import('./accessdenied/accessdenied.module').then(m => m.AccessdeniedModule) },
-        { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
-        { path: 'forgotpassword', loadChildren: () => import('./forgotpassword/forgotpassword.module').then(m => m.ForgotPasswordModule) },
-        { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) },
-        { path: 'user-type', loadChildren: () => import('./user-type/user-type.module').then(m => m.UserTypeModule) },
-        { path: 'newpassword', loadChildren: () => import('./newpassword/newpassword.module').then(m => m.NewPasswordModule) },
-        { path: 'verification', loadChildren: () => import('./verification/verification.module').then(m => m.VerificationModule) },
-        { path: 'lockscreen', loadChildren: () => import('./lockscreen/lockscreen.module').then(m => m.LockScreenModule) },
-        { path: '**', redirectTo: '/notfound' }
+        {path: 'error', data: {breadcrumb: 'Erro'}, component: ErrorComponent},
+        {path: 'access', data: {breadcrumb: 'Acesso Negado'}, component: AccessdeniedComponent},
+        {path: 'login', data: {breadcrumb: 'Login'}, component: LoginComponent},
+        {path: 'forgotpassword', data: {breadcrumb: 'Esqueci a senha'}, component: ForgotPasswordComponent},
+        {path: 'register', data: {breadcrumb: 'Registro'}, component: RegisterComponent},
+        {path: 'user-type', data: {breadcrumb: 'Tipo de Usuário'}, component: UserType},
+        {path: 'newpassword', data: {breadcrumb: 'Nova Senha'}, component: NewPasswordComponent},
+        {path: 'verification', data: {breadcrumb: 'Verificação'}, component: VerificationComponent},
+        {path: 'lockscreen', data: {breadcrumb: 'Tela Travada'}, component: LockScreenComponent},
+        {path: '**', redirectTo: '/notfound'}
     ])],
     exports: [RouterModule]
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {
+}
