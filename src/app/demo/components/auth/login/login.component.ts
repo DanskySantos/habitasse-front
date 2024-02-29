@@ -4,17 +4,18 @@ import { HttpClient} from '@angular/common/http';
 import { Credentials } from '../models/credentials.model';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {Observable} from "rxjs";
 
 @Component({
     templateUrl: './login.component.html',
     selector: 'button-loading-demo',
 })
 export class LoginComponent implements OnInit {
-    loading: boolean = false;
 
+    loading: boolean = false;
     loginForm!: FormGroup;
 
-    constructor(private authService: AuthService, private http: HttpClient, private router: Router) {}
+    constructor(private authService: AuthService) {}
 
     ngOnInit() {
         this.loginForm = new FormGroup({
@@ -47,14 +48,7 @@ export class LoginComponent implements OnInit {
             email: this.emailControl.value,
             password: this.passwordControl.value
         };
-        this.authService.login(credentials);
-        //     (response) => {
-        //         this.authService.loginSuccess(response.token);
-        //     },
-        //     () => {
-        //         this.authService.loginFailed();
-        //     }
-        // );
+        this.authService.login(credentials).subscribe();
     }
 
     get filledInput(): boolean {

@@ -2,9 +2,9 @@ import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { TabCloseEvent } from './api/tabcloseevent';
-import { MenuService } from './app.menu.service';
-import { AppSidebarComponent } from './app.sidebar.component';
-import { AppTopBarComponent } from './app.topbar.component';
+import { MenuService } from './menu/app.menu.service';
+import { AppSidebarComponent } from './sidebar/app.sidebar.component';
+import { AppTopBarComponent } from './topbar/app.topbar.component';
 import { LayoutService } from './service/app.layout.service';
 
 @Component({
@@ -66,7 +66,7 @@ export class AppLayoutComponent implements OnDestroy {
             if (this.router.isActive(event.tab.routerLink[0], { paths: 'subset', queryParams: 'subset', fragment: 'ignored', matrixParams: 'ignored'})) {
                 const tabs = this.layoutService.tabs;
 
-                if (tabs.length > 1) { 
+                if (tabs.length > 1) {
                     if (event.index === (tabs.length - 1))
                         this.router.navigate(tabs[tabs.length - 2].routerLink);
                     else
@@ -109,7 +109,7 @@ export class AppLayoutComponent implements OnDestroy {
             this.menuOutsideClickListener();
             this.menuOutsideClickListener = null;
         }
-        
+
         if (this.menuScrollListener) {
             this.menuScrollListener();
             this.menuScrollListener = null;

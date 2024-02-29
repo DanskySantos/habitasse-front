@@ -5,8 +5,7 @@ import {PropertyDemandComponent} from "./create-property-demand/property-demand.
 @NgModule({
     imports: [RouterModule.forChild([
         {
-            path: 'property-demand',
-            data: {breadcrumb: 'Demanda de Imóvel'},
+            path: '',
             component: PropertyDemandComponent
         }
     ])],

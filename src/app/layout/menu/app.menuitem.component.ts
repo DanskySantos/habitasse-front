@@ -4,8 +4,8 @@ import { animate, state, style, transition, trigger,AnimationEvent } from '@angu
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { MenuService } from './app.menu.service';
-import { LayoutService } from './service/app.layout.service';
-import { AppSidebarComponent } from './app.sidebar.component';
+import { LayoutService } from '../service/app.layout.service';
+import { AppSidebarComponent } from '../sidebar/app.sidebar.component';
 import {DomHandler} from 'primeng/dom';
 
 @Component({
@@ -20,9 +20,9 @@ import {DomHandler} from 'primeng/dom';
 				<span class="layout-menuitem-text">{{item.label}}</span>
 				<i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
 			</a>
-			<a *ngIf="(item.routerLink && !item.items) && item.visible !== false" (click)="itemClick($event)" (mouseenter)="onMouseEnter()" [ngClass]="item.class" 
+			<a *ngIf="(item.routerLink && !item.items) && item.visible !== false" (click)="itemClick($event)" (mouseenter)="onMouseEnter()" [ngClass]="item.class"
 			   [routerLink]="item.routerLink" routerLinkActive="active-route" [routerLinkActiveOptions]="item.routerLinkActiveOptions||{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-               [fragment]="item.fragment" [queryParamsHandling]="item.queryParamsHandling" [preserveFragment]="item.preserveFragment!" 
+               [fragment]="item.fragment" [queryParamsHandling]="item.queryParamsHandling" [preserveFragment]="item.preserveFragment!"
                [skipLocationChange]="item.skipLocationChange!" [replaceUrl]="item.replaceUrl!" [state]="item.state" [queryParams]="item.queryParams"
                [attr.target]="item.target" tabindex="0" pRipple [pTooltip]="item.label" [tooltipDisabled]="!(isSlim && root)">
 				<i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
@@ -66,7 +66,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
     @Input() parentKey!: string;
 
     @ViewChild('submenu') submenu!: ElementRef;
-    
+
     active = false;
 
     menuSourceSubscription: Subscription;
@@ -140,7 +140,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
             // reset
             overlay.style.top = '';
             overlay.style.left = '';
-      
+
             if ( this.layoutService.isSlim() || this.layoutService.isSlimPlus()) {
                 const topOffset = top - topbarHeight;
                 const height = topOffset + oHeight + topbarHeight;
@@ -232,7 +232,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
         return this.layoutService.isMobile();
     }
 
-    @HostBinding('class.active-menuitem') 
+    @HostBinding('class.active-menuitem')
     get activeClass() {
         return this.active && !this.root;
     }

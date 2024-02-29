@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {catchError, finalize, Observable, tap} from 'rxjs';
+import {catchError, finalize, tap} from 'rxjs';
 import {Credentials} from 'src/app/demo/components/auth/models/credentials.model';
 import {HttpClient} from '@angular/common/http';
 import {environment} from 'src/environments/environments';
@@ -8,6 +8,7 @@ import {RegisterModel} from "../models/register.model";
 import {SharedService} from "../../shared/service/SharedService";
 import {AuthModel} from "../models/auth.model";
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
+import {Router} from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -18,44 +19,51 @@ export class AuthService extends SharedService {
     jwtHelper: JwtHelperService = new JwtHelperService();
 
     constructor(private http: HttpClient,
+                private router: Router,
                 private cookieService: NgxCookieService) {
         super();
     }
 
-    login(credentials: Credentials): Observable<any> {
+    login(credentials: Credentials) {
         const headers = this.setHeaders();
         const body = JSON.stringify(credentials);
 
-        return this.http.post(this.apiURL + 'auth/authenticate', body, {headers}).pipe(
-            tap(response => {
-                this.setCookies(response);
-                return this.actionForSuccess(response);
-            }),
-            catchError(error => {
-                return this.actionForError(error);
-            }),
-            finalize(() => {
-                return this.finalAction();
-            })
-        );
+        return this.http.post(this.apiURL + 'auth/authenticate', body, {headers})
+            .pipe(
+                tap(response => {
+                    this.setCookies(response);
+                    console.log('asdasdas')
+                    this.router.navigate(['/property-demand'])
+                    return this.actionForSuccess(response);
+                }),
+                catchError(error => {
+                    return this.actionForError(error);
+                }),
+                finalize(() => {
+                    return this.finalAction();
+                })
+            );
     }
 
     register(registerModel: RegisterModel) {
         const headers = this.setHeaders();
         const body = JSON.stringify(registerModel);
 
-        return this.http.post(this.apiURL + 'auth/register', body, {headers}).pipe(
-            tap(response => {
-                this.setCookies(response);
-                return this.actionForSuccess(response);
-            }),
-            catchError(error => {
-                return this.actionForError(error);
-            }),
-            finalize(() => {
-                return this.finalAction();
-            })
-        );
+        return this.http.post(this.apiURL + 'auth/register', body, {headers})
+            .pipe(
+                tap(response => {
+                    this.setCookies(response);
+                    console.log('asdasdas')
+                    this.router.navigate(['/property-demand'])
+                    return this.actionForSuccess(response);
+                }),
+                catchError(error => {
+                    return this.actionForError(error);
+                }),
+                finalize(() => {
+                    return this.finalAction();
+                })
+            );
     }
 
     getUsuarioAutenticado() {
@@ -67,8 +75,9 @@ export class AuthService extends SharedService {
     }
 
     obterTokenUsuario() {
-        if (this.cookieService.get('token')) {
-            return this.cookieService.get('token')
+        var token = this.cookieService.get('access_token')
+        if (token) {
+            return token
         }
         return null;
     }

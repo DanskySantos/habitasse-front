@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { LayoutService } from "./service/app.layout.service";
+import { LayoutService } from "../service/app.layout.service";
 
 @Component({
     selector: 'app-topbar',
@@ -48,7 +48,7 @@ export class AppTopBarComponent {
 
     get logo(): string {
         const path = 'assets/layout/images/logo-';
-        const logo = (this.layoutTheme === 'primaryColor'  && !(this.layoutService.config().theme  == "yellow")) ? 'light.png' : (this.colorScheme === 'light' ? 'dark.png' : 'light.png');
+        const logo = 'light.png';
         return path + logo;
     }
 

@@ -2,18 +2,12 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {AppLayoutComponent} from './layout/app.layout.component';
 import {AuthGuard} from './demo/components/auth/guards/auth-guard.service';
-import {ProfileModule} from "./demo/components/profile/profile.module";
-import {PropertyDemandModule} from "./demo/components/property-demand/property-demand.module";
 
 const routes: Routes = [
     {
-        path: '', component: AppLayoutComponent,
+        path: '',
+        component: AppLayoutComponent,
         children: [
-            {
-                path: '',
-                canActivate: [AuthGuard],
-                loadChildren: () => import('./demo/components/dashboards/dashboards.module').then(m => m.DashboardsModule)
-            },
             {
                 path: 'utilities',
                 canActivate: [AuthGuard],
@@ -29,7 +23,7 @@ const routes: Routes = [
             {
                 path: 'property-demand',
                 canActivate: [AuthGuard],
-                data: {breadcrumb: 'Demanda de Propriedade'},
+                data: {breadcrumb: 'Demanda de Imóveis'},
                 loadChildren: () => import('./demo/components/property-demand/property-demand.module').then(m => m.PropertyDemandModule)
             },
             {
@@ -42,6 +36,7 @@ const routes: Routes = [
     },
     {
         path: 'auth',
+        canActivate: [AuthGuard],
         data: {breadcrumb: 'Auth'},
         loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule)
     },
