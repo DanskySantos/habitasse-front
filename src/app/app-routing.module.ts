@@ -6,6 +6,7 @@ import {AuthGuard} from './demo/components/auth/guards/auth-guard.service';
 const routes: Routes = [
     {
         path: '',
+        canActivate: [AuthGuard],
         component: AppLayoutComponent,
         children: [
             {
@@ -36,7 +37,6 @@ const routes: Routes = [
     },
     {
         path: 'auth',
-        canActivate: [AuthGuard],
         data: {breadcrumb: 'Auth'},
         loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule)
     },
