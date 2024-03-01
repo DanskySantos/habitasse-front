@@ -32,8 +32,7 @@ export class AuthService extends SharedService {
             .pipe(
                 tap(response => {
                     this.setCookies(response);
-                    console.log('asdasdas')
-                    this.router.navigate(['/property-demand'])
+                    this.router.navigate(['/home/property-demand'])
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {
@@ -53,8 +52,7 @@ export class AuthService extends SharedService {
             .pipe(
                 tap(response => {
                     this.setCookies(response);
-                    console.log('asdasdas')
-                    this.router.navigate(['/property-demand'])
+                    this.router.navigate(['/home/property-demand'])
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {

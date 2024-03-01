@@ -1,11 +1,20 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Subscription, debounceTime } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { AuthService } from '../auth/services/auth.service';
 
+interface Tipo {
+    name: string;
+    code: string;
+}
+ 
 @Component({
-    templateUrl: './property-demand.component.html'
+    templateUrl: './home.component.html'
 })
-export class PropertyDemandComponent implements OnInit, OnDestroy {
+
+export class HomeComponent implements OnInit, OnDestroy {
 
     overviewChartData: any;
 
@@ -13,7 +22,7 @@ export class PropertyDemandComponent implements OnInit, OnDestroy {
 
     overviewWeeks: any;
 
-    selectedOverviewWeek: any ;
+    selectedOverviewWeek: any;
 
     revenueChartData: any;
 
@@ -21,24 +30,134 @@ export class PropertyDemandComponent implements OnInit, OnDestroy {
 
     subscription: Subscription;
 
-    constructor(public layoutService: LayoutService) {
+    value!: string;
+
+    constructor(public layoutService: LayoutService, private authService: AuthService) {
         this.subscription = this.layoutService.configUpdate$
-        .pipe(debounceTime(25))
-        .subscribe((config) => {
-            this.initCharts();
-        });
+            .pipe(debounceTime(25))
+            .subscribe((config) => {
+                this.initCharts();
+            });
+    }
+
+    registerForm!: FormGroup;
+    loading: boolean = false;
+
+    tipoContrato: Tipo[] | undefined;
+    tipoImovel: Tipo[] | undefined;
+    QuanQuartos: Tipo[] | undefined;
+    tipoMobiliado: Tipo[] | undefined;
+    permitidoPet: Tipo[] | undefined;
+
+
+    load() {
+        this.loading = true;
+
+        setTimeout(() => {
+            this.loading = false;
+        }, 2000);
     }
 
     ngOnInit() {
-        this.initCharts();
+        this.tipoContrato = [
+            { name: 'Locação', code: 'LO' },
+            { name: 'Venda', code: 'VE' },
+            { name: 'Temporada', code: 'TE' },
+        ];
 
+        this.tipoImovel = [
+            { name: 'Apartamento', code: 'AP' },
+            { name: 'Casa', code: 'CA' },
+            { name: 'Kitnet', code: 'KI' },
+            { name: 'Cobertura', code: 'CO' },
+        ];
+
+        this.tipoMobiliado = [
+            { name: 'Sim', code: 'S' },
+            { name: 'Não', code: 'N' },
+            { name: 'Nenhum', code: 'NE' },
+        ];
+
+        this.QuanQuartos = [
+            { name: '1', code: '1' },
+            { name: '2', code: '2' },
+            { name: '3', code: '3' },
+            { name: '4', code: '4' },
+            { name: '5', code: '5' },
+        ];
+
+        this.permitidoPet = [
+            { name: 'Sim', code: 'S' },
+            { name: 'Não', code: 'N' },
+            { name: 'Nenhum', code: 'NE' },
+        ];
+ 
+  
+        this.createForm();
+        this.initCharts();
         this.overviewWeeks = [
             {name: 'Last Week', code: '0'},
             {name: 'This Week', code: '1'}
         ];
-        this.selectedOverviewWeek = this.overviewWeeks[0]
+        this.selectedOverviewWeek = this.overviewWeeks[0];
     }
 
+
+    private createForm() {
+        this.registerForm = new FormGroup({
+            selectedTipoContrato: new FormControl<Tipo | null>(null),
+            selectedTipoImovel: new FormControl<Tipo | null>(null),
+            localidade: new FormControl('', [Validators.required]),
+            selectQuantidade: new FormControl<Tipo | null>(null),
+            selectedMobiliado: new FormControl<Tipo | null>(null),
+            selectedPermitidoPet: new FormControl<Tipo | null>(null),
+            valorsugerido: new FormControl('', [Validators.required]),
+            sugestao: new FormControl('', [Validators.required]),
+        });
+    }
+
+    get contrato() {
+        return this.registerForm.get('contrato')!;
+    }
+
+    get imovel() {
+        return this.registerForm.get('imovel')!;
+    }   
+
+    get localidade() {
+        return this.registerForm.get('localidade')!;
+    }
+
+    get quantidade() {
+        return this.registerForm.get('quantidade')!;
+    }
+
+    get mobiliado() {
+        return this.registerForm.get('mobiliado')!;
+    }
+
+    get permitidopets() {
+        return this.registerForm.get('permitidopets')!;
+    }
+ 
+    get valorsugerido() {
+        return this.registerForm.get('valorsugerido')!;     
+    }
+
+    get sugestao() {
+        return this.registerForm.get('sugestao')!;
+    }
+   
+
+
+    submit() {
+        this.authService.register(this.registerForm.value).subscribe();
+        console.log(this.registerForm.value);
+    }
+
+
+
+ 
     initCharts() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
@@ -201,7 +320,7 @@ export class PropertyDemandComponent implements OnInit, OnDestroy {
             this.overviewChartData.datasets[1].data = dataSet1[parseInt('1')];
         }
 
-        this.overviewChartData = {...this.overviewChartData};
+        this.overviewChartData = { ...this.overviewChartData };
     }
 
     get colorScheme(): string {

@@ -6,6 +6,7 @@ import {AuthGuard} from './demo/components/auth/guards/auth-guard.service';
 const routes: Routes = [
     {
         path: '',
+        canActivate: [AuthGuard],
         component: AppLayoutComponent,
         children: [
             {
@@ -21,10 +22,10 @@ const routes: Routes = [
                 loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule)
             },
             {
-                path: 'property-demand',
+                path: 'home',
                 canActivate: [AuthGuard],
-                data: {breadcrumb: 'Demanda de Imóveis'},
-                loadChildren: () => import('./demo/components/property-demand/property-demand.module').then(m => m.PropertyDemandModule)
+                data: {breadcrumb: 'Home'},
+                loadChildren: () => import('./demo/components/home/home.module').then(m => m.HomeModule)
             },
             {
                 path: 'profile',
@@ -36,7 +37,6 @@ const routes: Routes = [
     },
     {
         path: 'auth',
-        canActivate: [AuthGuard],
         data: {breadcrumb: 'Auth'},
         loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule)
     },

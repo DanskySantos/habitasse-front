@@ -1,0 +1,104 @@
+<div>
+    <app-property-demand></app-property-demand>
+    <form
+    [formGroup]="registerForm"
+    #formDir="ngForm"
+    class="surface-ground h-full flex align-items-center justify-content-center"
+>
+    <div
+        class="surface-card py-7 px-5 sm:px-7 shadow-2 flex flex-column w-11 sm:w-4"
+        style="border-radius: 14px"
+    >
+        <img
+            style="width: 100%; height: 100%"
+            src="./assets/app/images/auth/logo_habitasse_fundo_branco.png"
+            alt="logo-habitasse"
+            class="mb-4 align-self-center"
+        />
+        <div class="flex align-items-center flex-column">
+            <p class="text-color-secondary mb-4">
+                Especifique seu imóvel dos sonhos.
+            </p>
+        </div>
+
+        <div class="mb-4">
+            <div class="p-input-icon-left w-full">
+                <p-dropdown  [style]="{ width: '100%' }" formControlName="selectedTipoContrato" [options]="tipoContrato" optionLabel="name" placeholder="Tipo de Contrato"></p-dropdown>
+            </div>
+            <app-form-field-error [form-control]="contrato">
+            </app-form-field-error>
+        </div>
+
+        <div class="mb-4">
+            <div class="p-input-icon-left w-full">
+                <div class="p-input-icon-left w-full">
+                    <p-dropdown  [style]="{ width: '100%' }" formControlName="selectedTipoImovel" [options]="tipoImovel" optionLabel="name" placeholder="Tipo de Imóvel"></p-dropdown>
+                </div>
+            </div>
+            <app-form-field-error [form-control]="imovel">
+            </app-form-field-error>
+        </div>
+        <div class="mb-4">
+            <div class="w-full">
+                <input type="text" pInputText placeholder="Localidade" formControlName="localidade" class="w-full" required>
+            </div>
+            <app-form-field-error
+                [form-control]="localidade">
+            </app-form-field-error>
+        </div>
+
+        <div class="mb-4">
+            <div class="p-input-icon-left w-full">
+                <p-dropdown  [style]="{ width: '100%' }" formControlName="selectQuantidade" [options]="QuanQuartos" optionLabel="name" placeholder="Quantidade de quartos"></p-dropdown>
+            </div>
+            <app-form-field-error [form-control]="quantidade">
+            </app-form-field-error>
+        </div>
+
+        <div class="mb-4">
+            <div class="p-input-icon-left w-full">
+                <p-dropdown  [style]="{ width: '100%' }" formControlName="selectedMobiliado" [options]="tipoMobiliado" optionLabel="name" placeholder="Mobiliado"></p-dropdown>
+            </div>
+            <app-form-field-error [form-control]="mobiliado">
+            </app-form-field-error>
+        </div>
+        
+        <div class="mb-4">
+            <div class="p-input-icon-left w-full">
+                <p-dropdown  [style]="{ width: '100%' }" formControlName="selectedPermitidoPet" [options]="permitidoPet" optionLabel="name" placeholder="Permitido Pet"></p-dropdown>
+            </div>
+            <app-form-field-error [form-control]="permitidopets">
+            </app-form-field-error>
+        </div>
+
+        <div class="mb-4">
+            <div class="w-full">
+                <textarea  [style]="{ width: '100%' }" rows="5" cols="30" formControlName="sugestao" placeholder="faça uma sugestão" pInputTextarea [(ngModel)]="value"></textarea>
+            </div>
+            <app-form-field-error
+                [form-control]="sugestao">
+            </app-form-field-error>
+        </div>
+
+        <p-button
+            type="submit"
+            [disabled]="registerForm.invalid"
+            label="Cadastrar"
+            [loading]="loading"
+            (onClick)="load()"
+            [style]="{ width: '100%' }"
+            class="mb-4 w-full max-w-full"
+        >
+        </p-button>
+
+        <span class="text-color-secondary text-center mb-4"
+            >Já possui conta?
+            <a
+                class="text-primary text-center mb-4"
+                routerLink="/auth/login"
+                ><strong>Login</strong></a
+            >
+        </span>
+    </div>
+</form>  
+</div>
