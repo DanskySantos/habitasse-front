@@ -6,7 +6,7 @@
     class="surface-ground flex align-items-center justify-content-center"
 >   
     <div
-        class="surface-card py-7 px-5 sm:px-7 shadow-2 flex flex-column w-11 xl:w-4 lg:w-7 xl:w-4 sm:w-30rem" 
+        class="surface-card py-5 px-5 sm:px-7 shadow-2 flex flex-column w-11 xl:w-4 lg:w-7 xl:w-4 sm:w-30rem" 
         style="border-radius: 14px"
     >
         <img
@@ -25,7 +25,7 @@
             <div class="p-input-icon-left w-full">
                 <p-dropdown  [style]="{ width: '100%' }" formControlName="selectedTipoContrato" [options]="tipoContrato" optionLabel="name" placeholder="selecione o tipo de Contrato"></p-dropdown>
             </div>
-            <app-form-field-error [form-control]="contrato">
+            <app-form-field-error [form-control]="selectedTipoContrato">
             </app-form-field-error>
         </div>
 
@@ -35,7 +35,7 @@
                     <p-dropdown  [style]="{ width: '100%' }" formControlName="selectedTipoImovel" [options]="tipoImovel" optionLabel="name" placeholder="selecione o tipo de Imóvel"></p-dropdown>
                 </div>
             </div>
-            <app-form-field-error [form-control]="imovel">
+            <app-form-field-error [form-control]="selectedTipoImovel">
             </app-form-field-error>
         </div>
         <div class="mb-4">
@@ -51,7 +51,7 @@
             <div class="p-input-icon-left w-full">
                 <p-dropdown  [style]="{ width: '100%' }" formControlName="selectQuantidade" [options]="QuanQuartos" optionLabel="name" placeholder="selecione a quantidade de quartos"></p-dropdown>
             </div>
-            <app-form-field-error [form-control]="quantidade">
+            <app-form-field-error [form-control]="selectQuantidade">
             </app-form-field-error>
         </div>
 
@@ -59,7 +59,7 @@
             <div class="p-input-icon-left w-full">
                 <p-dropdown  [style]="{ width: '100%' }" formControlName="selectedMobiliado" [options]="tipoMobiliado" optionLabel="name" placeholder="selecione se o imóvel e mobiliado"></p-dropdown>
             </div>
-            <app-form-field-error [form-control]="mobiliado">
+            <app-form-field-error [form-control]="selectedMobiliado">
             </app-form-field-error>
         </div>
         
@@ -67,7 +67,7 @@
             <div class="p-input-icon-left w-full">
                 <p-dropdown  [style]="{ width: '100%' }" formControlName="selectedPermitidoPet" [options]="permitidoPet" optionLabel="name" placeholder="selecione se o imóvel permite pets"></p-dropdown>
             </div>
-            <app-form-field-error [form-control]="permitidopets">
+            <app-form-field-error [form-control]="selectedPermitidoPet">
             </app-form-field-error>
         </div>
 

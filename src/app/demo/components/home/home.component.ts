@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     value!: string;
 
     constructor(public layoutService: LayoutService, private authService: AuthService) {
+        this.createForm();
         this.subscription = this.layoutService.configUpdate$
             .pipe(debounceTime(25))
             .subscribe((config) => {
@@ -116,29 +117,29 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
     }
 
-    get contrato() {
-        return this.registerForm.get('contrato')!;
+    get selectedTipoContrato() {
+        return this.registerForm.get('selectedTipoContrato')!;
     }
 
-    get imovel() {
-        return this.registerForm.get('imovel')!;
+    get selectedTipoImovel() {
+        return this.registerForm.get('selectedTipoImovel')!;
     }   
 
     get localidade() {
         return this.registerForm.get('localidade')!;
     }
 
-    get quantidade() {
-        return this.registerForm.get('quantidade')!;
+   get selectQuantidade() {
+        return this.registerForm.get('selectQuantidade')!;
+   }
+
+    get selectedMobiliado() {
+        return this.registerForm.get('selectedMobiliado')!;
     }
 
-    get mobiliado() {
-        return this.registerForm.get('mobiliado')!;
-    }
-
-    get permitidopets() {
-        return this.registerForm.get('permitidopets')!;
-    }
+  get selectedPermitidoPet() {
+        return this.registerForm.get('selectedPermitidoPet')!;
+  }
  
     get valorsugerido() {
         return this.registerForm.get('valorsugerido')!;     
@@ -154,9 +155,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.authService.register(this.registerForm.value).subscribe();
         console.log(this.registerForm.value);
     }
-
-
-
  
     initCharts() {
         const documentStyle = getComputedStyle(document.documentElement);
