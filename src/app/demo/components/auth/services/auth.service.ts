@@ -4,10 +4,10 @@ import {Credentials} from 'src/app/demo/components/auth/models/credentials.model
 import {HttpClient} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {RegisterModel} from "../models/register.model";
-import {SharedService} from "../../shared/service/SharedService";
 import {AuthModel} from "../models/auth.model";
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {Router} from "@angular/router";
+import {SharedService} from "../../shared/service/shared.service";
 
 @Injectable({
     providedIn: 'root'

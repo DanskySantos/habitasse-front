@@ -1,15 +1,16 @@
 import {Injectable} from '@angular/core';
-import {catchError, finalize, Observable, tap} from "rxjs";
+import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {SharedService} from "./SharedService";
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {StateModel} from "../../auth/models/state.model";
 import {CityModel} from "../../auth/models/city.model";
+import {SharedService} from "../../shared/service/shared.service";
+import {ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
 
 @Injectable({
     providedIn: 'root'
 })
-export class AddressService extends SharedService {
+export class PropertyDemandService extends SharedService {
 
     constructor(private http: HttpClient,
                 private cookieService: NgxCookieService) {
@@ -23,13 +24,8 @@ export class AddressService extends SharedService {
         });
     }
 
-    getAllStates(): Observable<StateModel[]> {
+    save(form: any) {
         const headers = this.setHeadersForBearer();
-        return this.http.get<StateModel[]>(this.apiURL + 'address/states', {headers});
-    }
-
-    getFilteredCities(uf: number): Observable<CityModel[]> {
-        const headers = this.setHeadersForBearer();
-        return this.http.get<CityModel[]>(this.apiURL + 'address/filter-cities?stateName=' + uf, {headers});
+        return this.http.post<StateModel[]>(this.apiURL + 'address/save', form, {headers});
     }
 }

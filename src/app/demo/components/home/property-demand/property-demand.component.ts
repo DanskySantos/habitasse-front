@@ -9,10 +9,8 @@ import {FurnishedEnum} from "../../enums/furnished-enum";
 import {SuggestedValueRentEnum} from "../../enums/suggested-value-rent-enum";
 import {SuggestedValueSaleEnum} from "../../enums/suggested-value-sale-enum";
 import {SuggestedValueSeasonalEnum} from "../../enums/suggested-value-seasonal-enum";
-import {AddressService} from "../../shared/service/AddressService";
-import {StateModel} from "../../auth/models/state.model";
-import {Observable, tap} from 'rxjs';
-import {map} from "rxjs/operators";
+import {AddressService} from "../../shared/service/address.service";
+import {PropertyDemandService} from "../services/property-demand.service";
 
 @Component({
     templateUrl: './property-demand.component.html',
@@ -36,7 +34,8 @@ export class PropertyDemandComponent implements OnInit {
     cities?: any;
 
     constructor(public layoutService: LayoutService,
-                private addressService: AddressService) {
+                private addressService: AddressService,
+                private propertyDemandService: PropertyDemandService) {
         this.startLists();
     }
 
@@ -59,7 +58,8 @@ export class PropertyDemandComponent implements OnInit {
         );
     }
 
-    load() {
+    save() {
+        this.propertyDemandService.save(this.propertyForm.value);
         console.log(this.propertyForm.value)
     }
 
