@@ -1,4 +1,123 @@
-<div class="grid">
+<div class="grid w-full">
+    <form [formGroup]="propertyForm" #formDir="ngForm"
+          class="surface-ground flex flex-column align-items-center justify-content-center w-full">
+
+        <div class="flex align-items-center flex-column w-full">
+            <h1 class="text-color-secondary mb-4">
+                Especifique seu imóvel dos sonhos.
+            </h1>
+        </div>
+
+        <div class="py-5 px-5 sm:px-7 flex flex-column">
+
+            <div class="mb-4">
+                <span class="field p-float-label">
+                    <p-dropdown [style]="{ width: '100%' }"
+                                formControlName="contractType"
+                                inputId="float-label"
+                                [options]="contractType"
+                                placeholder="Selecione o tipo de Contrato">
+                    </p-dropdown>
+                    <label for="float-label">Tipo de Contrato</label>
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <span class="field p-float-label">
+                    <p-dropdown [style]="{ width: '100%' }"
+                                formControlName="contractType"
+                                inputId="float-label"
+                                [options]="propertyType"
+                                placeholder="Selecione o tipo de Imóvel">
+                    </p-dropdown>
+                    <label for="float-label">Tipo de Imóvel</label>
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <span class="field p-float-label">
+                    <p-dropdown [style]="{ width: '100%' }"
+                                formControlName="bedroomsNumber"
+                                inputId="float-label"
+                                [options]="bedroomsNumber"
+                                placeholder="Selecione a quantidade de quartos">
+                    </p-dropdown>
+                    <label for="float-label">Quantidade de Quartos</label>
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <span class="field p-float-label">
+                    <p-dropdown [style]="{ width: '100%' }"
+                                formControlName="furnished"
+                                inputId="float-label"
+                                [options]="furnished"
+                                placeholder="Selecione se o imóvel e mobiliado">
+                    </p-dropdown>
+                    <label for="float-label">Mobiliado</label>
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <span class="field p-float-label">
+                    <p-dropdown [style]="{ width: '100%' }"
+                                formControlName="petFriendly"
+                                inputId="float-label"
+                                [options]="petFriendly"
+                                placeholder="Selecione se o imóvel permite pets">
+                    </p-dropdown>
+                    <label for="float-label">Permite Pet</label>
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <span class="field p-float-label">
+                    <p-dropdown [style]="{ width: '100%' }"
+                                formControlName="state"
+                                inputId="float-label"
+                                [options]="states"
+                                (onChange)="filterCities($event)"
+                                placeholder="Selecione o estado onde está o imóvel">
+                    </p-dropdown>
+                    <label for="float-label">Estado</label>
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <span class="field p-float-label">
+                    <p-dropdown [style]="{ width: '100%' }"
+                                formControlName="city"
+                                inputId="float-label"
+                                [options]="cities"
+                                placeholder="Selecione a cidade do imóvel">
+                    </p-dropdown>
+                    <label for="float-label">Cidade</label>
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <div class="field w-full">
+                    <label>Anotações</label>
+                    <textarea [style]="{ width: '100%' }"
+                              rows="5" cols="30"
+                              formControlName="annotation"
+                              placeholder="Faça uma anotação"
+                              pInputTextarea
+                              [(ngModel)]="value">
+                    </textarea>
+                </div>
+            </div>
+
+            <p-button
+                type="submit"
+                label="Registrar Imóvel"
+                [loading]="loading"
+                (onClick)="load()"
+                [style]="{ width: '100%' }"
+                class="mb-4 w-full max-w-full">
+            </p-button>
+        </div>
+    </form>
 
 
 </div>

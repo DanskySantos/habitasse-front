@@ -1,218 +1,131 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Subscription, debounceTime } from 'rxjs';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import {Component, OnInit} from '@angular/core';
+import {LayoutService} from 'src/app/layout/service/app.layout.service';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ContractTypeEnum} from "../../enums/contract-type-enum";
+import {PropertyTypeEnum} from "../../enums/property-type-enum";
+import {BedroomsNumberEnum} from "../../enums/bedrooms-number-enum";
+import {PetFriendlyEnum} from "../../enums/pet-friendly-enum";
+import {FurnishedEnum} from "../../enums/furnished-enum";
+import {SuggestedValueRentEnum} from "../../enums/suggested-value-rent-enum";
+import {SuggestedValueSaleEnum} from "../../enums/suggested-value-sale-enum";
+import {SuggestedValueSeasonalEnum} from "../../enums/suggested-value-seasonal-enum";
+import {AddressService} from "../../shared/service/AddressService";
+import {StateModel} from "../../auth/models/state.model";
+import {Observable, tap} from 'rxjs';
+import {map} from "rxjs/operators";
 
 @Component({
     templateUrl: './property-demand.component.html',
     selector: 'app-property-demand',
 
 })
-export class PropertyDemandComponent implements OnInit, OnDestroy {
+export class PropertyDemandComponent implements OnInit {
 
-    overviewChartData: any;
+    value!: string;
+    propertyForm!: FormGroup;
+    loading: boolean = false;
+    contractType?: string[];
+    propertyType?: string[];
+    bedroomsNumber?: string[];
+    furnished?: string[];
+    petFriendly?: string[];
+    suggestedValueForRent?: string[];
+    suggestedValueForSale?: string[];
+    suggestedValueForSeasonal?: string[];
+    states?: any;
+    cities?: any;
 
-    overviewChartOptions: any;
-
-    overviewWeeks: any;
-
-    selectedOverviewWeek: any ;
-
-    revenueChartData: any;
-
-    revenueChartOptions: any;
-
-    subscription: Subscription;
-
-    constructor(public layoutService: LayoutService) {
-        this.subscription = this.layoutService.configUpdate$
-        .pipe(debounceTime(25))
-        .subscribe((config) => {
-            this.initCharts();
-        });
+    constructor(public layoutService: LayoutService,
+                private addressService: AddressService) {
+        this.startLists();
     }
 
     ngOnInit() {
-        this.initCharts();
-
-        this.overviewWeeks = [
-            {name: 'Last Week', code: '0'},
-            {name: 'This Week', code: '1'}
-        ];
-        this.selectedOverviewWeek = this.overviewWeeks[0]
+        this.createForm();
     }
 
-    initCharts() {
-        const documentStyle = getComputedStyle(document.documentElement);
-        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-        const primaryColor = documentStyle.getPropertyValue('--primary-color');
-        const primaryColor300 = documentStyle.getPropertyValue('--primary-200');
-        const borderColor = documentStyle.getPropertyValue('--surface-border');
+    startLists() {
+        this.contractType = Object.values(ContractTypeEnum);
+        this.bedroomsNumber = Object.values(BedroomsNumberEnum);
+        this.propertyType = Object.values(PropertyTypeEnum);
+        this.petFriendly = Object.values(PetFriendlyEnum);
+        this.furnished = Object.values(FurnishedEnum);
+        this.suggestedValueForRent = Object.values(SuggestedValueRentEnum);
+        this.suggestedValueForSale = Object.values(SuggestedValueSaleEnum);
+        this.suggestedValueForSeasonal = Object.values(SuggestedValueSeasonalEnum);
 
-        this.overviewChartData = {
-            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-            datasets: [
-                {
-                    label: 'Organic',
-                    data: [2, 1, 0.5, 0.6, 0.5, 1.3, 1],
-                    borderColor: [
-                        primaryColor
-                    ],
-                    pointBorderColor: 'transparent',
-                    pointBackgroundColor: 'transparent',
-                    type: 'line',
-                    fill: false,
-                },
-                {
-                    label: 'Referral',
-                    data: [4.88, 3, 6.2, 4.5, 2.1, 5.1, 4.1],
-                    backgroundColor: [this.layoutService.config().colorScheme === 'dark' ? '#879AAF' : '#E4E7EB'] ,
-                    hoverBackgroundColor: [primaryColor300],
-                    fill: true,
-                    borderRadius: 10,
-                    borderSkipped: 'top bottom',
-                    barPercentage: 0.3
-                }
-            ]
-        };
-
-        this.overviewChartOptions = {
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    align: 'end',
-                    labels: {
-                        color: textColorSecondary
-                    }
-                }
-            },
-            responsive: true,
-            hover: {
-                mode: 'index'
-            },
-            scales: {
-                y: {
-                    max: 7,
-                    min: 0,
-                    ticks: {
-                        stepSize: 0,
-                        callback: function(value: number, index: number) {
-                            if (index === 0) {
-                                return value;
-                            }
-                            else {
-                                return value + 'k';
-                            }
-                        },
-                        color: textColorSecondary
-                    },
-                    grid: {
-                        borderDash: [2, 2],
-                        color: borderColor,
-                        drawBorder: false
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false,
-                    },
-                    ticks: {
-                        beginAtZero: true,
-                        color: textColorSecondary
-                    }
-                }
-            }
-        };
-
-        this.revenueChartData = {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-            datasets: [
-                {
-                    data: [11, 17, 30, 60, 88, 92],
-                    borderColor: 'rgba(25, 146, 212, 0.5)',
-                    pointBorderColor: 'transparent',
-                    pointBackgroundColor: 'transparent',
-                    fill: false,
-                    tension: .4
-                },
-                {
-                    data: [11, 19, 39, 59, 69, 71],
-                    borderColor: 'rgba(25, 146, 212, 0.5)',
-                    pointBorderColor: 'transparent',
-                    pointBackgroundColor: 'transparent',
-                    fill: false,
-                    tension: .4
-                },
-                {
-                    data: [11, 17, 21, 30, 47, 83],
-                    backgroundColor: 'rgba(25, 146, 212, 0.2)',
-                    borderColor: 'rgba(25, 146, 212, 0.5)',
-                    pointBorderColor: 'transparent',
-                    pointBackgroundColor: 'transparent',
-                    fill: true,
-                    tension: .4
-                }
-            ]
-        };
-
-        this.revenueChartOptions = {
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    grid: {
-                        color: borderColor
-                    },
-                    max: 100,
-                    min: 0,
-                    ticks: {
-                        color: textColorSecondary
-                    }
-                },
-                x: {
-                    grid: {
-                        color: borderColor
-                    },
-                    ticks: {
-                        color: textColorSecondary,
-                        beginAtZero: true
-                    }
-                }
-            }
-        };
+        this.addressService.getAllStates().subscribe(states =>
+            this.states = states.map(state => state.nome)
+        );
     }
 
-    changeOverviewWeek() {
-        const dataSet1 = [
-            [2, 1, 0.5, 0.6, 0.5, 1.3, 1],
-            [4.88, 3, 6.2, 4.5, 2.1, 5.1, 4.1]
-        ];
-        const dataSet2 = [
-            [3, 2.4, 1.5, 0.6, 4.5, 3.3, 2],
-            [3.2, 4.1, 2.2, 5.5, 4.1, 3.6, 3.5],
-        ];
+    load() {
+        console.log(this.propertyForm.value)
+    }
 
-        if (this.selectedOverviewWeek.code === '1') {
-            this.overviewChartData.datasets[0].data = dataSet2[parseInt('0')];
-            this.overviewChartData.datasets[1].data = dataSet2[parseInt('1')];
-        }
-        else {
-            this.overviewChartData.datasets[0].data = dataSet1[parseInt('0')];
-            this.overviewChartData.datasets[1].data = dataSet1[parseInt('1')];
-        }
+    filterCities(event: any) {
+        this.addressService.getFilteredCities(event.value).subscribe(cities =>
+            this.cities = cities.map(city => city.nome)
+        );
+    }
 
-        this.overviewChartData = {...this.overviewChartData};
+    private createForm() {
+        this.propertyForm = new FormGroup({
+            contractType: new FormControl(null, [Validators.required]),
+            propertyType: new FormControl(null, [Validators.required]),
+            bedroomsNumber: new FormControl(null, [Validators.required]),
+            furnished: new FormControl(null, [Validators.required]),
+            petFriendly: new FormControl(null, [Validators.required]),
+            suggestedValueForRent: new FormControl(null, [Validators.required]),
+            suggestedValueForSale: new FormControl(null, [Validators.required]),
+            suggestedValueForSeasonal: new FormControl(null, [Validators.required]),
+            state: new FormControl(null, [Validators.required]),
+            city: new FormControl(null, [Validators.required]),
+            annotation: new FormControl(null, [Validators.required]),
+        });
+    }
+
+    get selectedContractType() {
+        return this.propertyForm.get('contractType')!;
+    }
+
+    get selectedPropertyType() {
+        return this.propertyForm.get('propertyType')!;
+    }
+
+    get selectedState() {
+        return this.propertyForm.get('state')!;
+    }
+
+    get selectedCity() {
+        return this.propertyForm.get('city')!;
+    }
+
+    get selectBedroomsNumber() {
+        return this.propertyForm.get('bedroomsNumber')!;
+    }
+
+    get selectedFurnished() {
+        return this.propertyForm.get('furnished')!;
+    }
+
+    get selectedPetFriendly() {
+        return this.propertyForm.get('petFriendly')!;
+    }
+
+    get valorsugerido() {
+        return this.propertyForm.get('valorsugerido')!;
+    }
+
+    get annotation() {
+        return this.propertyForm.get('annotation')!;
+    }
+
+    submit() {
+        console.log(this.propertyForm.value);
     }
 
     get colorScheme(): string {
         return this.layoutService.config().colorScheme;
-    }
-
-    ngOnDestroy(): void {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
     }
 }

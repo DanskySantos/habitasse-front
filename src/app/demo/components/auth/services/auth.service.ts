@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {catchError, finalize, tap} from 'rxjs';
 import {Credentials} from 'src/app/demo/components/auth/models/credentials.model';
 import {HttpClient} from '@angular/common/http';
-import {environment} from 'src/environments/environments';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {RegisterModel} from "../models/register.model";
 import {SharedService} from "../../shared/service/SharedService";
@@ -15,7 +14,6 @@ import {Router} from "@angular/router";
 })
 export class AuthService extends SharedService {
 
-    apiURL: string = environment.apiUrl;
     jwtHelper: JwtHelperService = new JwtHelperService();
 
     constructor(private http: HttpClient,
