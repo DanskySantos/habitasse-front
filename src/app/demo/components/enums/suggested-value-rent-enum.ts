@@ -1,11 +1,11 @@
 export enum SuggestedValueRentEnum {
-    R$1K = "Mil Reais",
-    R$2K = "Dois Mil Reais",
-    R$3K = "Três Mil Reais",
-    R$4K = "Quatro Mil Reais",
-    R$5K = "Cinco Mil Reais",
-    R$6K = "Seis Mil Reais",
-    R$10K = "Dez Mil Reais",
-    R$15K = "Quinze Mil Reais",
+    R$1K = "R$ 1.000,00",
+    R$2K = "R$ 2.000,00",
+    R$3K = "R$ 3.000,00",
+    R$4K = "R$ 4.000,00",
+    R$5K = "R$ 5.000,00",
+    R$6K = "R$ 6.000,00",
+    R$10K = "R$ 10.000,00",
+    R$15K = "R$ 15.000,00",
 }
 

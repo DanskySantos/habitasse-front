@@ -32,6 +32,7 @@ export class PropertyDemandComponent implements OnInit {
     suggestedValueForSeasonal?: string[];
     states?: any;
     cities?: any;
+    disableCasteDropdown: boolean | undefined;
 
     constructor(public layoutService: LayoutService,
                 private addressService: AddressService,
@@ -42,6 +43,7 @@ export class PropertyDemandComponent implements OnInit {
     ngOnInit() {
         this.createForm();
     }
+
 
     startLists() {
         this.contractType = Object.values(ContractTypeEnum);
@@ -57,6 +59,22 @@ export class PropertyDemandComponent implements OnInit {
             this.states = states.map(state => state.nome)
         );
     }
+
+    
+    toggleDropdowns(contractType: string) {
+        const dropdowns = ['propertyType', 'bedroomsNumber', 'furnished', 'petFriendly', 'state', 'city'];
+    
+        if (contractType) {
+            dropdowns.forEach(dropdown => {
+                this.propertyForm.get(dropdown)!.enable();
+            });
+        } else {
+            dropdowns.forEach(dropdown => {
+                this.propertyForm.get(dropdown)!.disable();
+            });
+        }
+    }
+    
 
     save() {
         this.propertyDemandService.save(this.propertyForm.value);
