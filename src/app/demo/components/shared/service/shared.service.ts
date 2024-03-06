@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {throwError} from "rxjs";
 import {HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../../../environments/environments";
-import {CookieService as NgxCookieService} from "ngx-cookie-service/lib/cookie.service";
 
 @Injectable({
     providedIn: 'root'

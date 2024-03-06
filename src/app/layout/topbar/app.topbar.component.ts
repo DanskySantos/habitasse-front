@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from "../service/app.layout.service";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-topbar',
@@ -16,7 +17,11 @@ export class AppTopBarComponent {
 
     searchActive: boolean = false;
 
-    constructor(public layoutService: LayoutService) {}
+    constructor(public layoutService: LayoutService, private router: Router) {}
+
+    goToProfileEdit() {
+        this.router.navigate(['/profile/edit']);
+      }
 
     onMenuButtonClick() {
         this.layoutService.onMenuToggle();
