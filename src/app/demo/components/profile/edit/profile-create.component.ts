@@ -16,8 +16,7 @@ export class ProfileCreateComponent implements OnInit {
     }
 
     getUserProfile() {
-      this.userService.getUserProfile(this.userData).subscribe(
-      
+      this.userService.getUserProfile().subscribe(
       )
     }
 }
