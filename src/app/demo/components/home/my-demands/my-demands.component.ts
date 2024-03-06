@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LayoutService} from 'src/app/layout/service/app.layout.service';
-import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {ContractTypeEnum} from "../../enums/contract-type-enum";
 import {PropertyTypeEnum} from "../../enums/property-type-enum";
 import {BedroomsNumberEnum} from "../../enums/bedrooms-number-enum";
@@ -13,12 +13,13 @@ import {AddressService} from "../../shared/service/address.service";
 import {PropertyDemandService} from "../services/property-demand.service";
 
 @Component({
-    templateUrl: './property-demand.component.html',
-    selector: 'app-property-demand',
+    templateUrl: './my-demands.component.html',
+    selector: 'app-my-demands',
 
 })
-export class PropertyDemandComponent implements OnInit {
+export class MyDemandsComponent implements OnInit {
 
+    value!: string;
     propertyForm!: FormGroup;
     loading: boolean = false;
     contractType?: string[];
@@ -76,40 +77,28 @@ export class PropertyDemandComponent implements OnInit {
             bedroomsNumber: new FormControl(null, [Validators.required]),
             furnished: new FormControl(null, [Validators.required]),
             petFriendly: new FormControl(null, [Validators.required]),
-            suggestedValueForRent: new FormControl(null),
-            suggestedValueForSale: new FormControl(null),
-            suggestedValueForSeasonal: new FormControl(null),
+            suggestedValueForRent: new FormControl(null, [this.valueValidator]),
+            suggestedValueForSale: new FormControl(null, [this.valueValidator]),
+            suggestedValueForSeasonal: new FormControl(null, [this.valueValidator]),
             state: new FormControl(null, [Validators.required]),
             city: new FormControl(null, [Validators.required]),
             annotation: new FormControl(null, [Validators.required]),
         });
-        this.propertyForm.get('contractType')?.valueChanges.subscribe(contractType => {
-            this.setValidatorsBasedOnContractType(contractType);
-        });
     }
 
-    private setValidatorsBasedOnContractType(contractType: string | null) {
-        if (contractType === 'Locação') {
-            this.propertyForm.get('suggestedValueForRent')?.setValidators([Validators.required]);
-        } else {
-            this.propertyForm.get('suggestedValueForRent')?.clearValidators();
-        }
-
-        if (contractType === 'Venda') {
-            this.propertyForm.get('suggestedValueForSale')?.setValidators([Validators.required]);
-        } else {
-            this.propertyForm.get('suggestedValueForSale')?.clearValidators();
-        }
-
-        if (contractType === 'Temporada') {
-            this.propertyForm.get('suggestedValueForSeasonal')?.setValidators([Validators.required]);
-        } else {
-            this.propertyForm.get('suggestedValueForSeasonal')?.clearValidators();
-        }
-
-        this.propertyForm.get('suggestedValueForRent')?.updateValueAndValidity();
-        this.propertyForm.get('suggestedValueForSale')?.updateValueAndValidity();
-        this.propertyForm.get('suggestedValueForSeasonal')?.updateValueAndValidity();
+    valueValidator(): ValidatorFn {
+        return (control: AbstractControl): ValidationErrors | null => {
+            const contractType = this.selectedContractType.value;
+            const suggestedValue = control.value;
+            if (contractType === 'Locação' && !suggestedValue) {
+                return {suggestedValueForRentRequired: true};
+            } else if (contractType === 'Venda' && !suggestedValue) {
+                return {suggestedValueForSaleRequired: true};
+            } else if (contractType === 'Temporada' && !suggestedValue) {
+                return {suggestedValueForSeasonalRequired: true};
+            }
+            return null;
+        };
     }
 
     get selectedContractType() {

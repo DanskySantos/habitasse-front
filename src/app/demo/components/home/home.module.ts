@@ -6,6 +6,7 @@ import {HomeComponent} from './home.component';
 import {PropertyDemandComponent} from './property-demand/property-demand.component';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {MyDemandsComponent} from "./my-demands/my-demands.component";
 
 @NgModule({
     imports: [
@@ -17,11 +18,13 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     ],
     exports: [
         HomeComponent,
-        PropertyDemandComponent
+        PropertyDemandComponent,
+        MyDemandsComponent
     ],
     declarations: [
         HomeComponent,
-        PropertyDemandComponent
+        PropertyDemandComponent,
+        MyDemandsComponent
     ]
 })
 export class HomeModule {

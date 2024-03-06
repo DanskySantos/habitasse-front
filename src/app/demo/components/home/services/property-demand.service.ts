@@ -3,7 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {StateModel} from "../../auth/models/state.model";
 import {SharedService} from "../../shared/service/shared.service";
-
+import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,8 @@ import {SharedService} from "../../shared/service/shared.service";
 export class PropertyDemandService extends SharedService {
 
     constructor(private http: HttpClient,
+                private toastrService: ToastrService,
+                private router: Router,
                 private cookieService: NgxCookieService) {
         super();
     }
@@ -22,8 +25,17 @@ export class PropertyDemandService extends SharedService {
         });
     }
 
-    save(form: any) {
+    save(form: any){
         const headers = this.setHeadersForBearer();
-        return this.http.post<StateModel[]>(this.apiURL + 'address/save', form, {headers});
+        return this.http.post<StateModel[]>(this.apiURL + 'register-demand/save', form, {headers}).subscribe(
+            next => {
+                this.toastrService.success('Imóvel Cadastrado', 'Sucesso')
+                this.router.navigate(['/home/my-demands'])
+            },
+            err => {
+                this.toastrService.error(err.code, 'Erro')
+                console.log('error:', err)
+            }
+        );
     }
 }
