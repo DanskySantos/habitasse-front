@@ -8,6 +8,7 @@ import {AuthModel} from "../models/auth.model";
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {Router} from "@angular/router";
 import {SharedService} from "../../shared/service/shared.service";
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,7 @@ export class AuthService extends SharedService {
 
     constructor(private http: HttpClient,
                 private router: Router,
+                private toastrService: ToastrService,
                 private cookieService: NgxCookieService) {
         super();
     }
@@ -34,6 +36,7 @@ export class AuthService extends SharedService {
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {
+                    this.toastrService.error(error.error, 'Erro');
                     return this.actionForError(error);
                 }),
                 finalize(() => {
@@ -54,6 +57,7 @@ export class AuthService extends SharedService {
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {
+                    this.toastrService.error(error.error, 'Erro');
                     return this.actionForError(error);
                 }),
                 finalize(() => {

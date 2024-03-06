@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CookieService} from "ngx-cookie-service";
+import {ToastrModule} from "ngx-toastr";
 
 
 @NgModule({
@@ -16,6 +17,10 @@ import {CookieService} from "ngx-cookie-service";
         FormsModule,
         ToastModule,
         BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            timeOut: 2000,
+            positionClass: 'toast-top-right'
+        }),
     ],
     declarations: [
         AppComponent,

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LayoutService} from 'src/app/layout/service/app.layout.service';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {ContractTypeEnum} from "../../enums/contract-type-enum";
 import {PropertyTypeEnum} from "../../enums/property-type-enum";
 import {BedroomsNumberEnum} from "../../enums/bedrooms-number-enum";
@@ -32,7 +32,6 @@ export class PropertyDemandComponent implements OnInit {
     suggestedValueForSeasonal?: string[];
     states?: any;
     cities?: any;
-    disableCasteDropdown: boolean | undefined;
 
     constructor(public layoutService: LayoutService,
                 private addressService: AddressService,
@@ -43,7 +42,6 @@ export class PropertyDemandComponent implements OnInit {
     ngOnInit() {
         this.createForm();
     }
-
 
     startLists() {
         this.contractType = Object.values(ContractTypeEnum);
@@ -60,25 +58,9 @@ export class PropertyDemandComponent implements OnInit {
         );
     }
 
-    
-    toggleDropdowns(contractType: string) {
-        const dropdowns = ['propertyType', 'bedroomsNumber', 'furnished', 'petFriendly', 'state', 'city'];
-    
-        if (contractType) {
-            dropdowns.forEach(dropdown => {
-                this.propertyForm.get(dropdown)!.enable();
-            });
-        } else {
-            dropdowns.forEach(dropdown => {
-                this.propertyForm.get(dropdown)!.disable();
-            });
-        }
-    }
-    
-
     save() {
-        this.propertyDemandService.save(this.propertyForm.value);
         console.log(this.propertyForm.value)
+        this.propertyDemandService.save(this.propertyForm.value).subscribe();
     }
 
     filterCities(event: any) {
@@ -94,13 +76,28 @@ export class PropertyDemandComponent implements OnInit {
             bedroomsNumber: new FormControl(null, [Validators.required]),
             furnished: new FormControl(null, [Validators.required]),
             petFriendly: new FormControl(null, [Validators.required]),
-            suggestedValueForRent: new FormControl(null, [Validators.required]),
-            suggestedValueForSale: new FormControl(null, [Validators.required]),
-            suggestedValueForSeasonal: new FormControl(null, [Validators.required]),
+            suggestedValueForRent: new FormControl(null, [this.valueValidator]),
+            suggestedValueForSale: new FormControl(null, [this.valueValidator]),
+            suggestedValueForSeasonal: new FormControl(null, [this.valueValidator]),
             state: new FormControl(null, [Validators.required]),
             city: new FormControl(null, [Validators.required]),
             annotation: new FormControl(null, [Validators.required]),
         });
+    }
+
+    valueValidator(): ValidatorFn {
+        return (control: AbstractControl): ValidationErrors | null => {
+            const contractType = this.selectedContractType.value;
+            const suggestedValue = control.value;
+            if (contractType === 'Locação' && !suggestedValue) {
+                return { suggestedValueForRentRequired: true };
+            } else if (contractType === 'Venda' && !suggestedValue) {
+                return { suggestedValueForSaleRequired: true };
+            } else if (contractType === 'Temporada' && !suggestedValue) {
+                return { suggestedValueForSeasonalRequired: true };
+            }
+            return null;
+        };
     }
 
     get selectedContractType() {
@@ -131,8 +128,16 @@ export class PropertyDemandComponent implements OnInit {
         return this.propertyForm.get('petFriendly')!;
     }
 
-    get valorsugerido() {
-        return this.propertyForm.get('valorsugerido')!;
+    get selectedSuggestedValueForRent() {
+        return this.propertyForm.get('suggestedValueForRent')!;
+    }
+
+    get selectedSuggestedValueForSale() {
+        return this.propertyForm.get('suggestedValueForSale')!;
+    }
+
+    get selectedSuggestedValueForSeasonal() {
+        return this.propertyForm.get('suggestedValueForSeasonal')!;
     }
 
     get annotation() {

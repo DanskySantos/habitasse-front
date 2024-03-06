@@ -40,7 +40,7 @@ const routes: Routes = [
         data: {breadcrumb: 'Auth'},
         loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule)
     },
-    {path: '**', redirectTo: '/notfound'}
+    {path: '**', redirectTo: '/auth/login'}
 ];
 
 @NgModule({
