@@ -4,6 +4,7 @@ import { User } from '../interface/User';
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {SharedService} from "../../shared/service/shared.service";
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +29,9 @@ export class UserService extends SharedService  {
         const headers = this.getHeadersForBearer();
         return this.http.get<User>(this.apiURL + 'user/profile', {headers});
     }
+    
+    updateUserProfile(user: User): Observable<User> {
+        const headers = this.getHeadersForBearer();
+        return this.http.put<User>(this.apiURL + 'user/profile', { headers });
+      }
 }

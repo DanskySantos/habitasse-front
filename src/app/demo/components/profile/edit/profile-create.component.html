@@ -1,31 +1,66 @@
-<div class="card" >
-    <span class="text-900 text-xl font-bold mb-5 block">Editar perfil</span>
-    <div class="grid">
-        <div class="col-12 lg:col-2">
-            <div class="text-900 font-medium text-xl mb-3">Perfil</div>
-            <p class="m-0 p-0 text-600 line-height-3 mr-3">Edite as informações do seu perfil.</p>
+<div class="card">
+    <div class="grid p-4">
+        <div class="flex flex-column gap-2">
+            <span class="text-600 text-xl font-bold mb-5 block">Olá, {{userData.usernameForDto}}</span>
+            <span style="text-decoration: underline; cursor: pointer;" (click)="showDialog()"class="pi pi-user"> Senha e segurança</span>
+            <div class="flex flex-column formgrid p-fluid">
+                <p-dialog header="Edite sua senha" [(visible)]="visible" [modal]="true" [style]="{ width: '30vw' }" [draggable]="false" [resizable]="false">
+                    <div class="flex flex-column gap-1 md:col-12 sm:col-12 lg:col-12">
+                        <label for="password" class="font-medium text-900">Senha atual</label>
+                        <p-password [toggleMask]="true"></p-password>
+                    </div>
+                    <div class="flex flex-column gap-1 col-12 md:col-12 sm:col-12 lg:col-12">
+                        <label for="password" class="font-medium text-900">Nova senha</label>
+                        <p-password [toggleMask]="true"></p-password>
+                    </div>
+                    <div class="ml-3 w-4">
+                        <p-button
+                        type="submit"
+                        label="Editar senha"
+                        [loading]="loading"
+                        class="w-auto mt-4"
+                        >
+                         </p-button>
+                    </div>
+                </p-dialog>
+            </div>
+            <div class="w-auto">
+                <div class="text-900 font-medium text-xl mb-3">Seus Dados</div>
+                <p class="m-0 p-0 text-600 line-height-3 mr-3">Edite seu perfil</p>
+            </div>
         </div>
-        <div class="col-12 lg:col-10">
+        <div class="col-12 lg:col-10 pt-6">
             <div class="grid formgrid p-fluid">
-                <div class="mb-4 col-12 md:col-6 field p-float-label">
-                    <input id="name" type="text" pInputText>
+                <div class="mb-5 col-12 md:col-6 field p-float-label">
+                    <input id="name" type="text" pInputText [(ngModel)]="userData.person.name">
                     <label for="name" class="font-medium text-900 pl-3">Nome completo</label>
                 </div>
-                <div class="mb-4 col-12 md:col-6 field p-float-label">
-                    <input id="email" type="email" pInputText>
+                <div class="mb-5 col-12 md:col-6 field p-float-label">
+                    <input id="username" type="text" pInputText [(ngModel)]="userData.usernameForDto">
+                    <label for="username" class="font-medium text-900 pl-3">Username</label>
+                </div>
+                <div class="mb-5 col-12 md:col-6 field p-float-label">
+                    <input id="email" type="email" pInputText [(ngModel)]="userData.email">
                     <label for="email" class="font-medium text-900 pl-3">Email</label>
                 </div>
-                <div class="mb-4 col-12 md:col-6 field p-float-label">
-                    <input id="phone" type="tel" pInputText>
-                    <label for="phone" class="font-medium text-900 pl-3">Telefone</label>
-                </div>
-                <div class="mb-4 col-12 md:col-6 field p-float-label">
-                    <input id="birthdate" type="text" pInputText>
+               
+                <div class="mb-5 col-12 md:col-6 field p-float-label">
+                    <input id="birthdate" type="text" pInputText [(ngModel)]="userData.person.birthday">
                     <label for="birthdate" class="font-medium text-900 pl-3">Data de Nascimento</label>
                 </div>
-                <div class="col-12">
-                    <button pButton pRipple label="Editar" class="w-auto mt-3"></button>
+                <div class="mb-5 col-12 md:col-6 field p-float-label">
+                    <p-inputMask mask="(99) 9 9999-9999" [(ngModel)]="userData.person.phone"></p-inputMask>
+                    <label for="birthdate" class="font-medium text-900 pl-3">Telefone</label>   
                 </div>
+            </div>
+            <div class="">
+                <p-button
+                type="submit"
+                label="Editar dados"
+                [loading]="loading"
+                class="w-auto mt-4"
+                >
+            </p-button>
             </div>
         </div>
     </div>

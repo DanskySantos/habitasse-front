@@ -6,8 +6,8 @@ import {TableModule} from "primeng/table";
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import { ProfileCreateComponent } from './edit/profile-create.component';
-
-
+import {PasswordModule} from "primeng/password";
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
     imports: [
         CommonModule,
@@ -16,6 +16,8 @@ import { ProfileCreateComponent } from './edit/profile-create.component';
         TableModule,
         InputGroupModule,
         InputGroupAddonModule,
+        PasswordModule,
+        DialogModule
     ],
     exports: [
         ProfileCreateComponent

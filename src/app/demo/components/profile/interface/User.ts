@@ -1,6 +1,12 @@
 export interface User{
     name: string;
+    usernameForDto: string;
     email: string;
-    phone?: string;
+    password?: string;
     birthdate?: string;
+    person: {
+        name: string;
+        birthday: string;
+        phone: string;
+      };
 }
