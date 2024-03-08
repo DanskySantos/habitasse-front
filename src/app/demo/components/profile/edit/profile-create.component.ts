@@ -3,6 +3,8 @@ import {Component, OnInit} from '@angular/core';
 import { UserService } from '../service/UserService';
 import { User } from '../interface/User';
 import { FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
     templateUrl: './profile-create.component.html'
@@ -21,10 +23,12 @@ export class ProfileCreateComponent implements OnInit {
       name: '',
       birthday: '',
       phone: '',
-    }
+    },
+    currentPassword: '',
+    newPassword: '',
   };
 
-    constructor(private userService: UserService, ) {}
+    constructor(private userService: UserService, private toastrService: ToastrService) {}
 
     ngOnInit() {
       this.getUserProfile();
@@ -78,6 +82,24 @@ export class ProfileCreateComponent implements OnInit {
         (error: any) => {
           this.loading = false;
           console.error('Erro ao atualizar o perfil do usuário: ', error);
+        }
+      );
+    }
+
+    updateUserPassword() {
+      this.loading = true;
+      this.userService.updateUserPassword(this.userData.usernameForDto, this.userData.currentPassword, this.userData.newPassword).subscribe(
+        (data: User) => {
+          this.loading = false;
+          console.log('Senha do usuário atualizada com sucesso: ', data);
+          this.toastrService.success('Senha editada com sucesso', 'Sucesso')
+          window.location.reload();
+        },
+        (error: any) => {
+          this.loading = false;
+          console.error('Erro ao atualiazar sua senha, verifique e tente novamente: ', error);
+          this.toastrService.error(error.code, 'Erro ao atualiazar sua senha, verifique e tente novamente')
+          console.log('error:', error)
         }
       );
     }

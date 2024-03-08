@@ -34,4 +34,15 @@ export class UserService extends SharedService  {
         const headers = this.getHeadersForBearer();
         return this.http.put<User>(this.apiURL + 'user/profile', { headers });
       }
+
+    updateUserPassword(usernameForDto: string, currentPassword: string, newPassword: string): Observable<User> {
+        const headers = this.getHeadersForBearer();
+        const body = {
+          usernameForDto: usernameForDto,  
+          currentPassword: currentPassword,
+          newPassword: newPassword
+        };
+        console.log(body);
+        return this.http.put<User>(this.apiURL + `user/password/${usernameForDto}`, body,  { headers });
+      }
 }
