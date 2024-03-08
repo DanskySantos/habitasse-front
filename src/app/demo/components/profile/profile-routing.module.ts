@@ -1,10 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {ProfileCreateComponent} from "./edit/profile-create.component";
+import {ProfileUpdateComponent} from "./update/profile-update.component";
+import {ProfileComponent} from "./profile.component";
 
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: 'edit', data: {breadcrumb: 'Editar'}, component: ProfileCreateComponent },
+        { path: '', data: {breadcrumb: 'Perfil'}, component: ProfileComponent },
+        { path: 'update', data: {breadcrumb: 'Editar Dados'}, component: ProfileUpdateComponent },
+        { path: 'update-password', data: {breadcrumb: 'Editar Senha'}, component: ProfileUpdateComponent },
         { path: '**', redirectTo: '/notfound' }
     ])],
     exports: [RouterModule]

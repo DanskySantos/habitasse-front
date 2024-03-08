@@ -1,0 +1,43 @@
+<div class="card">
+    <span class="text-900 text-xl font-bold mb-5 block">Cadastre o imóvel dos seus sonhos</span>
+    <div class="grid">
+        <div class="col-12 lg:col-2">
+            <div class="text-900 font-medium text-xl mb-3">Seus Dados</div>
+            <p class="m-0 p-0 text-600 line-height-3 mr-3">Edite seu perfil</p>
+        </div>
+        <form [formGroup]="userForm" class="col-12 lg:col-10">
+            <div class="grid formgrid p-fluid">
+                <div class="mb-5 col-12 md:col-6 field p-float-label">
+                    <input id="name" type="text" pInputText formControlName="name">
+                    <label for="name" class="font-medium text-900 pl-3">Nome completo</label>
+                </div>
+                <div class="mb-5 col-12 md:col-6 field p-float-label">
+                    <input id="username" type="text" pInputText formControlName="username">
+                    <label for="username" class="font-medium text-900 pl-3">Username</label>
+                </div>
+                <div class="mb-5 col-12 md:col-6 field p-float-label">
+                    <input id="email" type="email" pInputText formControlName="email">
+                    <label for="email" class="font-medium text-900 pl-3">Email</label>
+                </div>
+
+                <div class="mb-5 col-12 md:col-6 field p-float-label">
+                    <input id="birthdate" type="text" pInputText formControlName="birthday">
+                    <label for="birthdate" class="font-medium text-900 pl-3">Data de Nascimento</label>
+                </div>
+                <div class="mb-5 col-12 md:col-6 field p-float-label">
+                    <p-inputMask mask="(99) 9 9999-9999" formControlName="phone"></p-inputMask>
+                    <label for="birthdate" class="font-medium text-900 pl-3">Telefone</label>
+                </div>
+            </div>
+            <div>
+                <p-button
+                    type="submit"
+                    label="Editar dados"
+                    [loading]="loading"
+                    class="w-auto mt-4"
+                    (onClick)="update()">
+                </p-button>
+            </div>
+        </form>
+    </div>
+</div>

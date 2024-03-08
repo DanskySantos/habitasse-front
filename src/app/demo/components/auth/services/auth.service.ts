@@ -8,6 +8,7 @@ import {AuthModel} from "../models/auth.model";
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {Router} from "@angular/router";
 import {SharedService} from "../../shared/service/shared.service";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
     providedIn: 'root'
@@ -17,6 +18,7 @@ export class AuthService extends SharedService {
     jwtHelper: JwtHelperService = new JwtHelperService();
 
     constructor(private http: HttpClient,
+                private toastrService: ToastrService,
                 private router: Router,
                 private cookieService: NgxCookieService) {
         super();
@@ -34,6 +36,7 @@ export class AuthService extends SharedService {
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {
+                    this.toastrService.error('Ocorreu um erro inesperado', 'Erro')
                     return this.actionForError(error);
                 }),
                 finalize(() => {
@@ -50,10 +53,12 @@ export class AuthService extends SharedService {
             .pipe(
                 tap(response => {
                     this.setCookies(response);
+                    this.toastrService.success('Registro Concluído', 'Sucesso')
                     this.router.navigate(['/home/property-demand'])
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {
+                    this.toastrService.error('Ocorreu um erro inesperado', 'Erro')
                     return this.actionForError(error);
                 }),
                 finalize(() => {

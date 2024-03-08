@@ -5,9 +5,12 @@ import {SharedModule} from "../shared/shared.module";
 import {TableModule} from "primeng/table";
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
-import { ProfileCreateComponent } from './edit/profile-create.component';
+import { ProfileUpdateComponent } from './update/profile-update.component';
 import {PasswordModule} from "primeng/password";
 import { DialogModule } from 'primeng/dialog';
+import {ProfileComponent} from "./profile.component";
+import {AvatarModule} from "primeng/avatar";
+
 @NgModule({
     imports: [
         CommonModule,
@@ -17,14 +20,16 @@ import { DialogModule } from 'primeng/dialog';
         InputGroupModule,
         InputGroupAddonModule,
         PasswordModule,
-        DialogModule
+        DialogModule,
+        AvatarModule
     ],
     exports: [
-        ProfileCreateComponent
+        ProfileUpdateComponent,
+        ProfileComponent
     ],
-    
     declarations: [
-        ProfileCreateComponent
+        ProfileUpdateComponent,
+        ProfileComponent
     ]
 })
 export class ProfileModule {

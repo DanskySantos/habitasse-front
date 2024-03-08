@@ -25,12 +25,14 @@ export class LoginComponent implements OnInit {
     }
 
     load() {
+        this.login();
         this.loading = true;
 
         setTimeout(() => {
             this.loading = false
         }, 2000);
     }
+
     get emailControl() {
         return this.loginForm.get('email')!;
     }

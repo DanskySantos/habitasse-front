@@ -20,7 +20,7 @@ export class AppTopBarComponent {
     constructor(public layoutService: LayoutService, private router: Router) {}
 
     goToProfileEdit() {
-        this.router.navigate(['/profile/edit']);
+        this.router.navigate(['/profile']);
       }
 
     onMenuButtonClick() {

@@ -1,0 +1,31 @@
+<div class="card" *ngIf="!showUserUpdate">
+    <div class="grid p-4">
+        <div class="flex flex-column gap-2">
+            <span class="text-600 text-xl font-bold mb-5 block">Olá, {{userData?.username}}</span>
+            <div class="w-auto">
+                <div class="text-900 font-medium text-xl mb-3">Edite seu perfil</div>
+            </div>
+        </div>
+        <div class="col-12 lg:col-10 pt-6">
+            <li class="mb-4 flex align-items-center justify-content-start">
+                <p-avatar icon="pi pi-user-edit" size="large" shape="circle" styleClass="text-base font-bold"
+                          [style]="{'background-color':'rgba(133,241,99,0.35)', 'color': '#46BB95', 'border': '1px solid #46BB95'}">
+                </p-avatar>
+                <div class="ml-3">
+                    <span class="block">Altere os dados do seu usuário</span>
+                    <span class="text-primary hover:underline cursor-pointer block font-bold" (click)="navigateToUpdateProfile()">Editar usuario</span>
+                </div>
+            </li>
+            <li class="mb-4 flex align-items-center justify-content-start">
+                <p-avatar icon="pi pi-key" size="large" shape="circle" styleClass="text-base font-bold"
+                          [style]="{'background-color':'rgba(133,241,99,0.35)', 'color': '#46BB95', 'border': '1px solid #46BB95'}">
+                </p-avatar>
+                <div class="ml-3">
+                    <span class="block">Altere a senha do seu usuário</span>
+                    <span class="text-primary hover:underline cursor-pointer block font-bold" (click)="navigateToUpdatePassword()">Editar senha</span>
+                </div>
+            </li>
+        </div>
+    </div>
+</div>
+<app-profile-upload [userData]="userData" *ngIf="showUserUpdate"></app-profile-upload>
