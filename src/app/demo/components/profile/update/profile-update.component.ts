@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserService} from '../service/user-service';
 import {ToastrService} from "ngx-toastr";
 import {UserModel} from "../models/user.model";
@@ -13,9 +13,14 @@ export class ProfileUpdateComponent implements OnInit {
 
     @Input('userData')
     userData?: UserModel;
-    userForm!: FormGroup;
 
+    @Output('actionSuccess')
+    actionSuccess = new EventEmitter<boolean>();
+
+    userForm!: FormGroup;
+    maxDate: Date = new Date();
     loading: boolean = false;
+    inputDate?: string;
 
     constructor(private userService: UserService,
                 private toastrService: ToastrService) {
@@ -38,6 +43,11 @@ export class ProfileUpdateComponent implements OnInit {
 
     updateUserProfile() {
         this.userService.updateUserProfile(this.userForm.value);
+        this.actionSuccess.emit(false);
+    }
+
+    public inputDateChanged(): void {
+        this.selectedBirthday.patchValue(this.inputDate);
     }
 
     update() {
@@ -46,5 +56,9 @@ export class ProfileUpdateComponent implements OnInit {
         setTimeout(() => {
             this.loading = false
         }, 2000);
+    }
+
+    get selectedBirthday() {
+        return this.userForm.get('birthday')!;
     }
 }

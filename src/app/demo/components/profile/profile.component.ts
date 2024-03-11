@@ -47,6 +47,10 @@ export class ProfileComponent implements OnInit {
         });
     }
 
+    hideUserUpdate() {
+        this.showUserUpdate = false;
+    }
+
     navigateToUpdateProfile() {
         this.showUserUpdate = true;
     }

@@ -21,12 +21,28 @@
                 </div>
 
                 <div class="mb-5 col-12 md:col-6 field p-float-label">
-                    <input id="birthdate" type="text" pInputText formControlName="birthday">
-                    <label for="birthdate" class="font-medium text-900 pl-3">Data de Nascimento</label>
+                    <p-calendar pInputText
+                                id="birthday"
+                                name="birthday"
+                                type="date"
+                                class="flex pt-0 pb-0 pr-0 pl-0"
+                                dateFormat="dd/mm/yy"
+                                [style]="{'width': '100%', 'border-radius': '6px'}"
+                                [showIcon]="true"
+                                [touchUI]="true"
+                                inputId="icon"
+                                formControlName="birthday"
+                                dataType="string"
+                                [(ngModel)]="inputDate"
+                                (onSelect)="inputDateChanged()"
+                                [maxDate]="maxDate">
+                    </p-calendar>
+                    <label for="birthday" class="font-medium text-900 pl-3">Data de Nascimento</label>
                 </div>
+
                 <div class="mb-5 col-12 md:col-6 field p-float-label">
                     <p-inputMask mask="(99) 9 9999-9999" formControlName="phone"></p-inputMask>
-                    <label for="birthdate" class="font-medium text-900 pl-3">Telefone</label>
+                    <label class="font-medium text-900 pl-3">Telefone</label>
                 </div>
             </div>
             <div>

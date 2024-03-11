@@ -41,7 +41,7 @@ export class UserService extends SharedService  {
         return this.http.put<UserModel>(this.apiURL + 'user/update/' + user.id, user, {headers}).subscribe(
             next => {
                 this.toastrService.success('Alterações Salvas', 'Sucesso')
-                this.router.navigate(['/home/my-demands'])
+                this.router.navigate(['/profile'])
             },
             err => {
                 this.toastrService.error(err.code, 'Erro')
