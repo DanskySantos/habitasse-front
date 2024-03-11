@@ -7,7 +7,6 @@ import {ForgotPasswordComponent} from "./forgotpassword/forgotpassword.component
 import {LockScreenComponent} from "./lockscreen/lockscreen.component";
 import {LoginComponent} from "./login/login.component";
 import {NewPasswordComponent} from "./newpassword/newpassword.component";
-import {UserType} from "./user-type/user-type";
 import {VerificationComponent} from "./verification/verification.component";
 
 @NgModule({
@@ -17,7 +16,6 @@ import {VerificationComponent} from "./verification/verification.component";
         {path: 'login', data: {breadcrumb: 'Login'}, component: LoginComponent},
         {path: 'forgotpassword', data: {breadcrumb: 'Esqueci a senha'}, component: ForgotPasswordComponent},
         {path: 'register', data: {breadcrumb: 'Registro'}, component: RegisterComponent},
-        {path: 'user-type', data: {breadcrumb: 'Tipo de Usuário'}, component: UserType},
         {path: 'newpassword', data: {breadcrumb: 'Nova Senha'}, component: NewPasswordComponent},
         {path: 'verification', data: {breadcrumb: 'Verificação'}, component: VerificationComponent},
         {path: 'lockscreen', data: {breadcrumb: 'Tela Travada'}, component: LockScreenComponent},

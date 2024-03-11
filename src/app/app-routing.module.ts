@@ -30,14 +30,14 @@ const routes: Routes = [
             {
                 path: 'profile',
                 canActivate: [AuthGuard],
-                data: {breadcrumb: 'User Management'},
+                data: {breadcrumb: 'Configurações de usuário'},
                 loadChildren: () => import('./demo/components/profile/profile.module').then(m => m.ProfileModule)
             },
         ]
     },
     {
         path: 'auth',
-        data: {breadcrumb: 'Auth'},
+        data: {breadcrumb: 'Autenticação'},
         loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule)
     },
     {path: '**', redirectTo: '/auth/login'}

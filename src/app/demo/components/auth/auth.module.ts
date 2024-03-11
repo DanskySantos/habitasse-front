@@ -8,7 +8,6 @@ import {ForgotPasswordComponent} from "./forgotpassword/forgotpassword.component
 import {LockScreenComponent} from "./lockscreen/lockscreen.component";
 import {LoginComponent} from "./login/login.component";
 import {NewPasswordComponent} from "./newpassword/newpassword.component";
-import {UserType} from "./user-type/user-type";
 import {VerificationComponent} from "./verification/verification.component";
 import {AppConfigModule} from "../../../layout/config/config.module";
 import {InputNumberModule} from "primeng/inputnumber";
@@ -24,7 +23,6 @@ import {PasswordModule} from "primeng/password";
         LockScreenComponent,
         LoginComponent,
         NewPasswordComponent,
-        UserType,
         VerificationComponent
     ],
     imports: [

@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from "../service/app.layout.service";
 import { Router } from '@angular/router';
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
     selector: 'app-topbar',
@@ -16,8 +17,13 @@ export class AppTopBarComponent {
     @ViewChild('menubutton') menuButton!: ElementRef;
 
     searchActive: boolean = false;
+    username?: string;
 
-    constructor(public layoutService: LayoutService, private router: Router) {}
+    constructor(public layoutService: LayoutService,
+                private cookieService: CookieService,
+                private router: Router) {
+        this.username = cookieService.get('username');
+    }
 
     goToProfileEdit() {
         this.router.navigate(['/profile']);
@@ -25,6 +31,11 @@ export class AppTopBarComponent {
 
     onMenuButtonClick() {
         this.layoutService.onMenuToggle();
+    }
+
+    signOut() {
+        this.cookieService.deleteAll();
+        this.router.navigate(['auth/login'])
     }
 
     activateSearch() {

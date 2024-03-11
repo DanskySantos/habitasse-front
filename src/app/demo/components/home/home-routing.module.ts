@@ -14,7 +14,7 @@ import {MyDemandsComponent} from "./my-demands/my-demands.component";
         },
         {
             path: 'property-demand',
-            data: {breadcrumb: 'Demanda de Imóvel'},
+            data: {breadcrumb: 'Cadastro de demandas'},
             component: PropertyDemandComponent
         },
         {

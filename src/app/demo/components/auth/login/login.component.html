@@ -1,39 +1,42 @@
 <form [formGroup]="loginForm" #formDir="ngForm"
-      class="surface-ground h-screen w-screen flex align-items-center justify-content-center"
+      class="h-screen w-screen flex align-items-center justify-content-center"
+      style="background: #46BB95"
       [ngClass]="{'p-input-filled': filledInput}">
 
-    <div class="surface-card py-7 px-5 sm:px-7 shadow-2 flex flex-column w-11 sm:w-30rem" style="border-radius:14px">
-        <img style="width: 100%; height: 100%"
-             src="./assets/app/images/auth/logo_habitasse_fundo_branco.png" alt="logo-habitasse"
+    <div class="flex flex-column align-items-center">
+        <img src="./assets/app/images/auth/logo_habitasse_fundo_verde.png"
+             alt="logo-habitasse"
+             style="width: 50%; height: 50%"
              class="mb-4 align-self-center">
+        <div class="surface-card py-7 px-5 sm:px-7 shadow-2 flex flex-column w-11 sm:w-30rem"
+             style="border-radius:14px">
+            <div class="flex align-items-start flex-column">
+                <h3 class="text-primary mb-4"><strong>Entrar</strong></h3>
+            </div>
 
-        <div class="flex align-items-center flex-column">
-            <p class="text-color-secondary mb-2">Bem vindo a Habitasse!</p>
-            <p class="text-color-secondary mb-4"><strong>Faça login para continuar!</strong></p>
-        </div>
-
-        <span class="p-input-icon-left mb-4">
-            <i class="pi pi-user"></i>
-            <input type="text" pInputText placeholder="Email" id="email" name="email"
+            <span class="p-input-icon-left mb-4">
+                <i class="pi pi-user"></i>
+                <input type="text" pInputText placeholder="Email" id="email" name="email"
                    formControlName="email" class="w-full">
-        </span>
+            </span>
 
-        <span class="p-input-icon-left mb-4">
-            <i class="pi pi-key"></i>
-            <input type="password" pInputText placeholder="Password" id="password" name="password"
+            <span class="p-input-icon-left mb-4">
+                <i class="pi pi-key"></i>
+                <input type="password" pInputText placeholder="Password" id="password" name="password"
                    formControlName="password" class="w-full">
-        </span>
+            </span>
+            <a class="text-primary text-right mb-4" routerLink="/auth/user-type"><strong>Esqueci a senha</strong></a>
+            <p-button label="Entrar"
+                      [disabled]="loginForm.invalid"
+                      [loading]="loading"
+                      (onClick)="load()"
+                      [style]="{'width': '100%', 'background': '#46BB95'}"
+                      class="mb-4 w-full max-w-full">
+            </p-button>
 
-        <p-button label="Entrar"
-                  [disabled]="loginForm.invalid"
-                  [loading]="loading"
-                  (onClick)="load()"
-                  [style]="{'width': '100%'}"
-                  class="mb-4 w-full max-w-full">
-        </p-button>
-
-        <span class="text-color-secondary text-center mb-4">Ainda nao possui conta?
-            <a class="text-primary text-center mb-4" routerLink="/auth/user-type"><strong>Clique aqui</strong></a>
-        </span>
+            <span class="text-color-secondary text-center mb-4 mt-4">Ainda nao possui conta?
+                <a class="text-primary text-center mb-4" routerLink="/auth/register"><strong>Cadastre-se aqui!</strong></a>
+            </span>
+        </div>
     </div>
 </form>

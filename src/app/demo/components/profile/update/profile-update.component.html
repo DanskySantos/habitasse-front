@@ -20,7 +20,7 @@
                     <label for="email" class="font-medium text-900 pl-3">Email</label>
                 </div>
 
-                <div class="mb-5 col-12 md:col-6 field p-float-label">
+                <div style="border: none; !important;" class="mb-5 col-12 md:col-6 field p-float-label">
                     <p-calendar pInputText
                                 id="birthday"
                                 name="birthday"
@@ -28,6 +28,7 @@
                                 class="flex pt-0 pb-0 pr-0 pl-0"
                                 dateFormat="dd/mm/yy"
                                 [style]="{'width': '100%', 'border-radius': '6px'}"
+                                [inputStyle]="{'border': 'none'}"
                                 [showIcon]="true"
                                 [touchUI]="true"
                                 inputId="icon"

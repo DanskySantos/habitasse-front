@@ -2,6 +2,15 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../services/auth.service";
 import {ActivatedRoute} from '@angular/router';
+import {ContractTypeEnum} from "../../enums/contract-type-enum";
+import {BedroomsNumberEnum} from "../../enums/bedrooms-number-enum";
+import {PropertyTypeEnum} from "../../enums/property-type-enum";
+import {PetFriendlyEnum} from "../../enums/pet-friendly-enum";
+import {FurnishedEnum} from "../../enums/furnished-enum";
+import {SuggestedValueRentEnum} from "../../enums/suggested-value-rent-enum";
+import {SuggestedValueSaleEnum} from "../../enums/suggested-value-sale-enum";
+import {SuggestedValueSeasonalEnum} from "../../enums/suggested-value-seasonal-enum";
+import {UserTypeEnum} from "../../enums/user-type-enum";
 
 @Component({
     templateUrl: './register.component.html',
@@ -10,8 +19,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-    @Input()
-    userRoles?: string;
+    userType?: string[];
 
     loading: boolean = false;
     registerForm!: FormGroup;
@@ -22,6 +30,11 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.createForm();
+        this.startLists();
+    }
+
+    startLists() {
+        this.userType = Object.values(UserTypeEnum);
     }
 
     private createForm() {
@@ -31,7 +44,7 @@ export class RegisterComponent implements OnInit {
             email: new FormControl('', [Validators.required, Validators.email]),
             password: new FormControl('', [Validators.required, Validators.minLength(5)]),
             birthday: new FormControl(''),
-            userRoles: new FormControl(this.userRoles)
+            userRoles: new FormControl('', Validators.required)
         });
     }
 
