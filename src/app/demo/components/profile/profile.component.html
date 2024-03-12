@@ -1,4 +1,4 @@
-<div class="card" *ngIf="!showUserUpdate">
+<div class="card" *ngIf="!showUserUpdate && !showUserPassword">
     <div class="grid p-4">
         <div class="flex flex-column gap-2">
             <span class="text-600 text-xl font-bold mb-5 block">Olá, {{userData?.username}}</span>
@@ -29,3 +29,4 @@
     </div>
 </div>
 <app-profile-upload [userData]="userData" (actionSuccess)="hideUserUpdate()" *ngIf="showUserUpdate"></app-profile-upload>
+<app-password-upload [userData]="userData"(actionSuccess)="hideUserPassword()" *ngIf="showUserPassword"></app-password-upload>

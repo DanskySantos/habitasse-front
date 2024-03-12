@@ -10,6 +10,7 @@ import {PasswordModule} from "primeng/password";
 import { DialogModule } from 'primeng/dialog';
 import {ProfileComponent} from "./profile.component";
 import {AvatarModule} from "primeng/avatar";
+import { PasswordUpdateComponent } from './update/updatePassword/password-update.component';
 
 @NgModule({
     imports: [
@@ -25,10 +26,12 @@ import {AvatarModule} from "primeng/avatar";
     ],
     exports: [
         ProfileUpdateComponent,
+        PasswordUpdateComponent,
         ProfileComponent
     ],
     declarations: [
         ProfileUpdateComponent,
+        PasswordUpdateComponent,
         ProfileComponent
     ]
 })

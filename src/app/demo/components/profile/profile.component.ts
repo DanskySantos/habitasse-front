@@ -55,6 +55,10 @@ export class ProfileComponent implements OnInit {
         this.showUserUpdate = true;
     }
 
+    hideUserPassword() {
+        this.showUserPassword = false;
+    }
+
     navigateToUpdatePassword() {
         this.showUserPassword = true;
     }

@@ -50,13 +50,22 @@ export class UserService extends SharedService  {
         );
     }
 
-    updateUserPassword(usernameForDto: string, currentPassword: string, newPassword: string): Observable<UserModel> {
+    updateUserPassword(id: number, currentPassword: string, newPassword: string){
         const headers = this.setHeadersForBearer();
         const body = {
-          usernameForDto: usernameForDto,
           currentPassword: currentPassword,
           newPassword: newPassword
         };
-        return this.http.put<UserModel>(this.apiURL + `user/password/${usernameForDto}`, body,  { headers });
+
+        return this.http.put<any>(this.apiURL + 'user/password/' + id, body,  { headers }).subscribe(
+            next => {
+                this.toastrService.success('Password salvo', 'Sucesso')
+                this.router.navigate(['/profile'])
+            },
+            err => {
+                this.toastrService.error(err.code, 'Erro')
+                console.log('error:', err)
+            }
+        )
       }
 }
