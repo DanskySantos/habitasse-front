@@ -6,7 +6,7 @@
     <div class="flex flex-column align-items-center">
         <img src="./assets/app/images/auth/logo_habitasse_fundo_verde.png"
              alt="logo-habitasse"
-             style="width: 50%; height: 50%"
+             style="width: 70%; height: 70%"
              class="mb-4 align-self-center">
         <div class="surface-card py-7 px-5 sm:px-7 shadow-2 flex flex-column w-11 sm:w-30rem"
              style="border-radius:14px">
@@ -16,26 +16,27 @@
 
             <span class="p-input-icon-left mb-4">
                 <i class="pi pi-user"></i>
-                <input type="text" pInputText placeholder="Email" id="email" name="email"
-                   formControlName="email" class="w-full">
+                <input type="text"  pInputText placeholder="Email" id="email" name="email"
+                   formControlName="email" class="w-full surface-50">
             </span>
 
-            <span class="p-input-icon-left mb-4">
+            <span class="p-input-icon-left mb-2">
                 <i class="pi pi-key"></i>
-                <input type="password" pInputText placeholder="Password" id="password" name="password"
-                   formControlName="password" class="w-full">
+                <input type="password" style="background-color: #f2f2f2;" pInputText placeholder="Password" id="password" name="password"
+                   formControlName="password" class="w-full surface-50">
             </span>
             <a class="text-primary text-right mb-4" routerLink="/auth/user-type"><strong>Esqueci a senha</strong></a>
-            <p-button label="Entrar"
-                      [disabled]="loginForm.invalid"
-                      [loading]="loading"
-                      (onClick)="load()"
-                      [style]="{'width': '100%', 'background': '#46BB95'}"
-                      class="mb-4 w-full max-w-full">
-            </p-button>
-
+            <div class="flex text-center justify-content-center">
+                <p-button label="ENTRAR"
+                    [disabled]="loginForm.invalid"
+                    [loading]="loading"
+                    (onClick)="load()"
+                    [style]="{'width': '95%', 'background': '#46BB95', 'border-radius': '10px'}"
+                    class="mb-4 w-full max-w-full">
+                </p-button>
+            </div>
             <span class="text-color-secondary text-center mb-4 mt-4">Ainda nao possui conta?
-                <a class="text-primary text-center mb-4" routerLink="/auth/register"><strong>Cadastre-se aqui!</strong></a>
+                <a class="text-primary text-center mb-4 ml-2" routerLink="/auth/register"><strong>Cadastre-se</strong></a>
             </span>
         </div>
     </div>

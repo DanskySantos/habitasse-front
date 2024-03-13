@@ -5,18 +5,18 @@
     <div class="flex flex-column align-items-center">
         <img src="./assets/app/images/auth/logo_habitasse_fundo_verde.png"
              alt="logo-habitasse"
-             style="width: 50%; height: 50%"
+             style="width: 70%; height: 70%"
              class="mb-4 align-self-center">
 
         <div class="surface-card py-7 px-5 sm:px-7 shadow-2 flex flex-column w-11 sm:w-30rem"
              style="border-radius:14px">
-            <div class="flex align-items-start flex-column">
+            <div class="flex align-items-start flex-column mb-4">
                 <h3 class="text-primary mb-5"><strong>Cadastro</strong></h3>
             </div>
             <div class="mb-5 field p-float-label w-full">
                 <span class="w-full">
                     <p-dropdown
-                        class="w-full flex"
+                        class="w-full flex surface-50"
                         formControlName="userRoles"
                         inputId="float-label"
                         [style]="{'width': '100%'}"
@@ -25,37 +25,37 @@
                         name="userRoles"
                         id="userRoles">
                     </p-dropdown>
-                    <label for="float-label" class="pl-3">Tipo de Usuário</label>
+                    <label for="float-label" class="pl-2 text-base">Tipo de Usuário</label>
                 </span>
             </div>
 
             <div class="mb-5 field p-float-label w-full">
-                <input class="w-full" id="name" type="text" autocomplete="off" pInputText formControlName="name">
-                <label for="name" class="w-full font-medium text-900">Nome Completo</label>
+                <input class="w-full surface-50"  id="name" type="text" autocomplete="off" pInputText formControlName="name">
+                <label for="name" class="w-full font-medium text-base">Nome Completo</label>
             </div>
 
             <div class="mb-5 field p-float-label w-full">
-                <input class="w-full" id="username" type="text" autocomplete="off" pInputText formControlName="username">
-                <label for="username" class="w-full font-medium text-900">Nome de Usuário</label>
+                <input class="w-full surface-50" id="username" type="text" autocomplete="off" pInputText formControlName="username">
+                <label for="username" class="w-full font-medium text-base">Nome de Usuário</label>
             </div>
 
             <div class="mb-5 field p-float-label w-full">
-                <input class="w-full" id="email" type="text" autocomplete="off" pInputText formControlName="email">
-                <label for="email" class="w-full font-medium text-900">Email</label>
+                <input class="w-full surface-50" id="email" type="text" autocomplete="off" pInputText formControlName="email">
+                <label for="email" class="w-full font-medium text-base">Email</label>
             </div>
 
             <div class="mb-5 field p-float-label w-full">
-                <input class="w-full" id="password" type="password" autocomplete="off" pInputText formControlName="password">
-                <label for="password" class="w-full font-medium text-900">Senha</label>
+                <input class="w-full surface-50" id="password" type="password" autocomplete="off" pInputText formControlName="password">
+                <label for="password" class="w-full font-medium text-base">Senha</label>
             </div>
 
             <p-button type="submit"
                       (click)="submit()"
                       [disabled]="registerForm.invalid"
-                      label="Cadastrar"
+                      label="CRIAR CONTA"
                       [loading]="loading"
                       (onClick)="load()"
-                      [style]="{'width': '100%'}"
+                      [style]="{'width': '100%', 'border-radius': '10px'}"
                       class="mb-4 w-full max-w-full">
             </p-button>
 
