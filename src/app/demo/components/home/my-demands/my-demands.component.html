@@ -13,10 +13,12 @@
                             <p class="m-0" style="color: #9E9E9E" title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
                             <div class="flex flex-row">
                                 <img ngSrc="./assets/app/images/icons/delete.png"
-                                     alt="house"
+                                     alt="delete"
+                                     title="Deletar"
                                      class="align-self-center mr-4 cursor-pointer" height="24" width="24">
                                 <img ngSrc="./assets/app/images/icons/edit.png"
-                                     alt="house"
+                                     alt="edit"
+                                     title="Editar"
                                      class="align-self-center cursor-pointer" height="24" width="24">
                             </div>
                         </div>
@@ -67,6 +69,7 @@
                             </span>
                         </ul>
                         <button type="button" pButton pRipple class="w-full mt-3 "
+                                disabled="{{demand.offers.length<=0}}"
                                 label="{{demand.offers.length > 0 ? demand.offers.length + ' propostas' : 'Sem propostas'}}"
                                 icon="pi pi-arrow-right" iconPos="right">
                             <img ngSrc="./assets/app/images/icons/Group.svg"
