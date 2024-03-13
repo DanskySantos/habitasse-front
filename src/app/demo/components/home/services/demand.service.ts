@@ -9,7 +9,7 @@ import {ToastrService} from "ngx-toastr";
 @Injectable({
     providedIn: 'root'
 })
-export class PropertyDemandService extends SharedService {
+export class DemandService extends SharedService {
 
     constructor(private http: HttpClient,
                 private toastrService: ToastrService,
@@ -25,18 +25,8 @@ export class PropertyDemandService extends SharedService {
         });
     }
 
-    save(form: any){
+    getDemands(){
         const headers = this.setHeadersForBearer();
-        return this.http.post<any[]>(this.apiURL + 'register-demand/save', form, {headers}).subscribe(
-            next => {
-                this.toastrService.success('Imóvel Cadastrado', 'Sucesso')
-                //TODO navegar para tela de minhas demandas
-                this.router.navigate(['/home/my-demands'])
-            },
-            err => {
-                this.toastrService.error(err.code, 'Erro')
-                console.log('error:', err)
-            }
-        );
+        return this.http.get<any[]>(this.apiURL + 'demand/findByEmail', {headers})
     }
 }

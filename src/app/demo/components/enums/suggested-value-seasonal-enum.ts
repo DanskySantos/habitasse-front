@@ -6,6 +6,6 @@ export enum SuggestedValueSeasonalEnum {
     R$2000 = "R$ 2.000,00",
     R$2500 = "R$ 2.500,00",
     R$3000 = "R$ 3.000,00",
-    R$5000 = "R$ 5.000,00"
+    R$5000 = "R$ 5.000,00",
 }
 

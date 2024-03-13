@@ -81,7 +81,7 @@ export class PropertyDemandComponent implements OnInit {
             suggestedValueForSeasonal: new FormControl(null),
             state: new FormControl(null, [Validators.required]),
             city: new FormControl(null, [Validators.required]),
-            annotation: new FormControl(null, [Validators.required]),
+            annotation: new FormControl(null),
         });
         this.propertyForm.get('contractType')?.valueChanges.subscribe(contractType => {
             this.setValidatorsBasedOnContractType(contractType);
