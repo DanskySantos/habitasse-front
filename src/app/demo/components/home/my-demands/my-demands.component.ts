@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LayoutService} from 'src/app/layout/service/app.layout.service';
 import {DemandService} from "../services/demand.service";
 import {ToastrService} from "ngx-toastr";
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './my-demands.component.html',
@@ -9,11 +10,26 @@ import {ToastrService} from "ngx-toastr";
 
 })
 export class MyDemandsComponent implements OnInit {
-
+    visible: boolean = false;
     demands: any;
+  
+    showDialog() {
+        this.visible = true;
+    }
+
+    loading: boolean = false;
+
+    load() {
+        this.loading = true;
+
+        setTimeout(() => {
+            this.loading = false
+        }, 2000);
+    }
 
     constructor(public layoutService: LayoutService,
                 private toastrService: ToastrService,
+                private router: Router,
                 private demandService: DemandService) {
         this.getDemands();
     }
@@ -25,6 +41,12 @@ export class MyDemandsComponent implements OnInit {
         this.demandService.getDemands().subscribe(data =>
             this.demands = data
         );
+    }
+
+    deleteDemand(propertyId: number, demandId: number) {
+        this.demandService.deleteDemand(propertyId, demandId);
+        this.toastrService.success('Demanda excluída com sucesso!');
+        location.reload();
     }
 
     getContractType(contractType: string): any {

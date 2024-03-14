@@ -63,6 +63,8 @@ export class PropertyDemandComponent implements OnInit {
         this.propertyDemandService.save(this.propertyForm.value)
     }
 
+    
+
     filterCities(event: any) {
         this.addressService.getFilteredCities(event.value).subscribe(cities =>
             this.cities = cities.map(city => city.nome)

@@ -29,4 +29,10 @@ export class DemandService extends SharedService {
         const headers = this.setHeadersForBearer();
         return this.http.get<any[]>(this.apiURL + 'demand/findByEmail', {headers})
     }
+
+    deleteDemand(propertyId: number, demandId: number){
+        const headers = this.setHeadersForBearer();
+        return this.http.delete<any>(`${this.apiURL}propertyDemand/delete/${propertyId}/${demandId}`, {headers}).subscribe(   
+        )
+    }
 }

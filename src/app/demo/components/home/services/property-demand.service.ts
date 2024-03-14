@@ -27,7 +27,7 @@ export class PropertyDemandService extends SharedService {
 
     save(form: any){
         const headers = this.setHeadersForBearer();
-        return this.http.post<any[]>(this.apiURL + 'register-demand/save', form, {headers}).subscribe(
+        return this.http.post<any[]>(this.apiURL + 'propertyDemand/save', form, {headers}).subscribe(
             next => {
                 this.toastrService.success('Imóvel Cadastrado', 'Sucesso')
                 //TODO navegar para tela de minhas demandas

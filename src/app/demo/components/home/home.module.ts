@@ -8,7 +8,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {MyDemandsComponent} from "./my-demands/my-demands.component";
 import {AvatarModule} from "primeng/avatar";
-
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
     imports: [
         CommonModule,
@@ -17,7 +17,8 @@ import {AvatarModule} from "primeng/avatar";
         DropdownModule,
         InputTextareaModule,
         AvatarModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        DialogModule
     ],
     exports: [
         HomeComponent,
