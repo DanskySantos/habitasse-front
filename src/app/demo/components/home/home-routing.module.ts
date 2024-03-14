@@ -19,7 +19,7 @@ import {MyDemandsComponent} from "./my-demands/my-demands.component";
         },
         {
             path: 'my-demands',
-            data: {breadcrumb: 'Imóveis Cadastrados'},
+            data: {breadcrumb: 'Minhas Demandas'},
             component: MyDemandsComponent
         }
     ])],

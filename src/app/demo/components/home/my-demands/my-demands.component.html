@@ -1,13 +1,20 @@
-<div class="card">
-    <span class="text-900 text-xl font-bold mb-5 block">Minhas demandas</span>
+<div class="">
+    <div class="flex justify-content-between">
+        <span class="text-900 text-xl font-bold mb-5 block">Minhas demandas</span>
+        <button type="button"
+                pButton
+                pRipple
+                style="height: 15%;"
+                label="Nova Demanda"
+                icon="pi pi-plus"
+                iconPos="left"
+                (click)="navigateToCreateDemand()">
+        </button>
+    </div>
     <div class="grid">
-        <div class="col-12 lg:col-2">
-            <div class="text-900 font-medium text-xl mb-3">Imóvel</div>
-            <p class="m-0 p-0 text-600 line-height-3 mr-3">Informe os dados solicitados</p>
-        </div>
         <div class="col-12 lg:col-10">
             <div class="grid formgrid p-fluid">
-                <div class="col-12 lg:col-6 xl:col-4 mb-4" *ngFor="let demand of demands">
+                <div class="col-12 xl:col-4 lg:col-6 mb-4" *ngFor="let demand of demands">
                     <div class="card h-full">
                         <div class="flex align-items-center mb-4 justify-content-between">
                             <p class="m-0" style="color: #9E9E9E" title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
@@ -16,7 +23,7 @@
                                      alt="delete"
                                      title="Deletar"
                                      class="align-self-center mr-4 cursor-pointer" height="24" width="24">
-                                     <p-dialog class="lg: w-11 sm: w-11 md: w-11" header="Deseja realmente excluir esta demanda?" 
+                                     <p-dialog class="lg: w-11 sm: w-11 md: w-11" header="Deseja realmente excluir esta demanda?"
                                      [(visible)]="visible" [modal]="true" [draggable]="false" [resizable]="false">
                                         <div>
                                             <p-button
@@ -93,5 +100,13 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="card flex justify-content-center">
+        <p-paginator (onPageChange)="onPageChange($event)"
+                     [first]="first"
+                     [rows]="rows"
+                     [totalRecords]="120"
+                     [rowsPerPageOptions]="[10, 20, 30]">
+        </p-paginator>
     </div>
 </div>

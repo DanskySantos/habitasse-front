@@ -9,6 +9,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {MyDemandsComponent} from "./my-demands/my-demands.component";
 import {AvatarModule} from "primeng/avatar";
 import { DialogModule } from 'primeng/dialog';
+import {PaginatorModule} from "primeng/paginator";
 @NgModule({
     imports: [
         CommonModule,
@@ -18,7 +19,8 @@ import { DialogModule } from 'primeng/dialog';
         InputTextareaModule,
         AvatarModule,
         NgOptimizedImage,
-        DialogModule
+        DialogModule,
+        PaginatorModule
     ],
     exports: [
         HomeComponent,

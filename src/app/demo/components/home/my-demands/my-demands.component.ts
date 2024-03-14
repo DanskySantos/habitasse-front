@@ -2,7 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {LayoutService} from 'src/app/layout/service/app.layout.service';
 import {DemandService} from "../services/demand.service";
 import {ToastrService} from "ngx-toastr";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
+import {PaginatorState} from "primeng/paginator";
+
+interface PageEvent {
+    first: number;
+    rows: number;
+    page: number;
+    pageCount: number;
+}
+
 
 @Component({
     templateUrl: './my-demands.component.html',
@@ -12,7 +21,9 @@ import { Router } from '@angular/router';
 export class MyDemandsComponent implements OnInit {
     visible: boolean = false;
     demands: any;
-  
+    first: number = 0;
+    rows: number = 5;
+
     showDialog() {
         this.visible = true;
     }
@@ -43,10 +54,20 @@ export class MyDemandsComponent implements OnInit {
         );
     }
 
+    navigateToCreateDemand() {
+        this.router.navigate(['/home/property-demand'])
+    }
+
     deleteDemand(propertyId: number, demandId: number) {
         this.demandService.deleteDemand(propertyId, demandId);
         this.toastrService.success('Demanda excluída com sucesso!');
         location.reload();
+    }
+
+    onPageChange(event: PaginatorState) {
+        console.log(event)
+        this.first = event.first!;
+        this.rows = event.rows!;
     }
 
     getContractType(contractType: string): any {
