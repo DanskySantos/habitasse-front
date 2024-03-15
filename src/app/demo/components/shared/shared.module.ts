@@ -14,41 +14,43 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { PanelModule} from  'primeng/panel';
 import { InputMaskModule } from 'primeng/inputmask';
 import {FormFieldErrorComponent} from "./components/form-field-error/form-field-error.component";
+import {PaginatorModule} from "primeng/paginator";
 
 @NgModule({
   declarations: [
     FormFieldErrorComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ButtonModule,
-    DialogModule,
-    RippleModule,
-    InputTextModule,
-    DropdownModule,
-    FileUploadModule,
-    InputTextareaModule,
-    CalendarModule,
-    AutoCompleteModule,
-    InputMaskModule,
-    PanelModule
-  ],
-  exports: [
-    FormsModule,
-    ReactiveFormsModule,
-    RippleModule,
-    DialogModule,
-    InputTextModule,
-    DropdownModule,
-    FileUploadModule,
-    InputTextareaModule,
-    CalendarModule,
-    AutoCompleteModule,
-    InputMaskModule,
-    PanelModule,
-    FormFieldErrorComponent,
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ButtonModule,
+        DialogModule,
+        RippleModule,
+        InputTextModule,
+        DropdownModule,
+        FileUploadModule,
+        InputTextareaModule,
+        CalendarModule,
+        AutoCompleteModule,
+        InputMaskModule,
+        PanelModule,
+        PaginatorModule
+    ],
+    exports: [
+        FormsModule,
+        ReactiveFormsModule,
+        RippleModule,
+        DialogModule,
+        InputTextModule,
+        DropdownModule,
+        FileUploadModule,
+        InputTextareaModule,
+        CalendarModule,
+        AutoCompleteModule,
+        InputMaskModule,
+        PanelModule,
+        FormFieldErrorComponent
+    ]
 })
 export class SharedModule { }

@@ -5,6 +5,7 @@ import {StateModel} from "../../auth/models/state.model";
 import {SharedService} from "../../shared/service/shared.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {PageModel} from "../models/page.model";
 
 @Injectable({
     providedIn: 'root'
@@ -25,14 +26,14 @@ export class DemandService extends SharedService {
         });
     }
 
-    getDemands(){
+    getDemands(page: number, size: number){
         const headers = this.setHeadersForBearer();
-        return this.http.get<any[]>(this.apiURL + 'demand/findByEmail', {headers})
+        return this.http.get<PageModel>(`${this.apiURL}demand/findByEmail/${page}/${size}`, {headers})
     }
 
     deleteDemand(propertyId: number, demandId: number){
         const headers = this.setHeadersForBearer();
-        return this.http.delete<any>(`${this.apiURL}propertyDemand/delete/${propertyId}/${demandId}`, {headers}).subscribe(   
+        return this.http.delete<any>(`${this.apiURL}propertyDemand/delete/${propertyId}/${demandId}`, {headers}).subscribe(
         )
     }
 }

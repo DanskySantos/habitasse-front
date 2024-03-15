@@ -10,6 +10,7 @@ import {MyDemandsComponent} from "./my-demands/my-demands.component";
 import {AvatarModule} from "primeng/avatar";
 import { DialogModule } from 'primeng/dialog';
 import {PaginatorModule} from "primeng/paginator";
+import {ProfileModule} from "../profile/profile.module";
 @NgModule({
     imports: [
         CommonModule,
@@ -20,7 +21,8 @@ import {PaginatorModule} from "primeng/paginator";
         AvatarModule,
         NgOptimizedImage,
         DialogModule,
-        PaginatorModule
+        PaginatorModule,
+        ProfileModule
     ],
     exports: [
         HomeComponent,

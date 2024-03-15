@@ -3,14 +3,8 @@ import {LayoutService} from 'src/app/layout/service/app.layout.service';
 import {DemandService} from "../services/demand.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from '@angular/router';
+import {PageModel} from "../models/page.model";
 import {PaginatorState} from "primeng/paginator";
-
-interface PageEvent {
-    first: number;
-    rows: number;
-    page: number;
-    pageCount: number;
-}
 
 
 @Component({
@@ -19,38 +13,41 @@ interface PageEvent {
 
 })
 export class MyDemandsComponent implements OnInit {
+
     visible: boolean = false;
     demands: any;
+
+    totalElements!: number;
+    page: number = 0;
+    size: number = 4;
     first: number = 0;
-    rows: number = 5;
-
-    showDialog() {
-        this.visible = true;
-    }
-
-    loading: boolean = false;
-
-    load() {
-        this.loading = true;
-
-        setTimeout(() => {
-            this.loading = false
-        }, 2000);
-    }
 
     constructor(public layoutService: LayoutService,
                 private toastrService: ToastrService,
                 private router: Router,
                 private demandService: DemandService) {
-        this.getDemands();
+        this.getDemands(this.page, this.size);
     }
 
     ngOnInit(): void {
     }
 
-    private getDemands() {
-        this.demandService.getDemands().subscribe(data =>
-            this.demands = data
+    showDialog() {
+        this.visible = true;
+    }
+
+    onPageChange(event: PaginatorState) {
+        this.first = event.first!
+        this.page = event.page!
+        this.size = event.rows!
+        this.getDemands(event.page!, event.rows!)
+    }
+
+    private getDemands(first: number, rows: number) {
+        this.demandService.getDemands(first, rows).subscribe((data: PageModel) => {
+                this.demands = data.content
+                this.totalElements = data.totalElements
+            }
         );
     }
 
@@ -64,11 +61,6 @@ export class MyDemandsComponent implements OnInit {
         location.reload();
     }
 
-    onPageChange(event: PaginatorState) {
-        console.log(event)
-        this.first = event.first!;
-        this.rows = event.rows!;
-    }
 
     getContractType(contractType: string): any {
         if (contractType == 'RENT')
@@ -195,4 +187,6 @@ export class MyDemandsComponent implements OnInit {
 
         return `${dia}/${mes}/${ano}`;
     }
+
+    protected readonly Number = Number;
 }
