@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {ProfileUpdateComponent} from "./update/profile-update.component";
+import {ProfileUpdateComponent} from "./update-user/profile-update.component";
 import {ProfileComponent} from "./profile.component";
 
 @NgModule({

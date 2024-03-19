@@ -30,7 +30,6 @@ export class PropertyDemandService extends SharedService {
         return this.http.post<any[]>(this.apiURL + 'propertyDemand/save', form, {headers}).subscribe(
             next => {
                 this.toastrService.success('Imóvel Cadastrado', 'Sucesso')
-                //TODO navegar para tela de minhas demandas
                 this.router.navigate(['/home/my-demands'])
             },
             err => {

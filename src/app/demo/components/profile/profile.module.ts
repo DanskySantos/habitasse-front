@@ -5,12 +5,12 @@ import {SharedModule} from "../shared/shared.module";
 import {TableModule} from "primeng/table";
 import {InputGroupModule} from "primeng/inputgroup";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
-import {ProfileUpdateComponent} from './update/profile-update.component';
+import {ProfileUpdateComponent} from './update-user/profile-update.component';
 import {PasswordModule} from "primeng/password";
 import {DialogModule} from 'primeng/dialog';
 import {ProfileComponent} from "./profile.component";
 import {AvatarModule} from "primeng/avatar";
-import { PasswordUpdateComponent } from './update/updatePassword/password-update.component';
+import { PasswordUpdateComponent } from './update-password/password-update.component';
 
 @NgModule({
     imports: [

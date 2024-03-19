@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {UserService} from '../../service/user-service';
+import {UserService} from '../service/user-service';
 import {ToastrService} from "ngx-toastr";
-import {UserModel} from "../../models/user.model";
+import {UserModel} from "../models/user.model";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
