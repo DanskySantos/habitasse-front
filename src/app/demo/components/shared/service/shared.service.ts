@@ -31,7 +31,6 @@ export class SharedService {
         return new HttpHeaders({
             'Authorization': 'Basic ' + btoa(`${this.clientID}:${this.clientSecret}`),
             'Access-Control-Allow-Origin': 'https://habitasse.netlify.app',
-            'Origin': 'https://habitasse.netlify.app',
             'Content-Type': 'application/json'
         });
     }
