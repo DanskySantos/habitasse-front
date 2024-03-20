@@ -93,10 +93,7 @@ export class UpdateDemandModalComponent implements OnInit {
         });
     }
 
-    edit() {
-        this.submited = true;
-        this.propertyDemandService.save(this.propertyForm.value)
-    }
+ 
     
     load() {
         this.loading = true;
@@ -111,11 +108,10 @@ export class UpdateDemandModalComponent implements OnInit {
             this.city = cities.map(city => city.nome)
         );
     }
-
-
+   
     updateDemand() {
-        this.demandService.updateDemand(this.propertyForm.value);
-        this.actionSuccess.emit(false);
+        this.submited = true;
+        this.demandService.updateDemand(this.propertyForm.value)
     }
 
     update() {

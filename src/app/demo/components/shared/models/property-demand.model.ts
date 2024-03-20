@@ -1,4 +1,5 @@
 import { AddressModel } from "./address.model";
+import { DemandModel } from "./demand.model";
 
 export class PropertyDemandModel {
     id!: number;
@@ -11,4 +12,5 @@ export class PropertyDemandModel {
     suggestedValueForSale!: string;
     suggestedValueForSeasonal!: string;
     address!: AddressModel;
+    annotation!: DemandModel;
 }

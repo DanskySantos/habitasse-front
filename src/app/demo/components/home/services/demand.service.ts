@@ -7,6 +7,7 @@ import {ToastrService} from "ngx-toastr";
 import {PageModel} from "../../shared/models/page.model";
 import { UserModel } from '../../shared/models/user.model';
 import { DemandModel } from '../../shared/models/demand.model';
+import { PropertyDemandModel } from '../../shared/models/property-demand.model';
 
 @Injectable({
     providedIn: 'root'
@@ -53,16 +54,16 @@ export class DemandService extends SharedService {
     }
 
 
-    updateDemand(demand: DemandModel){
+    updateDemand(demand: PropertyDemandModel){
         console.log('demand', demand)
         const headers = this.setHeadersForBearer();
-        return this.http.put<DemandModel>(this.apiURL + 'propertyDemand/update/' + demand.id, demand, {headers}).subscribe(
+        return this.http.put<PropertyDemandModel>(this.apiURL + 'propertyDemand/update/' + demand.id, demand, {headers}).subscribe(
             next => {
                 this.toastrService.success('Alterações Salvas', 'Sucesso')
-                this.router.navigate(['/home/my-demands'])
+                location.reload();
             },
             err => {
-                this.toastrService.error(err.code, 'Erro')
+                this.toastrService.error(err.code, 'Não foi possivel editar a demanda')
                 console.log('error:', err)
             }
         );
