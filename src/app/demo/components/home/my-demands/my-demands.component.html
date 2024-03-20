@@ -1,5 +1,5 @@
-<div class="">
-    <div class="flex justify-content-between">
+<div>
+    <div class="flex justify-content-between mb-4">
         <span class="text-900 text-xl font-bold mb-5 block">Minhas demandas</span>
         <button type="button"
                 pButton
@@ -12,14 +12,14 @@
         </button>
     </div>
     <div class="grid">
-        <div class="col-12 lg: mt-2">
-            <div class="grid formgrid p-fluid">
+        <div class="col-12 lg:col-10 w-full flex justify-content-evenly">
+            <div class="grid formgrid p-fluid w-full">
                 <div class="col-12 xl:col-3 lg:col-6 mb-4" *ngFor="let demand of demands">
                     <div class="card h-full">
                         <div class="flex align-items-center mb-4 justify-content-between">
                             <p class="m-0" style="color: #9E9E9E" title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
                             <div class="flex flex-row">
-                                <img (click)="showDialog()" ngSrc="./assets/app/images/icons/delete.png"
+                                <img (click)="ModalExcluir()" ngSrc="./assets/app/images/icons/delete.png"
                                      alt="delete"
                                      title="Deletar"
                                      class="align-self-center mr-4 cursor-pointer" height="24" width="24">
@@ -29,15 +29,17 @@
                                             <p-button
                                                 type="submit"
                                                 label="Excluir demanda"
+                                                [loading]="loading"
                                                 class="w-auto mt-4"
                                                 (click)="deleteDemand(demand.propertyDemand.id, demand.id)">
                                             </p-button>
                                         </div>
                                     </p-dialog>
-                                <img ngSrc="./assets/app/images/icons/edit.png"
+                                <img (click)="EditModal(modal)" ngSrc="./assets/app/images/icons/edit.png"
                                      alt="edit"
                                      title="Editar"
                                      class="align-self-center cursor-pointer" height="24" width="24">
+
                             </div>
                         </div>
                         <h5 class="p-2"
@@ -96,6 +98,7 @@
                                  class="align-self-center" height="19" width="19">
                         </button>
                     </div>
+                    <app-update-demand-modal #modal [demandData]="demand"></app-update-demand-modal>
                 </div>
             </div>
         </div>

@@ -11,7 +11,8 @@ import {AvatarModule} from "primeng/avatar";
 import { DialogModule } from 'primeng/dialog';
 import {PaginatorModule} from "primeng/paginator";
 import {ProfileModule} from "../profile/profile.module";
-import {AllDemandsComponent} from "./all-demands/all-demands.component";
+import {UpdateDemandModalComponent} from './my-demands/update-demand-modal/update-demand-modal.component';
+import {AllDemandsComponent} from './all-demands/all-demands.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -29,12 +30,15 @@ import {AllDemandsComponent} from "./all-demands/all-demands.component";
         HomeComponent,
         PropertyDemandComponent,
         MyDemandsComponent,
+        UpdateDemandModalComponent,
         AllDemandsComponent
+
     ],
     declarations: [
         HomeComponent,
         PropertyDemandComponent,
         MyDemandsComponent,
+        UpdateDemandModalComponent,
         AllDemandsComponent
     ]
 })

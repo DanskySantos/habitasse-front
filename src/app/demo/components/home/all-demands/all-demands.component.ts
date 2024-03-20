@@ -3,7 +3,7 @@ import {LayoutService} from 'src/app/layout/service/app.layout.service';
 import {DemandService} from "../services/demand.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from '@angular/router';
-import {PageModel} from "../models/page.model";
+import {PageModel} from "../../shared/models/page.model";
 import {PaginatorState} from "primeng/paginator";
 
 
