@@ -15,7 +15,7 @@ export class ProfileUpdateComponent implements OnInit {
     userData?: UserModel;
 
     @Output('actionSuccess')
-    actionSuccess = new EventEmitter<boolean>();
+    actionSuccess = new EventEmitter<UserModel>();
 
     userForm!: FormGroup;
     maxDate: Date = new Date();
@@ -43,7 +43,7 @@ export class ProfileUpdateComponent implements OnInit {
 
     updateUserProfile() {
         this.userService.updateUserProfile(this.userForm.value);
-        this.actionSuccess.emit(false);
+        this.actionSuccess.emit(this.userForm.value);
     }
 
     public inputDateChanged(): void {

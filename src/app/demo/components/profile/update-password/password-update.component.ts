@@ -15,7 +15,7 @@ export class PasswordUpdateComponent implements OnInit {
     userData?: UserModel;
 
     @Output('actionSuccess')
-    actionSuccess = new EventEmitter<boolean>();
+    actionSuccess = new EventEmitter<any>();
 
     userPasswordForm!: FormGroup;
     loading: boolean = false;
@@ -38,9 +38,8 @@ export class PasswordUpdateComponent implements OnInit {
 
 
     updateUserPassword() {
-        console.log(this.userData?.id, this.selectedCurrentPassword.value, this.selectedNewPassword.value)
         this.userService.updateUserPassword(this.userData?.id!, this.selectedCurrentPassword.value, this.selectedNewPassword.value);
-        this.actionSuccess.emit(false);
+        this.actionSuccess.emit(this.userPasswordForm.value);
     }
 
     updatePassword() {
