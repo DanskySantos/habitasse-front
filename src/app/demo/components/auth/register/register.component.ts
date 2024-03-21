@@ -31,12 +31,15 @@ export class RegisterComponent implements OnInit {
     private createForm() {
         this.registerForm = new FormGroup({
             name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-            username: new FormControl('', [Validators.required, Validators.minLength(5)]),
             email: new FormControl('', [Validators.required, Validators.email]),
             password: new FormControl('', [Validators.required, Validators.minLength(5)]),
             birthday: new FormControl(''),
             userRoles: new FormControl('', Validators.required)
         });
+    }
+
+    goBack() {
+        window.history.back();
     }
 
     submit() {
