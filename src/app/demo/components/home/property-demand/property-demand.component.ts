@@ -43,7 +43,7 @@ export class PropertyDemandComponent implements OnInit {
         this.createForm();
     }
 
-    startLists() {
+    startLists(){
         this.contractType = Object.values(ContractTypeEnum);
         this.bedroomsNumber = Object.values(BedroomsNumberEnum);
         this.propertyType = Object.values(PropertyTypeEnum);
@@ -62,8 +62,6 @@ export class PropertyDemandComponent implements OnInit {
         this.submited = true;
         this.propertyDemandService.save(this.propertyForm.value)
     }
-
-    
 
     filterCities(event: any) {
         this.addressService.getFilteredCities(event.value).subscribe(cities =>

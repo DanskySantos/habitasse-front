@@ -11,6 +11,7 @@ import {AvatarModule} from "primeng/avatar";
 import { DialogModule } from 'primeng/dialog';
 import {PaginatorModule} from "primeng/paginator";
 import {ProfileModule} from "../profile/profile.module";
+import {AccordionModule} from "primeng/accordion";
 import {UpdateDemandModalComponent} from './my-demands/update-demand-modal/update-demand-modal.component';
 import {AllDemandsComponent} from './all-demands/all-demands.component';
 @NgModule({
@@ -24,7 +25,8 @@ import {AllDemandsComponent} from './all-demands/all-demands.component';
         NgOptimizedImage,
         DialogModule,
         PaginatorModule,
-        ProfileModule
+        ProfileModule,
+        AccordionModule
     ],
     exports: [
         HomeComponent,
@@ -32,7 +34,6 @@ import {AllDemandsComponent} from './all-demands/all-demands.component';
         MyDemandsComponent,
         UpdateDemandModalComponent,
         AllDemandsComponent
-
     ],
     declarations: [
         HomeComponent,

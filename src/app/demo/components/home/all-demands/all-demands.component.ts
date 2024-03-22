@@ -5,6 +5,16 @@ import {ToastrService} from "ngx-toastr";
 import {Router} from '@angular/router';
 import {PageModel} from "../../shared/models/page.model";
 import {PaginatorState} from "primeng/paginator";
+import {ContractTypeEnum} from "../../enums/contract-type-enum";
+import {BedroomsNumberEnum} from "../../enums/bedrooms-number-enum";
+import {PropertyTypeEnum} from "../../enums/property-type-enum";
+import {PetFriendlyEnum} from "../../enums/pet-friendly-enum";
+import {FurnishedEnum} from "../../enums/furnished-enum";
+import {SuggestedValueRentEnum} from "../../enums/suggested-value-rent-enum";
+import {SuggestedValueSaleEnum} from "../../enums/suggested-value-sale-enum";
+import {SuggestedValueSeasonalEnum} from "../../enums/suggested-value-seasonal-enum";
+import {AddressService} from "../../shared/service/address.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -16,20 +26,48 @@ export class AllDemandsComponent implements OnInit {
 
     visible: boolean = false;
     demands: any;
-
+    filterForm!: FormGroup;
     totalElements!: number;
     page: number = 0;
     size: number = 4;
     first: number = 0;
+    contractType?: string[];
+    propertyType?: string[];
+    bedroomsNumber?: string[];
+    furnished?: string[];
+    petFriendly?: string[];
+    suggestedValueForRent?: string[];
+    suggestedValueForSale?: string[];
+    suggestedValueForSeasonal?: string[];
+    states?: any;
+    cities?: any;
 
     constructor(public layoutService: LayoutService,
                 private toastrService: ToastrService,
+                private addressService: AddressService,
                 private router: Router,
                 private demandService: DemandService) {
-        this.getDemands(this.page, this.size);
+        this.createForm();
+        this.startLists();
+        this.getFilteredDemands(this.page, this.size);
     }
 
     ngOnInit(): void {
+    }
+
+    private createForm() {
+        this.filterForm = new FormGroup({
+            contractType: new FormControl(null),
+            propertyType: new FormControl(null),
+            bedroomsNumber: new FormControl(null),
+            furnished: new FormControl(null),
+            petFriendly: new FormControl(null),
+            suggestedValueForRent: new FormControl(null),
+            suggestedValueForSale: new FormControl(null),
+            suggestedValueForSeasonal: new FormControl(null),
+            state: new FormControl(null),
+            city: new FormControl(null),
+        });
     }
 
     showDialog() {
@@ -40,19 +78,42 @@ export class AllDemandsComponent implements OnInit {
         this.first = event.first!
         this.page = event.page!
         this.size = event.rows!
-        this.getDemands(event.page!, event.rows!)
+        this.getFilteredDemands(event.page!, event.rows!)
     }
 
-    private getDemands(first: number, rows: number) {
-        this.demandService.getDemands(first, rows).subscribe((data: PageModel) => {
+    private getFilteredDemands(first: number, rows: number) {
+        this.demandService.getFilteredDemands(first, rows, this.filterForm.value).subscribe((data: PageModel) => {
                 this.demands = data.content
                 this.totalElements = data.totalElements
             }
         );
     }
 
-    navigateToCreateDemand() {
-        this.router.navigate(['/home/property-demand'])
+    filter() {
+        console.log(this.filterForm.value)
+        this.getFilteredDemands(this.page, this.size);
+    }
+
+    filterCities(event: any) {
+        this.addressService.getFilteredCities(event.value).subscribe(cities =>
+            this.cities = cities.map(city => city.nome)
+        );
+        this.getFilteredDemands(this.page, this.size);
+    }
+
+    startLists() {
+        this.contractType = Object.values(ContractTypeEnum);
+        this.bedroomsNumber = Object.values(BedroomsNumberEnum);
+        this.propertyType = Object.values(PropertyTypeEnum);
+        this.petFriendly = Object.values(PetFriendlyEnum);
+        this.furnished = Object.values(FurnishedEnum);
+        this.suggestedValueForRent = Object.values(SuggestedValueRentEnum);
+        this.suggestedValueForSale = Object.values(SuggestedValueSaleEnum);
+        this.suggestedValueForSeasonal = Object.values(SuggestedValueSeasonalEnum);
+
+        this.addressService.getAllStates().subscribe(states =>
+            this.states = states.map(state => state.nome)
+        );
     }
 
     deleteDemand(propertyId: number, demandId: number) {
@@ -61,6 +122,9 @@ export class AllDemandsComponent implements OnInit {
         location.reload();
     }
 
+    get selectedContractType() {
+        return this.filterForm.get('contractType')!;
+    }
 
     getContractType(contractType: string): any {
         if (contractType == 'RENT')
