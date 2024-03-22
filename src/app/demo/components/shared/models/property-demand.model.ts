@@ -1,5 +1,5 @@
-import { AddressModel } from "./address.model";
-import { DemandModel } from "./demand.model";
+import {AddressModel} from "./address.model";
+import {DemandModel} from "./demand.model";
 
 export class PropertyDemandModel {
     id!: number;

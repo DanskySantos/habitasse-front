@@ -1,12 +1,172 @@
 <div class="">
-    <div class="flex justify-content-between">
-        <span class="text-900 text-xl font-bold mb-5 block">Todas demandas</span>
-    </div>
-    <div class="flex justify-content-between">
-        <div class="mb-5 field p-float-label">
-            <input class="w-full surface-50" id="name" type="text" autocomplete="off" pInputText>
-            <label for="name" class="w-full font-medium text-base">Nome Completo</label>
+    <div class="flex-column mb-3">
+        <div class="flex justify-content-between w-full">
+            <span class="text-900 text-xl font-bold mb-5 block">Todas demandas</span>
         </div>
+        <p-accordion>
+            <p-accordionTab header="Filtros" [selected]="false" class="line-height-3 m-0">
+                <form [formGroup]="filterForm" class="mt-3 flex justify-content-between grid formgrid p-fluid">
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <span class="field p-float-label">
+                        <p-dropdown
+                            [style]="{ width: '100%' }"
+                            formControlName="contractType"
+                            inputId="float-label"
+                            [options]="contractType"
+                            placeholder="Selecione o tipo de Contrato"
+                            name="contractType"
+                            id="contractType"
+                            [showClear]="true"
+                            (onChange)="filter()">
+                        </p-dropdown>
+                        <label for="float-label">Tipo de Contrato</label>
+                    </span>
+                    </div>
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <span class="field p-float-label">
+                        <p-dropdown
+                            formControlName="propertyType"
+                            inputId="float-label"
+                            [options]="propertyType"
+                            placeholder="Selecione o tipo de Imóvel"
+                            optionDisabled="inactive"
+                            name="propertyType"
+                            id="propertyType"
+                            [showClear]="true"
+                            (onChange)="filter()">
+                        </p-dropdown>
+                        <label for="float-label">Tipo de Imóvel</label>
+                    </span>
+                    </div>
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <span class="field p-float-label">
+                        <p-dropdown
+                            formControlName="bedroomsNumber"
+                            inputId="float-label"
+                            [options]="bedroomsNumber"
+                            placeholder="Selecione a quantidade de quartos"
+                            name="bedroomsNumber"
+                            id="bedroomsNumber"
+                            [showClear]="true"
+                            (onChange)="filter()">
+                        </p-dropdown>
+                        <label for="float-label">Quantidade de Quartos</label>
+                    </span>
+                    </div>
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <span class="field p-float-label">
+                        <p-dropdown
+                            formControlName="furnished"
+                            inputId="float-label"
+                            [options]="furnished"
+                            placeholder="Selecione se o imóvel e mobiliado"
+                            name="furnished"
+                            id="furnished"
+                            [showClear]="true"
+                            (onChange)="filter()">
+                        </p-dropdown>
+                        <label for="float-label">Mobiliado</label>
+                    </span>
+                    </div>
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <span class="field p-float-label">
+                        <p-dropdown
+                            formControlName="state"
+                            inputId="float-label"
+                            [options]="states"
+                            [showClear]="true"
+                            (onChange)="filterCities($event)"
+                            placeholder="Selecione o estado onde está o imóvel"
+                            name="state"
+                            id="state">
+                        </p-dropdown>
+                        <label for="float-label">Estado</label>
+                    </span>
+                    </div>
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <span class="field p-float-label">
+                        <p-dropdown
+                            formControlName="petFriendly"
+                            inputId="float-label"
+                            [options]="petFriendly"
+                            placeholder="Selecione se o imóvel permite pets"
+                            name="petFriendly"
+                            id="petFriendly"
+                            [showClear]="true"
+                            (onChange)="filter()">
+                        </p-dropdown>
+                        <label for="float-label">Permite Pet</label>
+                    </span>
+                    </div>
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <span class="field p-float-label">
+                        <p-dropdown
+                            formControlName="city"
+                            inputId="float-label"
+                            [filter]="true"
+                            [showClear]="true"
+                            [options]="cities"
+                            placeholder="Selecione a cidade do imóvel"
+                            name="city"
+                            id="city"
+                            [showClear]="true"
+                            (onChange)="filter()">
+                        </p-dropdown>
+                        <label for="float-label">Cidade</label>
+                    </span>
+                    </div>
+                    <div
+                        class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                        *ngIf="selectedContractType.value === 'Locação'">
+                    <span class="field p-float-label">
+                        <p-dropdown
+                            formControlName="suggestedValueForRent"
+                            inputId="float-label"
+                            [options]="suggestedValueForRent"
+                            placeholder="Selecione o valor desejado"
+                            name="suggestedValueForRent"
+                            id="suggestedValueForRent"
+                            [showClear]="true"
+                            (onChange)="filter()">
+                        </p-dropdown>
+                        <label for="float-label">Valor</label>
+                    </span>
+                    </div>
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                        *ngIf="selectedContractType.value === 'Venda'">
+                    <span class="field p-float-label">
+                        <p-dropdown
+                            formControlName="suggestedValueForSale"
+                            inputId="float-label"
+                            [options]="suggestedValueForSale"
+                            placeholder="Selecione o valor desejado"
+                            name="suggestedValueForSale"
+                            id="suggestedValueForSale"
+                            [showClear]="true"
+                            (onChange)="filter()">
+                        </p-dropdown>
+                        <label for="float-label">Valor</label>
+                    </span>
+                    </div>
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                        *ngIf="selectedContractType.value === 'Temporada'">
+                    <span class="field p-float-label">
+                        <p-dropdown
+                            formControlName="suggestedValueForSeasonal"
+                            inputId="float-label"
+                            [options]="suggestedValueForSeasonal"
+                            placeholder="Selecione o valor desejado"
+                            name="suggestedValueForSeasonal"
+                            id="suggestedValueForSeasonal"
+                            [showClear]="true"
+                            (onChange)="filter()">
+                        </p-dropdown>
+                        <label for="float-label">Valor</label>
+                    </span>
+                    </div>
+                </form>
+            </p-accordionTab>
+        </p-accordion>
     </div>
     <div class="grid">
         <div class="col-12 lg: mt-2">
@@ -14,23 +174,25 @@
                 <div class="col-12 xl:col-3 lg:col-6 mb-4" *ngFor="let demand of demands">
                     <div class="card h-full">
                         <div class="flex align-items-center mb-4 justify-content-between">
-                            <p class="m-0" style="color: #9E9E9E" title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
+                            <p class="m-0" style="color: #9E9E9E"
+                               title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
                             <div class="flex flex-row">
                                 <img (click)="showDialog()" ngSrc="./assets/app/images/icons/delete.png"
                                      alt="delete"
                                      title="Deletar"
                                      class="align-self-center mr-4 cursor-pointer" height="24" width="24">
-                                     <p-dialog class="lg: w-11 sm: w-11 md: w-11" header="Deseja realmente excluir esta demanda?"
-                                     [(visible)]="visible" [modal]="true" [draggable]="false" [resizable]="false">
-                                        <div>
-                                            <p-button
-                                                type="submit"
-                                                label="Excluir demanda"
-                                                class="w-auto mt-4"
-                                                (click)="deleteDemand(demand.propertyDemand.id, demand.id)">
-                                            </p-button>
-                                        </div>
-                                    </p-dialog>
+                                <p-dialog class="lg: w-11 sm: w-11 md: w-11"
+                                          header="Deseja realmente excluir esta demanda?"
+                                          [(visible)]="visible" [modal]="true" [draggable]="false" [resizable]="false">
+                                    <div>
+                                        <p-button
+                                            type="submit"
+                                            label="Excluir demanda"
+                                            class="w-auto mt-4"
+                                            (click)="deleteDemand(demand.propertyDemand.id, demand.id)">
+                                        </p-button>
+                                    </div>
+                                </p-dialog>
                                 <img ngSrc="./assets/app/images/icons/edit.png"
                                      alt="edit"
                                      title="Editar"
