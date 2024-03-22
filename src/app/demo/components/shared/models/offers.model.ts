@@ -1,7 +1,7 @@
-import { UserModel } from "./user.model";
+import {UserModel} from "./user.model";
 
 export class OffersModel {
-   demandId?: number;
-   text?: string;
-   user?: UserModel;
+    demandId?: number;
+    text?: string;
+    user?: UserModel;
 }
