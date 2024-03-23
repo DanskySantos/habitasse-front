@@ -7,6 +7,7 @@ import {PageModel} from "../../shared/models/page.model";
 import {PaginatorState} from "primeng/paginator";
 import { UpdateDemandModalComponent } from './update-demand-modal/update-demand-modal.component';
 import { DemandModel } from '../../shared/models/demand.model';
+import { DeleteDemandModalComponent } from './delete-demand-modal/delete-demand-modal.component';
 
 
 @Component({
@@ -38,8 +39,8 @@ export class MyDemandsComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    ModalExcluir() {
-        this.visible = true;
+    ModalExcluir(modaldelete: DeleteDemandModalComponent) {
+        modaldelete.visible = true;
     }
 
     EditModal(modal: UpdateDemandModalComponent) {
@@ -73,13 +74,6 @@ export class MyDemandsComponent implements OnInit {
     navigateToCreateDemand() {
         this.router.navigate(['/home/property-demand'])
     }
-
-    deleteDemand(propertyId: number, demandId: number) {
-        this.demandService.deleteDemand(propertyId, demandId);
-        this.toastrService.success('Demanda excluída com sucesso!');
-        location.reload();
-    }
-
 
     getContractType(contractType: string): any {
         if (contractType == 'RENT')

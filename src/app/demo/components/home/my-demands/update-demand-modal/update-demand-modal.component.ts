@@ -23,6 +23,7 @@ export class UpdateDemandModalComponent implements OnInit {
 
     @Input('demandData')
     demandData?: DemandModel;
+    
     page: number = 0;
     size: number = 4;
     first: number = 0;
@@ -44,7 +45,6 @@ export class UpdateDemandModalComponent implements OnInit {
  
     constructor(public layoutService: LayoutService,
                 private addressService: AddressService,
-                private propertyDemandService: PropertyDemandService,
                 private demandService: DemandService) {
         this.startLists();        
     }
@@ -97,7 +97,6 @@ export class UpdateDemandModalComponent implements OnInit {
     
     load() {
         this.loading = true;
-
         setTimeout(() => {
             this.loading = false
         }, 2000);
@@ -294,15 +293,15 @@ export class UpdateDemandModalComponent implements OnInit {
 
     getBedroomsNumber(bedroomsNumber: any): any {
         if (bedroomsNumber == 'ONE')
-            return "Um quarto"
+            return "1"
         if (bedroomsNumber == 'TWO')
-            return "Dois quartos"
+            return "2"
         if (bedroomsNumber == 'THREE')
-            return "Três quartos"
+            return "3"
         if (bedroomsNumber == 'FOUR')
-            return "Quatro quartos"
+            return "4"
         if (bedroomsNumber == 'FIVE_OR_MORE')
-            return "Cinco ou mais quartos"
+            return "5"
     }
 
     getFurnished(furnished: any): any {

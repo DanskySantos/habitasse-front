@@ -19,22 +19,10 @@
                         <div class="flex align-items-center mb-4 justify-content-between">
                             <p class="m-0" style="color: #9E9E9E" title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
                             <div class="flex flex-row">
-                                <img (click)="ModalExcluir()" ngSrc="./assets/app/images/icons/delete.png"
+                                <img (click)="ModalExcluir(modaldelete)" ngSrc="./assets/app/images/icons/delete.png"
                                      alt="delete"
                                      title="Deletar"
                                      class="align-self-center mr-4 cursor-pointer" height="24" width="24">
-                                     <p-dialog class="lg: w-11 sm: w-11 md: w-11" header="Deseja realmente excluir esta demanda?"
-                                     [(visible)]="visible" [modal]="true" [draggable]="false" [resizable]="false">
-                                        <div>
-                                            <p-button
-                                                type="submit"
-                                                label="Excluir demanda"
-                                                [loading]="loading"
-                                                class="w-auto mt-4"
-                                                (click)="deleteDemand(demand.propertyDemand.id, demand.id)">
-                                            </p-button>
-                                        </div>
-                                    </p-dialog>
                                 <img (click)="EditModal(modal)" ngSrc="./assets/app/images/icons/edit.png"
                                      alt="edit"
                                      title="Editar"
@@ -99,6 +87,7 @@
                         </button>
                     </div>
                     <app-update-demand-modal #modal [demandData]="demand"></app-update-demand-modal>
+                    <app-delete-demand-modal #modaldelete [demand]="demand"></app-delete-demand-modal>
                 </div>
             </div>
         </div>
