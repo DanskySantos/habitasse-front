@@ -176,28 +176,6 @@
                         <div class="flex align-items-center mb-4 justify-content-between">
                             <p class="m-0" style="color: #9E9E9E"
                                title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
-                            <div class="flex flex-row">
-                                <img (click)="showDialog()" ngSrc="./assets/app/images/icons/delete.png"
-                                     alt="delete"
-                                     title="Deletar"
-                                     class="align-self-center mr-4 cursor-pointer" height="24" width="24">
-                                <p-dialog class="lg: w-11 sm: w-11 md: w-11"
-                                          header="Deseja realmente excluir esta demanda?"
-                                          [(visible)]="visible" [modal]="true" [draggable]="false" [resizable]="false">
-                                    <div>
-                                        <p-button
-                                            type="submit"
-                                            label="Excluir demanda"
-                                            class="w-auto mt-4"
-                                            (click)="deleteDemand(demand.propertyDemand.id, demand.id)">
-                                        </p-button>
-                                    </div>
-                                </p-dialog>
-                                <img ngSrc="./assets/app/images/icons/edit.png"
-                                     alt="edit"
-                                     title="Editar"
-                                     class="align-self-center cursor-pointer" height="24" width="24">
-                            </div>
                         </div>
                         <h5 class="p-2"
                             title="Tipo de contrato">{{ getContractType(demand.propertyDemand.contractType) }}</h5>
@@ -246,8 +224,7 @@
                             </span>
                         </ul>
                         <button type="button" pButton pRipple class="w-full mt-3 "
-                                disabled="{{demand.offers.length<=0}}"
-                                label="{{demand.offers.length > 0 ? demand.offers.length + ' propostas' : 'Sem propostas'}}"
+                                label="Fazer uma proposta"
                                 icon="pi pi-arrow-right" iconPos="right">
                             <img ngSrc="./assets/app/images/icons/Group.svg"
                                  alt="house"

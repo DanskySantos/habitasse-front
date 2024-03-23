@@ -36,7 +36,7 @@ export class AuthService extends SharedService {
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {
-                    this.toastrService.error('Ocorreu um erro inesperado', 'Erro')
+                    this.toastrService.error(error.error, 'Erro')
                     return this.actionForError(error);
                 }),
                 finalize(() => {
@@ -58,7 +58,7 @@ export class AuthService extends SharedService {
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {
-                    this.toastrService.error('Ocorreu um erro inesperado', 'Erro')
+                    this.toastrService.error(error.error, 'Erro')
                     return this.actionForError(error);
                 }),
                 finalize(() => {

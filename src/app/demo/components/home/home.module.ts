@@ -14,6 +14,7 @@ import {ProfileModule} from "../profile/profile.module";
 import {AccordionModule} from "primeng/accordion";
 import {UpdateDemandModalComponent} from './my-demands/update-demand-modal/update-demand-modal.component';
 import {AllDemandsComponent} from './all-demands/all-demands.component';
+import {NgxUiLoaderModule} from "ngx-ui-loader";
 import { DeleteDemandModalComponent } from './my-demands/delete-demand-modal/delete-demand-modal.component';
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import { DeleteDemandModalComponent } from './my-demands/delete-demand-modal/del
         DialogModule,
         PaginatorModule,
         ProfileModule,
-        AccordionModule
+        AccordionModule,
+        NgxUiLoaderModule
     ],
     exports: [
         HomeComponent,
