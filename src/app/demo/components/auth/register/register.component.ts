@@ -1,17 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../services/auth.service";
 import {ActivatedRoute} from '@angular/router';
-import {ContractTypeEnum} from "../../enums/contract-type-enum";
-import {BedroomsNumberEnum} from "../../enums/bedrooms-number-enum";
-import {PropertyTypeEnum} from "../../enums/property-type-enum";
-import {PetFriendlyEnum} from "../../enums/pet-friendly-enum";
-import {FurnishedEnum} from "../../enums/furnished-enum";
-import {SuggestedValueRentEnum} from "../../enums/suggested-value-rent-enum";
-import {SuggestedValueSaleEnum} from "../../enums/suggested-value-sale-enum";
-import {SuggestedValueSeasonalEnum} from "../../enums/suggested-value-seasonal-enum";
 import {UserTypeEnum} from "../../enums/user-type-enum";
-
 @Component({
     templateUrl: './register.component.html',
     selector: 'app-register',
@@ -40,12 +31,15 @@ export class RegisterComponent implements OnInit {
     private createForm() {
         this.registerForm = new FormGroup({
             name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-            username: new FormControl('', [Validators.required, Validators.minLength(5)]),
             email: new FormControl('', [Validators.required, Validators.email]),
             password: new FormControl('', [Validators.required, Validators.minLength(5)]),
             birthday: new FormControl(''),
             userRoles: new FormControl('', Validators.required)
         });
+    }
+
+    goBack() {
+        window.history.back();
     }
 
     submit() {

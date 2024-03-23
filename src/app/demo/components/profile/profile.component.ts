@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
 import {UserService} from "./service/user-service";
-import {UserModel} from "./models/user.model";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
+import { UserModel } from '../shared/models/user.model';
 
 @Component({
     templateUrl: './profile.component.html'

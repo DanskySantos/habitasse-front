@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { HttpClient} from '@angular/common/http';
-import { Credentials } from '../models/credentials.model';
+import { Credentials } from '../../shared/models/credentials.model';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {Observable} from "rxjs";

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserModel } from '../models/user.model';
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {SharedService} from "../../shared/service/shared.service";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
-import {StateModel} from "../../auth/models/state.model";
+import {StateModel} from "../../shared/models/state.model";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import { UserModel } from '../../shared/models/user.model';
 
 @Injectable({
   providedIn: 'root'

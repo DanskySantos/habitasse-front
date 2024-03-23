@@ -1,8 +1,8 @@
 export enum BedroomsNumberEnum {
-  ONE = "Um",
-  TWO = "Dois",
-  THREE = "Três",
-  FOUR = "Quatro",
-  FIVE_OR_MORE = "Cinco ou mais"
+  ONE = "1",
+  TWO = "2",
+  THREE = "3",
+  FOUR = "4",
+  FIVE_OR_MORE = "5"
 }
 

@@ -3,7 +3,6 @@
     <form [formGroup]="propertyForm" #formDir="ngForm" class="grid" (ngSubmit)="save()">
         <div class="col-12 lg:col-2">
             <div class="text-900 font-medium text-xl mb-3">Imóvel</div>
-            <p class="m-0 p-0 text-600 line-height-3 mr-3">Informe os dados solicitados</p>
         </div>
         <div class="col-12 lg:col-10">
             <div class="grid formgrid p-fluid">
@@ -62,19 +61,7 @@
                         <label for="float-label">Mobiliado</label>
                     </span>
                 </div>
-                <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
-                    <span class="field p-float-label">
-                        <p-dropdown
-                            formControlName="petFriendly"
-                            inputId="float-label"
-                            [options]="petFriendly"
-                            placeholder="Selecione se o imóvel permite pets"
-                            name="petFriendly"
-                            id="petFriendly">
-                        </p-dropdown>
-                        <label for="float-label">Permite Pet</label>
-                    </span>
-                </div>
+
                 <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
                     <span class="field p-float-label">
                         <p-dropdown
@@ -89,6 +76,7 @@
                         <label for="float-label">Estado</label>
                     </span>
                 </div>
+                
                 <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
                     <span class="field p-float-label">
                         <p-dropdown
@@ -104,6 +92,21 @@
                         <label for="float-label">Cidade</label>
                     </span>
                 </div>
+
+                <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <span class="field p-float-label">
+                        <p-dropdown
+                            formControlName="petFriendly"
+                            inputId="float-label"
+                            [options]="petFriendly"
+                            placeholder="Selecione se o imóvel permite pets"
+                            name="petFriendly"
+                            id="petFriendly">
+                        </p-dropdown>
+                        <label for="float-label">Permite Pet</label>
+                    </span>
+                </div>
+             
                 <div
                     class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
                     *ngIf="selectedContractType.value === 'Locação'">

@@ -1,11 +1,11 @@
-import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter, Subscription } from 'rxjs';
-import { TabCloseEvent } from './api/tabcloseevent';
-import { MenuService } from './menu/app.menu.service';
-import { AppSidebarComponent } from './sidebar/app.sidebar.component';
-import { AppTopBarComponent } from './topbar/app.topbar.component';
-import { LayoutService } from './service/app.layout.service';
+import {Component, OnDestroy, Renderer2, ViewChild} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {filter, Subscription} from 'rxjs';
+import {TabCloseEvent} from './api/tabcloseevent';
+import {MenuService} from './menu/app.menu.service';
+import {AppSidebarComponent} from './sidebar/app.sidebar.component';
+import {AppTopBarComponent} from './topbar/app.topbar.component';
+import {LayoutService} from './service/app.layout.service';
 
 @Component({
     selector: 'app-layout',
@@ -33,7 +33,7 @@ export class AppLayoutComponent implements OnDestroy {
             if (!this.menuOutsideClickListener) {
                 this.menuOutsideClickListener = this.renderer.listen('document', 'click', event => {
                     const isOutsideClicked = !(this.appSidebar.el.nativeElement.isSameNode(event.target) || this.appSidebar.el.nativeElement.contains(event.target)
-                    || this.appTopbar.menuButton.nativeElement.isSameNode(event.target) || this.appTopbar.menuButton.nativeElement.contains(event.target));
+                        || this.appTopbar.menuButton.nativeElement.isSameNode(event.target) || this.appTopbar.menuButton.nativeElement.contains(event.target));
                     if (isOutsideClicked) {
                         this.hideMenu();
                     }
@@ -64,7 +64,12 @@ export class AppLayoutComponent implements OnDestroy {
         });
 
         this.tabCloseSubscription = this.layoutService.tabClose$.subscribe((event: TabCloseEvent) => {
-            if (this.router.isActive(event.tab.routerLink[0], { paths: 'subset', queryParams: 'subset', fragment: 'ignored', matrixParams: 'ignored'})) {
+            if (this.router.isActive(event.tab.routerLink[0], {
+                paths: 'subset',
+                queryParams: 'subset',
+                fragment: 'ignored',
+                matrixParams: 'ignored'
+            })) {
                 const tabs = this.layoutService.tabs;
 
                 if (tabs.length > 1) {
@@ -72,8 +77,7 @@ export class AppLayoutComponent implements OnDestroy {
                         this.router.navigate(tabs[tabs.length - 2].routerLink);
                     else
                         this.router.navigate(tabs[event.index + 1].routerLink);
-                }
-                else {
+                } else {
                     this.router.navigate(['/']);
                 }
             }
@@ -85,8 +89,7 @@ export class AppLayoutComponent implements OnDestroy {
     blockBodyScroll(): void {
         if (document.body.classList) {
             document.body.classList.add('blocked-scroll');
-        }
-        else {
+        } else {
             document.body.className += ' blocked-scroll';
         }
     }
@@ -94,8 +97,7 @@ export class AppLayoutComponent implements OnDestroy {
     unblockBodyScroll(): void {
         if (document.body.classList) {
             document.body.classList.remove('blocked-scroll');
-        }
-        else {
+        } else {
             document.body.className = document.body.className.replace(new RegExp('(^|\\b)' +
                 'blocked-scroll'.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
         }
@@ -106,7 +108,7 @@ export class AppLayoutComponent implements OnDestroy {
         this.layoutService.state.staticMenuMobileActive = false;
         this.layoutService.state.menuHoverActive = false;
         this.menuService.reset();
-        if(this.menuOutsideClickListener) {
+        if (this.menuOutsideClickListener) {
             this.menuOutsideClickListener();
             this.menuOutsideClickListener = null;
         }

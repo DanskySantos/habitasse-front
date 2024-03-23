@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {LayoutService} from 'src/app/layout/service/app.layout.service';
 import {DemandService} from "../services/demand.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from '@angular/router';
-import {PageModel} from "../models/page.model";
+import {PageModel} from "../../shared/models/page.model";
 import {PaginatorState} from "primeng/paginator";
+import { UpdateDemandModalComponent } from './update-demand-modal/update-demand-modal.component';
+import { DemandModel } from '../../shared/models/demand.model';
+import { DeleteDemandModalComponent } from './delete-demand-modal/delete-demand-modal.component';
 
 
 @Component({
@@ -14,9 +17,13 @@ import {PaginatorState} from "primeng/paginator";
 })
 export class MyDemandsComponent implements OnInit {
 
-    visible: boolean = false;
-    demands: any;
+    @Input('demandData')
+    demandData?: DemandModel;
 
+    loading: boolean = false;
+    visible: boolean = false;
+    visibleEdit: boolean = false;
+    demands: any;
     totalElements!: number;
     page: number = 0;
     size: number = 4;
@@ -32,9 +39,22 @@ export class MyDemandsComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    showDialog() {
-        this.visible = true;
+    ModalExcluir(modaldelete: DeleteDemandModalComponent) {
+        modaldelete.visible = true;
     }
+
+    EditModal(modal: UpdateDemandModalComponent) {
+        modal.visibleEdit = true;
+    }
+
+    load() {
+        this.loading = true;
+
+        setTimeout(() => {
+            this.loading = false
+        }, 2000);
+    }
+
 
     onPageChange(event: PaginatorState) {
         this.first = event.first!
@@ -54,13 +74,6 @@ export class MyDemandsComponent implements OnInit {
     navigateToCreateDemand() {
         this.router.navigate(['/home/property-demand'])
     }
-
-    deleteDemand(propertyId: number, demandId: number) {
-        this.demandService.deleteDemand(propertyId, demandId);
-        this.toastrService.success('Demanda excluída com sucesso!');
-        location.reload();
-    }
-
 
     getContractType(contractType: string): any {
         if (contractType == 'RENT')

@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {catchError, finalize, tap} from 'rxjs';
-import {Credentials} from 'src/app/demo/components/auth/models/credentials.model';
+import {Credentials} from 'src/app/demo/components/shared/models/credentials.model';
 import {HttpClient} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {RegisterModel} from "../models/register.model";
-import {AuthModel} from "../models/auth.model";
+import {RegisterModel} from "../../shared/models/register.model";
+import {AuthModel} from "../../shared/models/auth.model";
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {Router} from "@angular/router";
 import {SharedService} from "../../shared/service/shared.service";
@@ -36,7 +36,7 @@ export class AuthService extends SharedService {
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {
-                    this.toastrService.error('Ocorreu um erro inesperado', 'Erro')
+                    this.toastrService.error(error.error, 'Erro')
                     return this.actionForError(error);
                 }),
                 finalize(() => {
@@ -58,7 +58,7 @@ export class AuthService extends SharedService {
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {
-                    this.toastrService.error('Ocorreu um erro inesperado', 'Erro')
+                    this.toastrService.error(error.error, 'Erro')
                     return this.actionForError(error);
                 }),
                 finalize(() => {
