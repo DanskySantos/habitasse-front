@@ -3,11 +3,11 @@
         header="Editar Demanda"
         [(visible)]="visibleEdit"
         [modal]="true"
-        [style]="{ margin: '10px' }"
+        [style]="{ width: '75vw', margin: '10px' }"
         [draggable]="false"
         [resizable]="false"
     >
-        <div class="p-4">
+        <div class="sm:p-0 md:p-1 lg:p-1 p-4 ">
             <form
                 [formGroup]="propertyForm"
                 #formDir="ngForm"
