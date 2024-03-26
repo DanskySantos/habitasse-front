@@ -3,16 +3,14 @@
     [(visible)]="visible"
     [modal]="true"
     [draggable]="false"
-    [resizable]="false"
->
+    [resizable]="false">
     <div>
         <p-button
             type="submit"
             label="Excluir demanda"
             [loading]="loading"
             class="w-auto mt-4"
-            (click)="deleteDemand(demand.propertyDemand.id, demand.id)"
-        >
+            (click)="deleteDemand(demand.propertyDemand.id, demand.id)">
         </p-button>
     </div>
 </p-dialog>
