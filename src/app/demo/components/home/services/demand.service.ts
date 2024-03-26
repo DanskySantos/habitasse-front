@@ -6,7 +6,6 @@ import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {PageModel} from "../../shared/models/page.model";
 import { UserModel } from '../../shared/models/user.model';
-import { DemandModel } from '../../shared/models/demand.model';
 import { PropertyDemandModel } from '../../shared/models/property-demand.model';
 
 @Injectable({

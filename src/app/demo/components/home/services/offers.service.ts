@@ -27,10 +27,10 @@ export class OffersService extends SharedService {
 
     CreateOffers(form: any){
         const headers = this.setHeadersForBearer();
-        return this.http.post<any[]>(this.apiURL + '/offers', form, {headers}).subscribe(
+        return this.http.post<any>(this.apiURL + 'offer/save', form, {headers}).subscribe(
             next => {
                 this.toastrService.success('Proposta enviada', 'Sucesso')
-                this.router.navigate(['/home/all-demands'])
+                location.reload()
             },
             err => {
                 this.toastrService.error(err.code, 'Erro')
