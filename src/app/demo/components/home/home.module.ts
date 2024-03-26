@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {SharedModule} from "../shared/shared.module";
 import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './home.component';
@@ -14,8 +13,9 @@ import {ProfileModule} from "../profile/profile.module";
 import {AccordionModule} from "primeng/accordion";
 import {UpdateDemandModalComponent} from './my-demands/update-demand-modal/update-demand-modal.component';
 import {AllDemandsComponent} from './all-demands/all-demands.component';
-import {NgxUiLoaderModule} from "ngx-ui-loader";
 import { DeleteDemandModalComponent } from './my-demands/delete-demand-modal/delete-demand-modal.component';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 @NgModule({
     imports: [
         CommonModule,
