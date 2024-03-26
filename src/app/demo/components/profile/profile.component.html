@@ -28,5 +28,5 @@
         </div>
     </div>
 </div>
-<app-profile-upload [userData]="userData" (actionSuccess)="hideUserUpdate()" *ngIf="showUserUpdate"></app-profile-upload>
-<app-password-upload [userData]="userData"(actionSuccess)="hideUserPassword()" *ngIf="showUserPassword"></app-password-upload>
+<app-profile-upload [userData]="userData" (actionSuccess)="hideUserUpdate($event)" *ngIf="showUserUpdate"></app-profile-upload>
+<app-password-upload [userData]="userData" (actionSuccess)="hideUserPassword($event)" *ngIf="showUserPassword"></app-password-upload>

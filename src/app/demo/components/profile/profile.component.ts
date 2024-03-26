@@ -47,7 +47,8 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    hideUserUpdate() {
+    hideUserUpdate($event: UserModel) {
+        this.userData = $event
         this.showUserUpdate = false;
     }
 
@@ -55,7 +56,8 @@ export class ProfileComponent implements OnInit {
         this.showUserUpdate = true;
     }
 
-    hideUserPassword() {
+    hideUserPassword($event: any) {
+        this.userData!.password = $event.newPassword;
         this.showUserPassword = false;
     }
 
