@@ -23,7 +23,7 @@ export class UpdateDemandModalComponent implements OnInit {
 
     @Input('demandData')
     demandData?: DemandModel;
-    
+
     page: number = 0;
     size: number = 4;
     first: number = 0;
@@ -42,13 +42,13 @@ export class UpdateDemandModalComponent implements OnInit {
     city?: any;
     submited: boolean = false;
     actionSuccess: any;
- 
+
     constructor(public layoutService: LayoutService,
                 private addressService: AddressService,
                 private demandService: DemandService) {
-        this.startLists();        
+        this.startLists();
     }
-    
+
 
     ngOnInit() {
         this.createForm();
@@ -93,8 +93,8 @@ export class UpdateDemandModalComponent implements OnInit {
         });
     }
 
- 
-    
+
+
     load() {
         this.loading = true;
         setTimeout(() => {
@@ -107,7 +107,7 @@ export class UpdateDemandModalComponent implements OnInit {
             this.city = cities.map(city => city.nome)
         );
     }
-   
+
     updateDemand() {
         this.submited = true;
         this.demandService.updateDemand(this.propertyForm.value)
@@ -121,7 +121,7 @@ export class UpdateDemandModalComponent implements OnInit {
         }, 2000);
     }
 
-   
+
 
     private setValidatorsBasedOnContractType(contractType: string | null) {
         if (contractType === 'Locação') {
@@ -293,15 +293,15 @@ export class UpdateDemandModalComponent implements OnInit {
 
     getBedroomsNumber(bedroomsNumber: any): any {
         if (bedroomsNumber == 'ONE')
-            return "1"
+            return "Um quarto"
         if (bedroomsNumber == 'TWO')
-            return "2"
+            return "Dois quartos"
         if (bedroomsNumber == 'THREE')
-            return "3"
+            return "Três quartos"
         if (bedroomsNumber == 'FOUR')
-            return "4"
+            return "Quatro quartos"
         if (bedroomsNumber == 'FIVE_OR_MORE')
-            return "5"
+            return "Cinco ou mais quartos"
     }
 
     getFurnished(furnished: any): any {
