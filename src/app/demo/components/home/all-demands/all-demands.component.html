@@ -223,7 +223,7 @@
                                 <span>{{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</span>
                             </span>
                         </ul>
-                        <button type="button" pButton pRipple class="w-full mt-3 "
+                        <button (click)="allDemandsModal(modal)"  type="button" pButton pRipple class="w-full mt-3 "
                                 label="Fazer uma proposta"
                                 icon="pi pi-arrow-right" iconPos="right">
                             <img ngSrc="./assets/app/images/icons/Group.svg"
@@ -232,6 +232,7 @@
                                  class="align-self-center" height="19" width="19">
                         </button>
                     </div>
+                    <app-all-demands-modal #modal [allDemand]="demand"></app-all-demands-modal>
                 </div>
             </div>
         </div>

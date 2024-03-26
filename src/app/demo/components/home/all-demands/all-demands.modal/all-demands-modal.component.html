@@ -1,0 +1,47 @@
+<p-dialog
+    header="Faça sua proposta"
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '70%', margin: '10px'}"
+    class="sm: p-0 md:p-0 lg:p-0 p-2"
+    [draggable]="false"
+    [resizable]="false"
+>
+    <div class="sm:p-0 md:p-0 lg:p-0 p-2">
+        <form
+            [formGroup]="allDemandsOffers"
+            #formDir="ngForm"
+            class="flex flex-column justify-content-center align-items-center"
+            (ngSubmit)="saveOffers()"
+        >
+            <div class="col-12 lg:col-12 sm:col-12 md:col-12">
+                <div class="grid formgrid p-fluid">
+                    <div class="mb-3 col-12">
+                        <div class="field w-full">
+                            <label>Proposta:</label>
+                            <textarea
+                                [style]="{ width: '100%' }"
+                                rows="5"
+                                cols="30"
+                                formControlName="proposal"
+                                placeholder="Digite algo..."
+                                pInputTextarea
+                            >
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 lg:col-3 sm:col-12 md:col-12">
+                        <p-button
+                            type="submit"
+                            label="Enviar Proposta"
+                            [disabled]="allDemandsOffers.invalid && !this.submited"
+                            [loading]="loading"
+                            class="w-auto mt-4"
+                        >
+                        </p-button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</p-dialog>

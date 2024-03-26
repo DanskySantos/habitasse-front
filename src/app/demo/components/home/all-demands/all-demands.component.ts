@@ -15,6 +15,7 @@ import {SuggestedValueSaleEnum} from "../../enums/suggested-value-sale-enum";
 import {SuggestedValueSeasonalEnum} from "../../enums/suggested-value-seasonal-enum";
 import {AddressService} from "../../shared/service/address.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { AllDemandsModalComponent } from './all-demands.modal/all-demands-modal.component';
 
 
 @Component({
@@ -70,8 +71,9 @@ export class AllDemandsComponent implements OnInit {
         });
     }
 
-    showDialog() {
-        this.visible = true;
+
+    allDemandsModal(proposalmodal: AllDemandsModalComponent) {
+        proposalmodal.visible = true;
     }
 
     onPageChange(event: PaginatorState) {

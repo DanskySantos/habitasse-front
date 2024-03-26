@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { AddressService } from '../../../shared/service/address.service';
-import { PropertyDemandService } from '../../services/property-demand.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContractTypeEnum } from '../../../enums/contract-type-enum';
 import { BedroomsNumberEnum } from '../../../enums/bedrooms-number-enum';
