@@ -60,7 +60,6 @@ export class DemandService extends SharedService {
 
 
     updateDemand(demand: PropertyDemandModel){
-        console.log('demand', demand)
         const headers = this.setHeadersForBearer();
         return this.http.put<PropertyDemandModel>(this.apiURL + 'propertyDemand/update/' + demand.id, demand, {headers}).subscribe(
             next => {
