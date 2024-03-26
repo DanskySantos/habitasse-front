@@ -57,7 +57,6 @@ export class UpdateDemandModalComponent implements OnInit {
         );
     }
 
-
     startLists() {
         this.contractType = Object.values(ContractTypeEnum);
         this.bedroomsNumber = Object.values(BedroomsNumberEnum);

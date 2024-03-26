@@ -34,9 +34,10 @@ export class DeleteDemandModalComponent implements OnInit {
     }
 
     deleteDemand(propertyId: number, demandId: number) {
-        this.demandService.deleteDemand(propertyId, demandId);
+        this.demandService.deleteDemand(propertyId, demandId).subscribe( data =>
+            location.reload()
+        )
         this.toastrService.success('Demanda excluída com sucesso!');
-        location.reload();
     }
 
     load() {
