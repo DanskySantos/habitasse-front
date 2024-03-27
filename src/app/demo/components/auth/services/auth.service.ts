@@ -97,6 +97,7 @@ export class AuthService extends SharedService {
         this.cookieService.set('access_token', auth.access_token);
         this.cookieService.set('refresh_token', auth.refresh_token);
         this.cookieService.set('username', auth.username);
+        this.cookieService.set('userId', auth.userId);
         return auth;
     }
 }

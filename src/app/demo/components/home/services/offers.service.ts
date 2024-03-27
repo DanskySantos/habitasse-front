@@ -25,9 +25,23 @@ export class OffersService extends SharedService {
     }
 
 
-    CreateOffers(form: any){
+    createOffers(form: any){
         const headers = this.setHeadersForBearer();
         return this.http.post<any>(this.apiURL + 'offer/save', form, {headers}).subscribe(
+            next => {
+                this.toastrService.success('Proposta enviada', 'Sucesso')
+                location.reload()
+            },
+            err => {
+                this.toastrService.error(err.code, 'Erro')
+                console.log('error:', err)
+            }
+        );
+    }
+
+    editOffers(form: any, offerId: number){
+        const headers = this.setHeadersForBearer();
+        return this.http.put<any>(this.apiURL + 'offer/update/' + offerId, form, {headers}).subscribe(
             next => {
                 this.toastrService.success('Proposta enviada', 'Sucesso')
                 location.reload()

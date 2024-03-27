@@ -14,9 +14,10 @@ import {SuggestedValueRentEnum} from "../../enums/suggested-value-rent-enum";
 import {SuggestedValueSaleEnum} from "../../enums/suggested-value-sale-enum";
 import {SuggestedValueSeasonalEnum} from "../../enums/suggested-value-seasonal-enum";
 import {AddressService} from "../../shared/service/address.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import { AllDemandsModalComponent } from './all-demands.modal/all-demands-modal.component';
-
+import {FormControl, FormGroup} from "@angular/forms";
+import {CreateUpdateOfferModalComponent} from './create-update-offer.modal/create-update-offer-modal.component';
+import {DemandModel} from "../../shared/models/demand.model";
+import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 
 @Component({
     templateUrl: './all-demands.component.html',
@@ -47,7 +48,8 @@ export class AllDemandsComponent implements OnInit {
                 private toastrService: ToastrService,
                 private addressService: AddressService,
                 private router: Router,
-                private demandService: DemandService) {
+                private demandService: DemandService,
+                private cookieService: NgxCookieService) {
         this.createForm();
         this.startLists();
         this.getFilteredDemands(this.page, this.size);
@@ -71,8 +73,7 @@ export class AllDemandsComponent implements OnInit {
         });
     }
 
-
-    allDemandsModal(proposalmodal: AllDemandsModalComponent) {
+    allDemandsModal(proposalmodal: CreateUpdateOfferModalComponent) {
         proposalmodal.visible = true;
     }
 
@@ -92,7 +93,6 @@ export class AllDemandsComponent implements OnInit {
     }
 
     filter() {
-        console.log(this.filterForm.value)
         this.getFilteredDemands(this.page, this.size);
     }
 
@@ -116,12 +116,6 @@ export class AllDemandsComponent implements OnInit {
         this.addressService.getAllStates().subscribe(states =>
             this.states = states.map(state => state.nome)
         );
-    }
-
-    deleteDemand(propertyId: number, demandId: number) {
-        this.demandService.deleteDemand(propertyId, demandId);
-        this.toastrService.success('Demanda excluída com sucesso!');
-        location.reload();
     }
 
     get selectedContractType() {
@@ -148,6 +142,13 @@ export class AllDemandsComponent implements OnInit {
             return 'Loteamento'
         if (propertyType == 'FARM')
             return 'Sítio/Fazenda/Chácara'
+    }
+
+    findOffer(demand: DemandModel) {
+        if (demand.offers)
+        return demand.offers?.filter(offer => offer.userId?.toString() === this.cookieService.get('userId')).pop()
+
+        return null;
     }
 
     getLocation(address: any): any {
@@ -248,11 +249,9 @@ export class AllDemandsComponent implements OnInit {
         const data = new Date(dataString);
 
         const dia = String(data.getDate()).padStart(2, '0');
-        const mes = String(data.getMonth() + 1).padStart(2, '0'); // Os meses começam do zero, então adicionamos 1
+        const mes = String(data.getMonth() + 1).padStart(2, '0');
         const ano = data.getFullYear();
 
         return `${dia}/${mes}/${ano}`;
     }
-
-    protected readonly Number = Number;
 }
