@@ -77,7 +77,7 @@
                             </span>
                         </ul>
                         <button type="button" pButton pRipple class="w-full mt-3 "
-                                disabled="{{demand.offers.length<=0}}"
+                                [disabled]="demand.offers.length == 0"
                                 label="{{demand.offers.length > 0 ? demand.offers.length + ' proposta(s)' : 'Sem propostas'}}"
                                 icon="pi pi-arrow-right" iconPos="right">
                             <img ngSrc="./assets/app/images/icons/Group.svg"

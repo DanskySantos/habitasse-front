@@ -9,7 +9,6 @@ import { UpdateDemandModalComponent } from './update-demand-modal/update-demand-
 import { DemandModel } from '../../shared/models/demand.model';
 import { DeleteDemandModalComponent } from './delete-demand-modal/delete-demand-modal.component';
 
-
 @Component({
     templateUrl: './my-demands.component.html',
     selector: 'app-my-demands',
@@ -200,6 +199,4 @@ export class MyDemandsComponent implements OnInit {
 
         return `${dia}/${mes}/${ano}`;
     }
-
-    protected readonly Number = Number;
 }
