@@ -8,7 +8,6 @@ import {PaginatorState} from "primeng/paginator";
 import { UpdateDemandModalComponent } from './update-demand-modal/update-demand-modal.component';
 import { DemandModel } from '../../shared/models/demand.model';
 import { DeleteDemandModalComponent } from './delete-demand-modal/delete-demand-modal.component';
-import { CreateUpdateOfferModalComponent } from '../all-demands/create-update-offer.modal/create-update-offer-modal.component';
 import { ListOfferComponent } from './list-offer-modal/my-offer-modal.component';
 
 @Component({

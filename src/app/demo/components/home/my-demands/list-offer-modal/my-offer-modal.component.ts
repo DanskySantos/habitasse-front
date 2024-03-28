@@ -3,6 +3,7 @@ import {LayoutService} from 'src/app/layout/service/app.layout.service';
 import {ToastrService} from "ngx-toastr";
 import {Router} from '@angular/router';
 import { OffersModel } from '../../../shared/models/offers.model';
+import { UserModel } from '../../../shared/models/user.model';
  
 
 @Component({
@@ -12,9 +13,9 @@ import { OffersModel } from '../../../shared/models/offers.model';
 })
 export class ListOfferComponent implements OnInit {
 
-    @Input('listOffer')
-    listOffer?: OffersModel;
-
+    @Input('offers')
+    offers?: OffersModel[];
+ 
     loading: boolean = false;
     visible: boolean = false;
  
@@ -33,4 +34,6 @@ export class ListOfferComponent implements OnInit {
             this.loading = false
         }, 2000);
     }
+
+   
 }
