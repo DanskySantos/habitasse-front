@@ -8,6 +8,8 @@ import {PaginatorState} from "primeng/paginator";
 import { UpdateDemandModalComponent } from './update-demand-modal/update-demand-modal.component';
 import { DemandModel } from '../../shared/models/demand.model';
 import { DeleteDemandModalComponent } from './delete-demand-modal/delete-demand-modal.component';
+import { CreateUpdateOfferModalComponent } from '../all-demands/create-update-offer.modal/create-update-offer-modal.component';
+import { ListOfferComponent } from './list-offer-modal/my-offer-modal.component';
 
 @Component({
     templateUrl: './my-demands.component.html',
@@ -15,7 +17,7 @@ import { DeleteDemandModalComponent } from './delete-demand-modal/delete-demand-
 
 })
 export class MyDemandsComponent implements OnInit {
-
+    
     @Input('demandData')
     demandData?: DemandModel;
 
@@ -38,6 +40,10 @@ export class MyDemandsComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    allOffersModal(listoffer: ListOfferComponent) {
+        listoffer.visible = true;
+    }
+ 
     ModalExcluir(modaldelete: DeleteDemandModalComponent) {
         modaldelete.visible = true;
     }

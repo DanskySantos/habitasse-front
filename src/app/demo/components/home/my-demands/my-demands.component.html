@@ -76,7 +76,7 @@
                                 <span>{{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</span>
                             </span>
                         </ul>
-                        <button type="button" pButton pRipple class="w-full mt-3 "
+                        <button (click)="allOffersModal(modaloffer)" type="button" pButton pRipple class="w-full mt-3 "
                                 [disabled]="demand.offers.length == 0"
                                 label="{{demand.offers.length > 0 ? demand.offers.length + ' proposta(s)' : 'Sem propostas'}}"
                                 icon="pi pi-arrow-right" iconPos="right">
@@ -86,6 +86,7 @@
                                  class="align-self-center" height="19" width="19">
                         </button>
                     </div>
+                    <app-offer-modal #modaloffer [listOffer]="demand.offers"></app-offer-modal>
                     <app-update-demand-modal #modal [demandData]="demand"></app-update-demand-modal>
                     <app-delete-demand-modal #modaldelete [demand]="demand"></app-delete-demand-modal>
                 </div>

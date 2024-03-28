@@ -15,9 +15,9 @@ import {SuggestedValueSaleEnum} from "../../enums/suggested-value-sale-enum";
 import {SuggestedValueSeasonalEnum} from "../../enums/suggested-value-seasonal-enum";
 import {AddressService} from "../../shared/service/address.service";
 import {FormControl, FormGroup} from "@angular/forms";
-import {CreateUpdateOfferModalComponent} from './create-update-offer.modal/create-update-offer-modal.component';
 import {DemandModel} from "../../shared/models/demand.model";
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
+import { CreateUpdateOfferModalComponent } from './create-update-offer.modal/create-update-offer-modal.component';
 
 @Component({
     templateUrl: './all-demands.component.html',
@@ -25,7 +25,6 @@ import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 
 })
 export class AllDemandsComponent implements OnInit {
-
     visible: boolean = false;
     demands: any;
     filterForm!: FormGroup;
@@ -73,9 +72,7 @@ export class AllDemandsComponent implements OnInit {
         });
     }
 
-    allDemandsModal(proposalmodal: CreateUpdateOfferModalComponent) {
-        proposalmodal.visible = true;
-    }
+ 
 
     onPageChange(event: PaginatorState) {
         this.first = event.first!
@@ -90,6 +87,10 @@ export class AllDemandsComponent implements OnInit {
                 this.totalElements = data.totalElements
             }
         );
+    }
+
+    allDemandsModal(proposalmodal: CreateUpdateOfferModalComponent) {
+        proposalmodal.visible = true;
     }
 
     filter() {

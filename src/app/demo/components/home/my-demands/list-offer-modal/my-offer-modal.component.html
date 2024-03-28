@@ -1,0 +1,31 @@
+
+    <p-dialog header="Lista de Propostas" [(visible)]="visible" [modal]="true" [style]="{ height: '50vw'}" [draggable]="false" [resizable]="false">
+        <div>
+            <div class="grid">
+                <div class="col-12 lg:col-10 w-full flex justify-content-evenly">
+                    <div class="grid formgrid p-fluid w-full">
+                        <div class="col-12 xl:col-12 lg:col-12 mb-4">
+                            <div class="card h-full">
+                                <ul class="list-none p-0 m-0">
+                                    <span class="flex p-2 align-items-center mb-2" title="Permite animais">
+                                        <i class="pi pi-user mr-2" style="font-size: 1.5rem; color: #585757"></i>
+                                        <span>{{"Pedro caminhoes"}}</span>
+                                    </span>
+                                    <span class="flex p-2 align-items-center mb-2" title="Comentários">
+                                        <img ngSrc="./assets/app/images/icons/comment.png"
+                                             alt="house"
+                                             class="align-self-center mr-2" height="24" width="24">
+                                        <span>{{"OLÁ, ME CHAMO PEDRO CAMINHÃO, GOSTARIA DE FAZER UMA PROPOSTA PRA VOCÊ, EU TENHO 1900 NA MAO DO PAI"}}</span>
+                                    </span>
+                                    <div class="flex gap-2">
+                                        <p-button [style]="{width: '100%'}" label="Aceitar"></p-button>
+                                        <p-button label="Recusar" severity="danger"></p-button>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-dialog>

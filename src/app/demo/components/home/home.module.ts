@@ -17,6 +17,8 @@ import { DeleteDemandModalComponent } from './my-demands/delete-demand-modal/del
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { CreateUpdateOfferModalComponent } from './all-demands/create-update-offer.modal/create-update-offer-modal.component';
+import { ListOfferComponent } from './my-demands/list-offer-modal/my-offer-modal.component';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -39,7 +41,8 @@ import { CreateUpdateOfferModalComponent } from './all-demands/create-update-off
         UpdateDemandModalComponent,
         DeleteDemandModalComponent,
         AllDemandsComponent,
-        CreateUpdateOfferModalComponent
+        CreateUpdateOfferModalComponent,
+        ListOfferComponent
     ],
     declarations: [
         HomeComponent,
@@ -48,7 +51,8 @@ import { CreateUpdateOfferModalComponent } from './all-demands/create-update-off
         UpdateDemandModalComponent,
         DeleteDemandModalComponent,
         AllDemandsComponent,
-        CreateUpdateOfferModalComponent
+        CreateUpdateOfferModalComponent,
+        ListOfferComponent
     ]
 })
 export class HomeModule {
