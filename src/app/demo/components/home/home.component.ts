@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
         this.ngxUiLoaderService.start();
         this.userService.getUserProfile().subscribe(
             data => {
-                this.userData = data;
                 this.getHomePage(data.demandsQuantity, data.role);
+                this.userData = data;
                 this.ngxUiLoaderService.stop();
                 if (this.userData && this.userData.birthday) {
                     this.userData.birthday = this.formatarData(this.userData.birthday);

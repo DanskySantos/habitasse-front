@@ -43,14 +43,13 @@ export class RegisterComponent implements OnInit {
     }
 
     private setValidatorsBasedOnRole(role: string | null) {
-        console.log(role)
-        if (role === 'Sou corretor') {
+        if (role === 'Quero fazer ofertas') {
             this.registerForm.get('phone')?.setValidators([Validators.required]);
         } else {
             this.registerForm.get('phone')?.clearValidators();
         }
 
-        if (role === 'Sou cliente') {
+        if (role === 'Quero encontrar um imóvel') {
             this.registerForm.get('suggestedValueForRent')?.clearValidators();
         }
         this.registerForm.get('phone')?.updateValueAndValidity();
@@ -65,7 +64,12 @@ export class RegisterComponent implements OnInit {
         setTimeout(() => {
             this.loading = false
         }, 2000);
-        this.authService.register(this.registerForm.value).subscribe()
+        this.setRole(UserTypeEnum, this.userRoles.value)
+        this.authService.register(this.registerForm.value).subscribe();
+    }
+
+    setRole(object: any, value: any) {
+        this.registerForm.get('userRoles')?.patchValue(Object.keys(object).find(key => object[key] === value));
     }
 
     get name() {

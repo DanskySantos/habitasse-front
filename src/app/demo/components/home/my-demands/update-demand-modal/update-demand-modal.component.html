@@ -1,22 +1,19 @@
-
-    <p-dialog
-        header="Editar Demanda"
-        [(visible)]="visibleEdit"
-        [modal]="true"
-        [style]="{ width: '75vw', margin: '10px' }"
-        [draggable]="false"
-        [resizable]="false"
-    >
-        <div class="sm:p-0 md:p-1 lg:p-1 p-4 ">
-            <form
-                [formGroup]="propertyForm"
-                #formDir="ngForm"
-                class="flex flex-column justify-content-center align-items-center"
-                (ngSubmit)="updateDemand()"
-            >
-                <div class="col-12 lg:col-12 sm:col-12 md:col-12">
-                    <div class="grid formgrid p-fluid">
-                        <div class="mb-3 col-12 lg:col-6 md:col-12 sm:col-12">
+<p-dialog
+    header="Editar Demanda"
+    [(visible)]="visibleEdit"
+    [modal]="true"
+    [style]="{ width: '75vw', margin: '10px' }"
+    [draggable]="false"
+    [resizable]="false">
+    <div class="sm:p-0 md:p-1 lg:p-1 p-4 ">
+        <form
+            [formGroup]="propertyForm"
+            #formDir="ngForm"
+            class="flex flex-column justify-content-center align-items-center"
+            (ngSubmit)="updateDemand()">
+            <div class="col-12 lg:col-12 sm:col-12 md:col-12">
+                <div class="grid formgrid p-fluid">
+                    <div class="mb-3 col-12 lg:col-6 md:col-12 sm:col-12">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     [style]="{ width: '100%' }"
@@ -25,15 +22,13 @@
                                     [options]="contractType"
                                     placeholder="Selecione o tipo de Contrato"
                                     name="contractType"
-                                    id="contractType"
-                                >
+                                    id="contractType">
                                 </p-dropdown>
                                 <label for="float-label"
-                                    >Tipo de Contrato</label
-                                >
+                                >Tipo de Contrato</label>
                             </span>
-                        </div>
-                        <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    </div>
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="propertyType"
@@ -42,13 +37,12 @@
                                     placeholder="Selecione o tipo de Imóvel"
                                     optionDisabled="inactive"
                                     name="propertyType"
-                                    id="propertyType"
-                                >
+                                    id="propertyType">
                                 </p-dropdown>
                                 <label for="float-label">Tipo de Imóvel</label>
                             </span>
-                        </div>
-                        <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    </div>
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="bedroomsNumber"
@@ -56,15 +50,12 @@
                                     [options]="bedroomsNumber"
                                     placeholder="Selecione a quantidade de quartos"
                                     name="bedroomsNumber"
-                                    id="bedroomsNumber"
-                                >
+                                    id="bedroomsNumber">
                                 </p-dropdown>
-                                <label for="float-label"
-                                    >Quantidade de Quartos</label
-                                >
+                                <label for="float-label">Quantidade de Quartos</label>
                             </span>
-                        </div>
-                        <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    </div>
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="furnished"
@@ -72,14 +63,13 @@
                                     [options]="furnished"
                                     placeholder="Selecione se o imóvel e mobiliado"
                                     name="furnished"
-                                    id="furnished"
-                                >
+                                    id="furnished">
                                 </p-dropdown>
                                 <label for="float-label">Mobiliado</label>
                             </span>
-                        </div>
-        
-                        <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    </div>
+
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="state"
@@ -88,14 +78,13 @@
                                     (onChange)="filterCities($event)"
                                     placeholder="Selecione o estado onde está o imóvel"
                                     name="state"
-                                    id="state"
-                                >
+                                    id="state">
                                 </p-dropdown>
                                 <label for="float-label">Estado</label>
                             </span>
-                        </div>
-                       
-                        <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    </div>
+
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="petFriendly"
@@ -103,14 +92,13 @@
                                     [options]="petFriendly"
                                     placeholder="Selecione se o imóvel permite pets"
                                     name="petFriendly"
-                                    id="petFriendly"
-                                >
+                                    id="petFriendly">
                                 </p-dropdown>
                                 <label for="float-label">Permite Pet</label>
                             </span>
-                        </div>
+                    </div>
 
-                        <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="city"
@@ -120,16 +108,14 @@
                                     [options]="city"
                                     placeholder="Selecione a cidade do imóvel"
                                     name="city"
-                                    id="city"
-                                >
+                                    id="city">
                                 </p-dropdown>
                                 <label for="float-label">Cidade</label>
                             </span>
-                        </div>
-                        <div
-                            class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
-                            *ngIf="selectedContractType.value === 'Locação'"
-                        >
+                    </div>
+                    <div
+                        class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                        *ngIf="selectedContractType.value === 'Locação'">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="suggestedValueForRent"
@@ -137,16 +123,14 @@
                                     [options]="suggestedValueForRent"
                                     placeholder="Selecione o valor desejado"
                                     name="suggestedValueForRent"
-                                    id="suggestedValueForRent"
-                                >
+                                    id="suggestedValueForRent">
                                 </p-dropdown>
                                 <label for="float-label">Valor</label>
                             </span>
-                        </div>
-                        <div
-                            class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
-                            *ngIf="selectedContractType.value === 'Venda'"
-                        >
+                    </div>
+                    <div
+                        class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                        *ngIf="selectedContractType.value === 'Venda'">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="suggestedValueForSale"
@@ -154,16 +138,14 @@
                                     [options]="suggestedValueForSale"
                                     placeholder="Selecione o valor desejado"
                                     name="suggestedValueForSale"
-                                    id="suggestedValueForSale"
-                                >
+                                    id="suggestedValueForSale">
                                 </p-dropdown>
                                 <label for="float-label">Valor</label>
                             </span>
-                        </div>
-                        <div
-                            class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
-                            *ngIf="selectedContractType.value === 'Temporada'"
-                        >
+                    </div>
+                    <div
+                        class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                        *ngIf="selectedContractType.value === 'Temporada'">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="suggestedValueForSeasonal"
@@ -171,39 +153,36 @@
                                     [options]="suggestedValueForSeasonal"
                                     placeholder="Selecione o valor desejado"
                                     name="suggestedValueForSeasonal"
-                                    id="suggestedValueForSeasonal"
-                                >
+                                    id="suggestedValueForSeasonal">
                                 </p-dropdown>
                                 <label for="float-label">Valor</label>
                             </span>
-                        </div>
-                        <div class="mb-3 col-12">
-                            <div class="field w-full">
-                                <label>Anotações</label>
-                                <textarea
-                                    [style]="{ width: '100%' }"
-                                    rows="5"
-                                    cols="30"
-                                    formControlName="annotation"
-                                    placeholder="Faça uma anotação"
-                                    pInputTextarea
-                                >
+                    </div>
+                    <div class="mb-3 col-12">
+                        <div class="field w-full">
+                            <label>Anotações</label>
+                            <textarea
+                                [style]="{ width: '100%' }"
+                                rows="5"
+                                cols="30"
+                                formControlName="annotation"
+                                placeholder="Faça uma anotação"
+                                pInputTextarea>
                                 </textarea>
-                            </div>
-                        </div>
-                        <div class="ml-3">
-                            <p-button
-                                type="submit"
-                                label="Editar Imóvel"
-                                [loading]="loading"
-                                class="w-auto mt-4"
-                                (onClick)="update()"
-                            >
-                            </p-button>
                         </div>
                     </div>
+                    <div class="ml-3">
+                        <p-button
+                            type="submit"
+                            label="Editar Imóvel"
+                            [loading]="loading"
+                            class="w-auto mt-4"
+                            (onClick)="update()">
+                        </p-button>
+                    </div>
                 </div>
-            </form>
-        </div>
-    </p-dialog>
+            </div>
+        </form>
+    </div>
+</p-dialog>
 

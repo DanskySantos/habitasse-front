@@ -45,13 +45,14 @@
                 <label for="password" class="w-full font-medium text-base">Senha</label>
             </div>
 
-            <div class="mb-4 field p-float-label w-full" *ngIf="userRoles.value === 'Sou corretor'">
+            <div class="mb-4 field p-float-label w-full" *ngIf="userRoles.value === 'Quero fazer ofertas'">
                 <input class="w-full surface-50" id="phone" type="tel" pInputText formControlName="phone" maxlength="11" minlength="11">
                 <label for="phone" class="w-full font-medium text-base">Celular (whatsapp)</label>
             </div>
 
             <p-button type="submit"
                       (click)="submit()"
+                      (keyup.enter)="submit()"
                       [disabled]="registerForm.invalid"
                       label="CRIAR CONTA"
                       [loading]="loading"

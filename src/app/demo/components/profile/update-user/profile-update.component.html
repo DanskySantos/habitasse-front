@@ -34,9 +34,8 @@
                                 inputId="icon"
                                 formControlName="birthday"
                                 dataType="string"
-                                [(ngModel)]="inputDate"
-                                (onSelect)="inputDateChanged()"
-                                [maxDate]="maxDate">
+                                [maxDate]="maxDate"
+                                [defaultDate]="maxDate">
                     </p-calendar>
                     <label for="birthday" class="font-medium text-900 pl-3">Data de Nascimento</label>
                 </div>

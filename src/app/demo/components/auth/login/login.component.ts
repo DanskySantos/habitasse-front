@@ -24,13 +24,13 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    load() {
-        this.login();
+    submit() {
         this.loading = true;
 
         setTimeout(() => {
             this.loading = false
         }, 2000);
+        this.login();
     }
 
     get emailControl() {

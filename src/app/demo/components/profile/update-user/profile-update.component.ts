@@ -19,12 +19,13 @@ export class ProfileUpdateComponent implements OnInit {
     actionSuccess = new EventEmitter<UserModel>();
 
     userForm!: FormGroup;
-    maxDate: Date = new Date();
+    maxDate!: Date;
     loading: boolean = false;
     inputDate?: string;
 
     constructor(private userService: UserService,
                 private toastrService: ToastrService) {
+        this.setMaxDate();
     }
 
     ngOnInit() {
@@ -40,6 +41,12 @@ export class ProfileUpdateComponent implements OnInit {
             username: new FormControl(this.userData?.username, [Validators.required]),
             email: new FormControl(this.userData?.email, [Validators.required]),
         });
+    }
+
+    setMaxDate() {
+        const currentDate: Date = new Date();
+        this.maxDate = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
+        console.log(this.maxDate)
     }
 
     updateUserProfile() {

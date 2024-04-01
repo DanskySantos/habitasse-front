@@ -9,6 +9,7 @@ import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {Router} from "@angular/router";
 import {SharedService} from "../../shared/service/shared.service";
 import {ToastrService} from "ngx-toastr";
+import {map} from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -32,7 +33,7 @@ export class AuthService extends SharedService {
             .pipe(
                 tap(response => {
                     this.setCookies(response);
-                    this.router.navigate(['/home/property-demand'])
+                    this.router.navigate(['/home'])
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {
@@ -51,11 +52,11 @@ export class AuthService extends SharedService {
 
         return this.http.post(this.apiURL + 'auth/register', body, {headers})
             .pipe(
-                tap(response => {
+                map(response => {
                     this.setCookies(response);
                     this.toastrService.success('Registro Concluído', 'Sucesso')
-                    this.router.navigate(['/home'])
-                    return this.actionForSuccess(response);
+                    this.actionForSuccess(response);
+                    return this.router.navigate(['/home']);
                 }),
                 catchError(error => {
                     this.toastrService.error(error.error, 'Erro')
@@ -65,14 +66,6 @@ export class AuthService extends SharedService {
                     return this.finalAction();
                 })
             );
-    }
-
-    getUsuarioAutenticado() {
-        const token = this.cookieService.get('token')
-        if (token) {
-            return this.jwtHelper.decodeToken(token).email
-        }
-        return null;
     }
 
     obterTokenUsuario() {

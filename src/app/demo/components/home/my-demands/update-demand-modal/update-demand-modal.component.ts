@@ -48,7 +48,6 @@ export class UpdateDemandModalComponent implements OnInit {
         this.startLists();
     }
 
-
     ngOnInit() {
         this.createForm();
         this.addressService.getFilteredCities(this.demandData!.propertyDemand!.address!.state!).subscribe(cities =>
@@ -123,18 +122,24 @@ export class UpdateDemandModalComponent implements OnInit {
 
     private setValidatorsBasedOnContractType(contractType: string | null) {
         if (contractType === 'Locação') {
+            this.propertyForm.get('suggestedValueForSale')?.reset();
+            this.propertyForm.get('suggestedValueForSeasonal')?.reset();
             this.propertyForm.get('suggestedValueForRent')?.setValidators([Validators.required]);
         } else {
             this.propertyForm.get('suggestedValueForRent')?.clearValidators();
         }
 
         if (contractType === 'Venda') {
+            this.propertyForm.get('suggestedValueForRent')?.reset();
+            this.propertyForm.get('suggestedValueForSeasonal')?.reset();
             this.propertyForm.get('suggestedValueForSale')?.setValidators([Validators.required]);
         } else {
             this.propertyForm.get('suggestedValueForSale')?.clearValidators();
         }
 
         if (contractType === 'Temporada') {
+            this.propertyForm.get('suggestedValueForRent')?.reset();
+            this.propertyForm.get('suggestedValueForSale')?.reset();
             this.propertyForm.get('suggestedValueForSeasonal')?.setValidators([Validators.required]);
         } else {
             this.propertyForm.get('suggestedValueForSeasonal')?.clearValidators();
@@ -291,15 +296,15 @@ export class UpdateDemandModalComponent implements OnInit {
 
     getBedroomsNumber(bedroomsNumber: any): any {
         if (bedroomsNumber == 'ONE')
-            return "Um quarto"
+            return "1"
         if (bedroomsNumber == 'TWO')
-            return "Dois quartos"
+            return "2"
         if (bedroomsNumber == 'THREE')
-            return "Três quartos"
+            return "3"
         if (bedroomsNumber == 'FOUR')
-            return "Quatro quartos"
+            return "4"
         if (bedroomsNumber == 'FIVE_OR_MORE')
-            return "Cinco ou mais quartos"
+            return "5 ou mais"
     }
 
     getFurnished(furnished: any): any {

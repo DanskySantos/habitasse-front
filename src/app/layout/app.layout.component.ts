@@ -1,4 +1,4 @@
-import {Component, OnDestroy, Renderer2, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, Renderer2, ViewChild} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter, Subscription} from 'rxjs';
 import {TabCloseEvent} from './api/tabcloseevent';
@@ -11,7 +11,7 @@ import {LayoutService} from './service/app.layout.service';
     selector: 'app-layout',
     templateUrl: './app.layout.component.html'
 })
-export class AppLayoutComponent implements OnDestroy {
+export class AppLayoutComponent implements OnDestroy, AfterViewInit {
 
     overlayMenuOpenSubscription: Subscription;
 
@@ -28,7 +28,6 @@ export class AppLayoutComponent implements OnDestroy {
     @ViewChild(AppTopBarComponent) appTopbar!: AppTopBarComponent;
 
     constructor(private menuService: MenuService, public layoutService: LayoutService, public renderer: Renderer2, public router: Router) {
-        this.router.navigate(['/home'])
         this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
             if (!this.menuOutsideClickListener) {
                 this.menuOutsideClickListener = this.renderer.listen('document', 'click', event => {
@@ -84,6 +83,10 @@ export class AppLayoutComponent implements OnDestroy {
 
             this.layoutService.closeTab(event.index);
         });
+    }
+
+    ngAfterViewInit(): void {
+        this.router.navigate(['/home'])
     }
 
     blockBodyScroll(): void {
