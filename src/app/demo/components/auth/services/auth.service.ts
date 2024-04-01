@@ -54,7 +54,7 @@ export class AuthService extends SharedService {
                 tap(response => {
                     this.setCookies(response);
                     this.toastrService.success('Registro Concluído', 'Sucesso')
-                    this.router.navigate(['/home/property-demand'])
+                    this.router.navigate(['/home'])
                     return this.actionForSuccess(response);
                 }),
                 catchError(error => {

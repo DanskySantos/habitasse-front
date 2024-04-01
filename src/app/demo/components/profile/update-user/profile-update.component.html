@@ -42,8 +42,8 @@
                 </div>
 
                 <div class="mb-5 col-12 md:col-6 field p-float-label">
-                    <p-inputMask mask="(99) 9 9999-9999" formControlName="phone"></p-inputMask>
-                    <label class="font-medium text-900 pl-3">Telefone</label>
+                    <input id="phone" type="tel" pInputText formControlName="phone" maxlength="11" minlength="11">
+                    <label  for="phone" class="font-medium text-900 pl-3">Telefone</label>
                 </div>
             </div>
             <div>
