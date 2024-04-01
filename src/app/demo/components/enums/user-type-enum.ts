@@ -1,5 +1,6 @@
 export enum UserTypeEnum {
-    USER_CO = "Sou corretor",
-    USER_CD = "Sou cliente"
+    USER_CO = "Quero fazer ofertas",
+    USER_CD = "Quero encontrar um imóvel"
+
 }
 
