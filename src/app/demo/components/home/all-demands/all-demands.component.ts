@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LayoutService} from 'src/app/layout/service/app.layout.service';
 import {DemandService} from "../services/demand.service";
-import {ToastrService} from "ngx-toastr";
-import {Router} from '@angular/router';
 import {PageModel} from "../../shared/models/page.model";
 import {PaginatorState} from "primeng/paginator";
 import {ContractTypeEnum} from "../../enums/contract-type-enum";
@@ -44,9 +42,7 @@ export class AllDemandsComponent implements OnInit {
     cities?: any;
 
     constructor(public layoutService: LayoutService,
-                private toastrService: ToastrService,
                 private addressService: AddressService,
-                private router: Router,
                 private demandService: DemandService,
                 private cookieService: NgxCookieService) {
         this.createForm();
@@ -148,9 +144,10 @@ export class AllDemandsComponent implements OnInit {
     findOffer(demand: DemandModel) {
         if (demand.offers)
         return demand.offers?.filter(offer => offer.userId?.toString() === this.cookieService.get('userId')).pop()
-
+    
         return null;
     }
+
 
     getLocation(address: any): any {
         return address.city + ' - ' + address.state
@@ -228,15 +225,15 @@ export class AllDemandsComponent implements OnInit {
 
     getBedroomsNumber(bedroomsNumber: any): any {
         if (bedroomsNumber == 'ONE')
-            return "Um quarto"
+            return "1"
         if (bedroomsNumber == 'TWO')
-            return "Dois quartos"
+            return "2"
         if (bedroomsNumber == 'THREE')
-            return "Três quartos"
+            return "3"
         if (bedroomsNumber == 'FOUR')
-            return "Quatro quartos"
+            return "4"
         if (bedroomsNumber == 'FIVE_OR_MORE')
-            return "Cinco ou mais quartos"
+            return "5 ou mais"
     }
 
     getBolean(boolean: any): any {
