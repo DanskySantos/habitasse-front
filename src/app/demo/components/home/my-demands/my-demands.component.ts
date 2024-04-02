@@ -16,7 +16,7 @@ import { ListOfferComponent } from './list-offer-modal/my-offer-modal.component'
 
 })
 export class MyDemandsComponent implements OnInit {
-    
+
     @Input('demandData')
     demandData?: DemandModel;
 
@@ -41,24 +41,16 @@ export class MyDemandsComponent implements OnInit {
 
     allOffersModal(listoffer: ListOfferComponent) {
         listoffer.visible = true;
+        listoffer.getOffers(0, 10);
     }
- 
-    ModalExcluir(modaldelete: DeleteDemandModalComponent) {
+
+    modalExcluir(modaldelete: DeleteDemandModalComponent) {
         modaldelete.visible = true;
     }
 
-    EditModal(modal: UpdateDemandModalComponent) {
+    editModal(modal: UpdateDemandModalComponent) {
         modal.visibleEdit = true;
     }
-
-    load() {
-        this.loading = true;
-
-        setTimeout(() => {
-            this.loading = false
-        }, 2000);
-    }
-
 
     onPageChange(event: PaginatorState) {
         this.first = event.first!

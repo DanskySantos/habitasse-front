@@ -4,6 +4,7 @@ import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {SharedService} from "../../shared/service/shared.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {PageModel} from "../../shared/models/page.model";
 
 @Injectable({
     providedIn: 'root'
@@ -53,4 +54,8 @@ export class OffersService extends SharedService {
         );
     }
 
+    getOffers(page: number, size: number, demandId: number){
+        const headers = this.setHeadersForBearer();
+        return this.http.get<PageModel>(`${this.apiURL}offer/findByDemand/${demandId}/${page}/${size}`, {headers})
+    }
 }
