@@ -68,7 +68,7 @@ export class AllDemandsComponent implements OnInit {
         });
     }
 
- 
+
 
     onPageChange(event: PaginatorState) {
         this.first = event.first!
@@ -144,7 +144,7 @@ export class AllDemandsComponent implements OnInit {
     findOffer(demand: DemandModel) {
         if (demand.offers)
         return demand.offers?.filter(offer => offer.userId?.toString() === this.cookieService.get('userId')).pop()
-    
+
         return null;
     }
 

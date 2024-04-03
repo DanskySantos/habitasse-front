@@ -9,4 +9,5 @@ export class DemandModel {
     contact?: string;
     offers?: OffersModel[];
     user?: UserModel;
+    creationDate!: string;
 }

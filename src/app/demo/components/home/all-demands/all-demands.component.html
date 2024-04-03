@@ -224,7 +224,7 @@
                             </span>
                         </ul>
                         <button (click)="allDemandsModal(modal)"  type="button" pButton pRipple class="w-full mt-3"
-                                [label]="demand.offers.length == 0 ? 'Fazer proposta' : 'Editar proposta'"
+                                [label]="findOffer(demand) ? 'Editar proposta' : 'Fazer proposta'"
                                 icon="pi pi-arrow-right" iconPos="right">
                             <img [ngSrc]="demand.offers.length == 0 ? './assets/app/images/icons/icons8-plus-24.png' : './assets/app/images/icons/Group.svg'"
                                  alt="house"
@@ -232,7 +232,7 @@
                                  class="align-self-center" height="19" width="19">
                         </button>
                     </div>
-                    <app-create-update-offer-modal #modal [demandId]="demand.id" [offer]="findOffer(demand)"></app-create-update-offer-modal>
+                    <app-create-update-offer-modal #modal [demand]="demand" [offer]="findOffer(demand)"></app-create-update-offer-modal>
                 </div>
             </div>
         </div>

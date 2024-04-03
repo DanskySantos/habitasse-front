@@ -1,21 +1,7 @@
-import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OffersService} from '../../services/offers.service';
-import { DemandModel } from '../../../shared/models/demand.model';
-import { DemandService } from '../../services/demand.service';
-import {CookieService as NgxCookieService} from 'ngx-cookie-service';
-import { ContractTypeEnum } from '../../../enums/contract-type-enum';
-import { BedroomsNumberEnum } from '../../../enums/bedrooms-number-enum';
-import { PropertyTypeEnum } from '../../../enums/property-type-enum';
-import { PetFriendlyEnum } from '../../../enums/pet-friendly-enum';
-import { FurnishedEnum } from '../../../enums/furnished-enum';
-import { SuggestedValueRentEnum } from '../../../enums/suggested-value-rent-enum';
-import { SuggestedValueSaleEnum } from '../../../enums/suggested-value-sale-enum';
-import { SuggestedValueSeasonalEnum } from '../../../enums/suggested-value-seasonal-enum';
-import { AddressService } from '../../../shared/service/address.service';
-import { PaginatorState } from 'primeng/paginator';
-import { PageModel } from '../../../shared/models/page.model';
-
+import {DemandModel} from "../../../shared/models/demand.model";
 
 @Component({
     templateUrl: './create-update-offer-modal.component.html',
@@ -23,46 +9,25 @@ import { PageModel } from '../../../shared/models/page.model';
 
 })
 export class CreateUpdateOfferModalComponent implements OnInit {
-    @Input('demandId')
-    demandId?: number;
+
+    @Input('demand')
+    demand!: DemandModel;
 
     @Input('offer')
     offer?: any;
 
-    totalElements!: number;
-    page: number = 0;
-    size: number = 10;
-    first: number = 0;
     allDemandsOffers!: FormGroup;
     visible: boolean = false;
     loading: boolean = false;
     submited: boolean = false;
-    demands: any;
 
-    filterForm!: FormGroup;
-    contractType?: string[];
-    propertyType?: string[];
-    bedroomsNumber?: string[];
-    furnished?: string[];
-    petFriendly?: string[];
-    suggestedValueForRent?: string[];
-    suggestedValueForSale?: string[];
-    suggestedValueForSeasonal?: string[];
-    states?: any;
-    cities?: any;
-
-    constructor(private offersService: OffersService,  private demandService: DemandService,
-        private cookieService: NgxCookieService,  private addressService: AddressService) {
-            this.createForm();
-            this.createForms();
-            this.startLists();
-            this.getFilteredDemands(this.page, this.size);
+    constructor(private offersService: OffersService) {
     }
 
-    ngOnInit(): void {
+    ngOnInit() {
+        this.createForm();
     }
 
-   
     createOffers() {
         this.submited = true;
         this.offersService.createOffers(this.allDemandsOffers.value)
@@ -88,88 +53,46 @@ export class CreateUpdateOfferModalComponent implements OnInit {
     createForm() {
         if (this.offer) {
             this.allDemandsOffers = new FormGroup({
-                demandId: new FormControl(this.demandId),
+                demandId: new FormControl(this.demand?.id),
                 text: new FormControl(this.offer.text, [Validators.required]),
             });
         } else {
             this.allDemandsOffers = new FormGroup({
-                demandId: new FormControl(this.demandId),
+                demandId: new FormControl(this.demand?.id),
                 text: new FormControl(null, [Validators.required]),
             });
         }
     }
 
-    private createForms() {
-        this.filterForm = new FormGroup({
-            contractType: new FormControl(null),
-            propertyType: new FormControl(null),
-            bedroomsNumber: new FormControl(null),
-            furnished: new FormControl(null),
-            petFriendly: new FormControl(null),
-            suggestedValueForRent: new FormControl(null),
-            suggestedValueForSale: new FormControl(null),
-            suggestedValueForSeasonal: new FormControl(null),
-            state: new FormControl(null),
-            city: new FormControl(null),
-        });
+    getBolean(boolean: any): any {
+        if (boolean == true)
+            return "Sim"
+        if (boolean == false)
+            return "Não"
     }
 
+    formatarData(dataString: string) {
+        const data = new Date(dataString);
 
-    onPageChange(event: PaginatorState) {
-        this.first = event.first!
-        this.page = event.page!
-        this.size = event.rows!
-        this.getFilteredDemands(event.page!, event.rows!)
+        const dia = String(data.getDate()).padStart(2, '0');
+        const mes = String(data.getMonth() + 1).padStart(2, '0');
+        const ano = data.getFullYear();
+
+        return `${dia}/${mes}/${ano}`;
     }
 
-
-    startLists() {
-        this.contractType = Object.values(ContractTypeEnum);
-        this.bedroomsNumber = Object.values(BedroomsNumberEnum);
-        this.propertyType = Object.values(PropertyTypeEnum);
-        this.petFriendly = Object.values(PetFriendlyEnum);
-        this.furnished = Object.values(FurnishedEnum);
-        this.suggestedValueForRent = Object.values(SuggestedValueRentEnum);
-        this.suggestedValueForSale = Object.values(SuggestedValueSaleEnum);
-        this.suggestedValueForSeasonal = Object.values(SuggestedValueSeasonalEnum);
-
-        this.addressService.getAllStates().subscribe(states =>
-            this.states = states.map(state => state.nome)
-        );
+    getBedroomsNumber(bedroomsNumber: any): any {
+        if (bedroomsNumber == 'ONE')
+            return "Um quarto"
+        if (bedroomsNumber == 'TWO')
+            return "Dois quartos"
+        if (bedroomsNumber == 'THREE')
+            return "Três quartos"
+        if (bedroomsNumber == 'FOUR')
+            return "Quatro quartos"
+        if (bedroomsNumber == 'FIVE_OR_MORE')
+            return "Cinco ou mais quartos"
     }
-
-    load() {
-        this.loading = true;
-
-        setTimeout(() => {
-            this.loading = false
-        }, 2000);
-    }
-
-    filter() {
-        this.getFilteredDemands(this.page, this.size);
-    }
-
-
-    filterCities(event: any) {
-        this.addressService.getFilteredCities(event.value).subscribe(cities =>
-            this.cities = cities.map(city => city.nome)
-        );
-        this.getFilteredDemands(this.page, this.size);
-    }
-
-    private getFilteredDemands(first: number, rows: number) {
-        this.demandService.getFilteredDemands(first, rows, this.filterForm.value).subscribe((data: PageModel) => {
-                this.demands = data.content
-                this.totalElements = data.totalElements
-            }
-        );
-    }
-
-    get selectedContractType() {
-        return this.filterForm.get('contractType')!;
-    }
-
     getContractType(contractType: string): any {
         if (contractType == 'RENT')
             return 'Locação'
@@ -191,14 +114,6 @@ export class CreateUpdateOfferModalComponent implements OnInit {
         if (propertyType == 'FARM')
             return 'Sítio/Fazenda/Chácara'
     }
-
-    findOffer(demand: DemandModel) {
-        if (demand.offers)
-        return demand.offers?.filter(offer => offer.userId?.toString() === this.cookieService.get('userId')).pop()
-    
-        return null;
-    }
-
 
     getLocation(address: any): any {
         return address.city + ' - ' + address.state
@@ -272,35 +187,5 @@ export class CreateUpdateOfferModalComponent implements OnInit {
             return "R$ 3.000,00"
         if (suggestedValueForSeasonal == 'R$5000')
             return "R$ 5.000,00"
-    }
-
-    getBedroomsNumber(bedroomsNumber: any): any {
-        if (bedroomsNumber == 'ONE')
-            return "1"
-        if (bedroomsNumber == 'TWO')
-            return "2"
-        if (bedroomsNumber == 'THREE')
-            return "3"
-        if (bedroomsNumber == 'FOUR')
-            return "4"
-        if (bedroomsNumber == 'FIVE_OR_MORE')
-            return "5 ou mais"
-    }
-
-    getBolean(boolean: any): any {
-        if (boolean == true)
-            return "Sim"
-        if (boolean == false)
-            return "Não"
-    }
-
-    formatarData(dataString: string) {
-        const data = new Date(dataString);
-
-        const dia = String(data.getDate()).padStart(2, '0');
-        const mes = String(data.getMonth() + 1).padStart(2, '0');
-        const ano = data.getFullYear();
-
-        return `${dia}/${mes}/${ano}`;
     }
 }
