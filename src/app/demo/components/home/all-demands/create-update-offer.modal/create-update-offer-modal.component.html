@@ -2,12 +2,12 @@
     header="Proposta"
     [(visible)]="visible"
     [modal]="true"
-    [style]="{ width: '50%', margin: '10px'}"
+    [style]="{ width: '60vw', margin: '10px'}"
     class="sm:p-0 md:p-0 lg:p-2 p-0"
     [draggable]="false"
     [resizable]="false">
-    <div>
-        <div>
+    <div  class="flex-column sm:flex  md:flex-column lg:flex-row  justify-content-evenly">
+        <div class="surface-100 p-3 shadow-2 border-round-lg mb-3">
             <div class="flex align-items-center mb-4 justify-content-between">
                 <p class="m-0" style="color: #222222"
                    title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
