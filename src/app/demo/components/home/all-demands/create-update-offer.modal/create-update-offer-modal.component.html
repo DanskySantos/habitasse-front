@@ -1,22 +1,81 @@
 <p-dialog
-    header="Faça sua proposta"
+    header="Proposta"
     [(visible)]="visible"
     [modal]="true"
-    [style]="{ width: '70%', margin: '10px'}"
-    class="sm: p-0 md:p-0 lg:p-0 p-2"
+    [style]="{ width: '50%', margin: '10px'}"
+    class="sm:p-0 md:p-0 lg:p-2 p-0"
     [draggable]="false"
     [resizable]="false">
-    <div class="sm:p-0 md:p-0 lg:p-0 p-2">
+    <div class="w-12 sm:w-12 md:w-12 lg:w-12 xl:w-12 flex sm:flex md:flex lg:flex justify-content-center gap-5">
+        <form  [formGroup]="filterForm"
+        #formDir="ngForm"
+         class="flex align-items-center justify-content-center">
+            <div class="col-12 sm:mb-0 md:col-12 sm:col-12 xl:col-12 lg:col-12 p-0" *ngFor="let demand of demands">
+                <div class="card h-full w-12 sm:w-12 md:w-12 lg:w-12 xl:w-12 surface-100">
+                    <div class="flex align-items-center mb-4 justify-content-between">
+                        <p class="m-0" style="color: #222222"
+                           title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
+                    </div>
+                    <h5 class="p-2"
+                        title="Tipo de contrato">{{ getContractType(demand.propertyDemand.contractType) }}</h5>
+                    <ul class="list-none p-0 m-0">
+                        <span class="flex p-2 align-items-center mb-2" title="Tipo de propriedade">
+                            <img ngSrc="./assets/app/images/icons/house.png"
+                                 alt="house"
+                                 class="align-self-center mr-2" height="24" width="24">
+                            <span>Tipo de imóvel - {{ getPropertyType(demand.propertyDemand.propertyType) }}</span>
+                        </span>
+                        <span class="flex p-2 align-items-center mb-2" title="Localidade">
+                            <img ngSrc="./assets/app/images/icons/location_on.png"
+                                 alt="house"
+                                 class="align-self-center mr-2" height="24" width="24">
+                            <span>Localidade - {{ getLocation(demand.propertyDemand.address) }}</span>
+                        </span>
+                        <span class="flex p-2 align-items-center mb-2" title="Valor desejado">
+                            <img ngSrc="./assets/app/images/icons/monetization_on.png"
+                                 alt="house"
+                                 class="align-self-center mr-2" height="24" width="24">
+                            <span>Valor até - {{ getValue(demand.propertyDemand) }}</span>
+                        </span>
+                        <span class="flex p-2 align-items-center mb-2" title="Quantidade de quartos">
+                            <img ngSrc="./assets/app/images/icons/hotel.png"
+                                 alt="house"
+                                 class="align-self-center mr-2" height="24" width="24">
+                            <span>Quartos - {{ getBedroomsNumber(demand.propertyDemand.bedroomsNumber) }}</span>
+                        </span>
+                        <span class="flex p-2 align-items-center mb-2" title="Mobiliado">
+                            <img ngSrc="./assets/app/images/icons/kitchen.png"
+                                 alt="house"
+                                 class="align-self-center mr-2" height="24" width="24">
+                            <span>Mobiliado - {{ getBolean(demand.propertyDemand.furnished) }}</span>
+                        </span>
+                        <span class="flex p-2 align-items-center mb-2" title="Permite animais">
+                            <img ngSrc="./assets/app/images/icons/pets.png"
+                                 alt="house"
+                                 class="align-self-center mr-2" height="24" width="24">
+                            <span>Pet - {{ getBolean(demand.propertyDemand.petFriendly) }}</span>
+                        </span>
+                        <span class="flex p-2 align-items-center mb-2" title="Comentários">
+                            <img ngSrc="./assets/app/images/icons/comment.png"
+                                 alt="house"
+                                 class="align-self-center mr-2" height="24" width="24">
+                            <span>Comentarios - {{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</span>
+                        </span>
+                    </ul>
+                </div>
+                <app-create-update-offer-modal #modal [demandId]="demand.id" [offer]="findOffer(demand)"></app-create-update-offer-modal>
+            </div>
+        </form>
         <form
             [formGroup]="allDemandsOffers"
             #formDir="ngForm"
-            class="flex flex-column justify-content-center align-items-center"
+            class="flex flex-column align-items-center"
             (ngSubmit)="saveOffers()">
-            <div class="col-12 lg:col-12 sm:col-12 md:col-12">
+            <div class="col-12 lg:col-12  md:col-12 sm:col-12">
+                <h3>Detalhes da proposta</h3>
                 <div class="grid formgrid p-fluid">
                     <div class="mb-3 col-12">
                         <div class="field w-full">
-                            <label>Proposta:</label>
                             <textarea
                                 [style]="{ width: '100%' }"
                                 rows="5"
@@ -27,7 +86,7 @@
                             </textarea>
                         </div>
                     </div>
-                    <div class="col-12 lg:col-3 sm:col-12 md:col-12">
+                    <div class="col-12 lg:col-6 sm:col-12 md:col-12">
                         <p-button
                             type="submit"
                             [label]="this.offer ? 'Editar proposta' : 'Fazer uma proposta'"
