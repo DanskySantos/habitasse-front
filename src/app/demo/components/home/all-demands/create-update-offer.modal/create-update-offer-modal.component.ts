@@ -66,42 +66,42 @@ export class CreateUpdateOfferModalComponent implements OnInit {
     }
 
     Bolean(boolean: any): any {
-        return this.sharedService.getBolean(boolean);
+        return this.offersService.getBolean(boolean);
     }
     
     formatarData(dataString: string) {
-        return this.sharedService.getformatarData(dataString);
+        return this.offersService.getformatarData(dataString);
     }
     
     BedroomsNumber(bedroomsNumber: any): any {
-        return this.sharedService.getBedroomsNumber(bedroomsNumber);
+        return this.offersService.getBedroomsNumber(bedroomsNumber);
     }
     
     ContractType(contractType: string): any {
-        return this.sharedService.getContractType(contractType);
+        return this.offersService.getContractType(contractType);
     }
     
     PropertyType(propertyType: string): any {
-        return this.sharedService.getPropertyType(propertyType);
+        return this.offersService.getPropertyType(propertyType);
     }
     
     Location(address: any): any {
-        return this.sharedService.getLocation(address);
+        return this.offersService.getLocation(address);
     }
     
     Value(propertyDemand: any): any {
-        return this.sharedService.getValue(propertyDemand);
+        return this.offersService.getValue(propertyDemand);
     }
     
     ValueForRent(suggestedValueForRent: any): any {
-        return this.sharedService.getValueForRent(suggestedValueForRent);
+        return this.offersService.getValueForRent(suggestedValueForRent);
     }
     
     ValueForSale(suggestedValueForSale: any): any {
-        return this.sharedService.getValueForSale(suggestedValueForSale);
+        return this.offersService.getValueForSale(suggestedValueForSale);
     }
     
     ForSeasonal(suggestedValueForSeasonal: any): any {
-        return this.sharedService.getValueForSeasonal(suggestedValueForSeasonal);
+        return this.offersService.getValueForSeasonal(suggestedValueForSeasonal);
     }
 }
