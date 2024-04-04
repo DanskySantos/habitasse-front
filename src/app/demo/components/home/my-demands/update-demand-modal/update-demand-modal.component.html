@@ -173,6 +173,7 @@
                     </div>
                     <div class="ml-3">
                         <p-button
+                            [disabled]="this.propertyForm.untouched || this.propertyForm.invalid"
                             type="submit"
                             label="Editar Imóvel"
                             [loading]="loading"

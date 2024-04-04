@@ -10,19 +10,11 @@
                                     <i class="pi pi-user mr-2" style="font-size: 1.5rem; color: #585757"></i>
                                     <span>Nome: {{offer.username}}</span>
                                 </span>
-                                <span ng class="flex p-2 align-items-center mb-2" title="Email">
-                                    <i class="pi pi-envelope mr-2" style="font-size: 1.5rem; color: #585757"></i>
-                                    <span>Email: {{offer.userEmail}}</span>
-                                </span>
-                                <span *ngIf="offer.contact" class="flex p-2 align-items-center mb-2" title="Telefone">
-                                    <i class="pi pi-user mr-2" style="font-size: 1.5rem; color: #585757"></i>
-                                    <span>Telefone: {{offer.contact}}</span>
-                                </span>
                                 <span class="flex p-2 align-items-center mb-2" title="Comentários">
                                     <img src="./assets/app/images/icons/comment.png"
                                          alt="house"
                                          class="align-self-center mr-2" height="24" width="24">
-                                    <span>Descrição: {{offer.text}}</span>
+                                    <span class="text-overflow-ellipsis	white-space-nowrap overflow-hidden">Descrição: {{offer.text}}</span>
                                 </span>
                                 <div class="flex gap-2 width-full lg:justify-content-start sm:justify-content-center md:justify-content-center justify-content-center">
                                     <p-button [style]="{width: '100%'}" label="Aceitar"></p-button>
