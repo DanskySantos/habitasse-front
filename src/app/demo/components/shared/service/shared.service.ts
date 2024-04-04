@@ -52,15 +52,15 @@ export class SharedService {
 
     getBedroomsNumber(bedroomsNumber: any): any {
         if (bedroomsNumber == 'ONE')
-            return "Um quarto"
+            return "1"
         if (bedroomsNumber == 'TWO')
-            return "Dois quartos"
+            return "2"
         if (bedroomsNumber == 'THREE')
-            return "Três quartos"
+            return "3"
         if (bedroomsNumber == 'FOUR')
-            return "Quatro quartos"
+            return "4"
         if (bedroomsNumber == 'FIVE_OR_MORE')
-            return "Cinco ou mais quartos"
+            return "5 ou mais"
     }
     getContractType(contractType: string): any {
         if (contractType == 'RENT')

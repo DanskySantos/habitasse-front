@@ -3,6 +3,7 @@ export class AuthModel {
     refresh_token!: string;
     username!: string;
     userId!: string;
+    userRole!: string;
 
     constructor() {
     }
