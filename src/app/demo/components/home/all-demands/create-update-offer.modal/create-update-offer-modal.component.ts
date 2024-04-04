@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OffersService} from '../../services/offers.service';
 import {DemandModel} from "../../../shared/models/demand.model";
-import { SharedService } from '../../../shared/service/shared.service';
 
 @Component({
     templateUrl: './create-update-offer-modal.component.html',
@@ -22,7 +21,7 @@ export class CreateUpdateOfferModalComponent implements OnInit {
     loading: boolean = false;
     submited: boolean = false;
 
-    constructor(private offersService: OffersService) {
+    constructor(protected offersService: OffersService) {
     }
 
     ngOnInit() {
@@ -63,45 +62,5 @@ export class CreateUpdateOfferModalComponent implements OnInit {
                 text: new FormControl(null, [Validators.required]),
             });
         }
-    }
-
-    Bolean(boolean: any): any {
-        return this.offersService.getBolean(boolean);
-    }
-    
-    formatarData(dataString: string) {
-        return this.offersService.getformatarData(dataString);
-    }
-    
-    BedroomsNumber(bedroomsNumber: any): any {
-        return this.offersService.getBedroomsNumber(bedroomsNumber);
-    }
-    
-    ContractType(contractType: string): any {
-        return this.offersService.getContractType(contractType);
-    }
-    
-    PropertyType(propertyType: string): any {
-        return this.offersService.getPropertyType(propertyType);
-    }
-    
-    Location(address: any): any {
-        return this.offersService.getLocation(address);
-    }
-    
-    Value(propertyDemand: any): any {
-        return this.offersService.getValue(propertyDemand);
-    }
-    
-    ValueForRent(suggestedValueForRent: any): any {
-        return this.offersService.getValueForRent(suggestedValueForRent);
-    }
-    
-    ValueForSale(suggestedValueForSale: any): any {
-        return this.offersService.getValueForSale(suggestedValueForSale);
-    }
-    
-    ForSeasonal(suggestedValueForSeasonal: any): any {
-        return this.offersService.getValueForSeasonal(suggestedValueForSeasonal);
     }
 }

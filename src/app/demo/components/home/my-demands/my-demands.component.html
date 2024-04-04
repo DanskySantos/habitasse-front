@@ -17,7 +17,8 @@
                 <div class="col-12 xl:col-3 lg:col-6 mb-4" *ngFor="let demand of demands">
                     <div class="card h-full">
                         <div class="flex align-items-center mb-4 justify-content-between">
-                            <p class="m-0" style="color: #9E9E9E" title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
+                            <p class="m-0" style="color: #9E9E9E"
+                               title="Data de criação">{{ demandService.getformatData(demand.creationDate) }}</p>
                             <div class="flex flex-row">
                                 <img (click)="modalExcluir(modaldelete)" ngSrc="./assets/app/images/icons/delete.png"
                                      alt="delete"
@@ -31,43 +32,43 @@
                             </div>
                         </div>
                         <h5 class="p-2"
-                            title="Tipo de contrato">{{ getContractType(demand.propertyDemand.contractType) }}</h5>
+                            title="Tipo de contrato">{{ demandService.getContractType(demand.propertyDemand.contractType) }}</h5>
                         <ul class="list-none p-0 m-0">
                             <span class="flex p-2 align-items-center mb-2" title="Tipo de propriedade">
                                 <img ngSrc="./assets/app/images/icons/house.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Tipo de imóvel - {{ getPropertyType(demand.propertyDemand.propertyType) }}</span>
+                                <span>Tipo de imóvel - {{ demandService.getPropertyType(demand.propertyDemand.propertyType) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Localidade">
                                 <img ngSrc="./assets/app/images/icons/location_on.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Localidade - {{ getLocation(demand.propertyDemand.address) }}</span>
+                                <span>Localidade - {{ demandService.getLocation(demand.propertyDemand.address) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Valor desejado">
                                 <img ngSrc="./assets/app/images/icons/monetization_on.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Valor até - {{ getValue(demand.propertyDemand) }}</span>
+                                <span>Valor até - {{ demandService.getValue(demand.propertyDemand) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Quantidade de quartos">
                                 <img ngSrc="./assets/app/images/icons/hotel.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Quartos - {{ getBedroomsNumber(demand.propertyDemand.bedroomsNumber) }}</span>
+                                <span>Quartos - {{ demandService.getBedroomsNumber(demand.propertyDemand.bedroomsNumber) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Mobiliado">
                                 <img ngSrc="./assets/app/images/icons/kitchen.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Mobiliado - {{ getBolean(demand.propertyDemand.furnished) }}</span>
+                                <span>Mobiliado - {{ demandService.getBoolean(demand.propertyDemand.furnished) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Permite animais">
                                 <img ngSrc="./assets/app/images/icons/pets.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Pet - {{ getBolean(demand.propertyDemand.petFriendly) }}</span>
+                                <span>Pet - {{ demandService.getBoolean(demand.propertyDemand.petFriendly) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Comentários">
                                 <img ngSrc="./assets/app/images/icons/comment.png"

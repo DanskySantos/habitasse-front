@@ -6,60 +6,59 @@
     class="sm:p-0 md:p-0 lg:p-2 p-0"
     [draggable]="false"
     [resizable]="false">
-    <div  class="flex-column sm:flex  md:flex-column lg:flex-row  justify-content-evenly">
+    <div class="flex-column sm:flex  md:flex-column lg:flex-row  justify-content-evenly">
         <div class="surface-100 p-3 shadow-2 border-round-lg mb-3">
             <div class="flex align-items-center mb-4 justify-content-between">
                 <p class="m-0" style="color: #222222"
-                   title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
+                   title="Data de criação">{{ offersService.getformatData(demand.creationDate) }}</p>
             </div>
             <h5 class="p-2"
-                title="Tipo de contrato">{{ ContractType(demand.propertyDemand.contractType) }}</h5>
+                title="Tipo de contrato">{{ offersService.getContractType(demand.propertyDemand.contractType) }}</h5>
             <ul class="list-none p-0 m-0">
                         <span class="flex p-2 align-items-center mb-2" title="Tipo de propriedade">
                             <img ngSrc="./assets/app/images/icons/house.png"
                                  alt="house"
                                  class="align-self-center mr-2" height="24" width="24">
-                            <span>Tipo de imóvel - {{ PropertyType(demand.propertyDemand.propertyType) }}</span>
+                            <span>Tipo de imóvel - {{ offersService.getPropertyType(demand.propertyDemand.propertyType) }}</span>
                         </span>
                 <span class="flex p-2 align-items-center mb-2" title="Localidade">
                             <img ngSrc="./assets/app/images/icons/location_on.png"
                                  alt="house"
                                  class="align-self-center mr-2" height="24" width="24">
-                            <span>Localidade - {{ Location(demand.propertyDemand.address) }}</span>
+                            <span>Localidade - {{ offersService.getLocation(demand.propertyDemand.address) }}</span>
                         </span>
                 <span class="flex p-2 align-items-center mb-2" title="Valor desejado">
                             <img ngSrc="./assets/app/images/icons/monetization_on.png"
                                  alt="house"
                                  class="align-self-center mr-2" height="24" width="24">
-                            <span>Valor até - {{ Value(demand.propertyDemand) }}</span>
+                            <span>Valor até - {{ offersService.getValue(demand.propertyDemand) }}</span>
                         </span>
                 <span class="flex p-2 align-items-center mb-2" title="Quantidade de quartos">
                             <img ngSrc="./assets/app/images/icons/hotel.png"
                                  alt="house"
                                  class="align-self-center mr-2" height="24" width="24">
-                            <span>Quartos - {{ BedroomsNumber(demand.propertyDemand.bedroomsNumber) }}</span>
+                            <span>Quartos - {{ offersService.getBedroomsNumber(demand.propertyDemand.bedroomsNumber) }}</span>
                         </span>
                 <span class="flex p-2 align-items-center mb-2" title="Mobiliado">
                             <img ngSrc="./assets/app/images/icons/kitchen.png"
                                  alt="house"
                                  class="align-self-center mr-2" height="24" width="24">
-                            <span>Mobiliado - {{ Bolean(demand.propertyDemand.furnished) }}</span>
+                            <span>Mobiliado - {{ offersService.getBoolean(demand.propertyDemand.furnished) }}</span>
                         </span>
                 <span class="flex p-2 align-items-center mb-2" title="Permite animais">
                             <img ngSrc="./assets/app/images/icons/pets.png"
                                  alt="house"
                                  class="align-self-center mr-2" height="24" width="24">
-                            <span>Pet - {{ Bolean(demand.propertyDemand.petFriendly) }}</span>
+                            <span>Pet - {{ offersService.getBoolean(demand.propertyDemand.petFriendly) }}</span>
                         </span>
                 <span class="flex p-2 align-items-center mb-2" title="Comentários">
                             <img ngSrc="./assets/app/images/icons/comment.png"
                                  alt="house"
                                  class="align-self-center mr-2" height="24" width="24">
-                            <span>Comentarios - {{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</span>
-                        </span>
+                <span>Comentarios - {{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</span>
+                </span>
             </ul>
         </div>
-
         <form
             [formGroup]="allDemandsOffers"
             #formDir="ngForm"

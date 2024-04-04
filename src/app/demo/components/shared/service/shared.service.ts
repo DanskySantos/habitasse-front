@@ -34,14 +34,14 @@ export class SharedService {
         });
     }
 
-    getBolean(boolean: any): any {
+    getBoolean(boolean: any): any {
         if (boolean == true)
             return "Sim"
         if (boolean == false)
             return "Não"
     }
 
-    getformatarData(dataString: string) {
+    getformatData(dataString: string) {
         const data = new Date(dataString);
         const dia = String(data.getDate()).padStart(2, '0');
         const mes = String(data.getMonth() + 1).padStart(2, '0');

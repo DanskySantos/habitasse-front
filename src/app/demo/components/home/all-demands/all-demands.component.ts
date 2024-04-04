@@ -15,8 +15,8 @@ import {AddressService} from "../../shared/service/address.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {DemandModel} from "../../shared/models/demand.model";
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
-import { CreateUpdateOfferModalComponent } from './create-update-offer.modal/create-update-offer-modal.component';
-import { OffersService } from '../services/offers.service';
+import {CreateUpdateOfferModalComponent} from './create-update-offer.modal/create-update-offer-modal.component';
+import {OffersService} from '../services/offers.service';
 
 @Component({
     templateUrl: './all-demands.component.html',
@@ -46,7 +46,7 @@ export class AllDemandsComponent implements OnInit {
                 private addressService: AddressService,
                 private demandService: DemandService,
                 private cookieService: NgxCookieService,
-                private offersService: OffersService) {
+                protected offersService: OffersService) {
         this.createForm();
         this.startLists();
         this.getFilteredDemands(this.page, this.size);
@@ -69,8 +69,6 @@ export class AllDemandsComponent implements OnInit {
             city: new FormControl(null),
         });
     }
-
-
 
     onPageChange(event: PaginatorState) {
         this.first = event.first!
@@ -104,7 +102,7 @@ export class AllDemandsComponent implements OnInit {
 
     findOffer(demand: DemandModel) {
         if (demand.offers)
-        return demand.offers?.filter(offer => offer.userId?.toString() === this.cookieService.get('userId')).pop()
+            return demand.offers?.filter(offer => offer.userId?.toString() === this.cookieService.get('userId')).pop()
 
         return null;
     }
@@ -126,47 +124,5 @@ export class AllDemandsComponent implements OnInit {
 
     get selectedContractType() {
         return this.filterForm.get('contractType')!;
-    }
-
-    ContractType(contractType: string): any {
-        return this.offersService.getContractType(contractType);
-    }
-
-    PropertyType(propertyType: string): any {
-        return this.offersService.getPropertyType(propertyType);
-    }
-
-   
-
-    Location(address: any): any {
-        return this.offersService.getLocation(address);
-    }
-
-    Value(propertyDemand: any): any {
-        return this.offersService.getValue(propertyDemand);
-    }
-
-    ValueForRent(suggestedValueForRent: any): any {
-        return this.offersService.getValueForRent(suggestedValueForRent);
-    }
-
-    ValueForSale(suggestedValueForSale: any): any {
-        return this.offersService.getValueForSale(suggestedValueForSale);
-    }
-
-    ValueForSeasonal(suggestedValueForSeasonal: any): any {
-        return this.offersService.getValueForSeasonal(suggestedValueForSeasonal);
-    }
-
-    BedroomsNumber(bedroomsNumber: any): any {
-        return this.offersService.getBedroomsNumber(bedroomsNumber);
-    }
-
-    Bolean(boolean: any): any {
-        return this.offersService.getBolean(boolean);
-    }
-
-    formatarData(dataString: string) {
-        return this.offersService.getformatarData(dataString);
     }
 }
