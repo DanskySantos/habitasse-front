@@ -22,7 +22,7 @@ export class CreateUpdateOfferModalComponent implements OnInit {
     loading: boolean = false;
     submited: boolean = false;
 
-    constructor(private offersService: OffersService, private sharedService: SharedService) {
+    constructor(private offersService: OffersService) {
     }
 
     ngOnInit() {

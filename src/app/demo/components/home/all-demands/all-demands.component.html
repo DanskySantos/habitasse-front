@@ -178,43 +178,43 @@
                                title="Data de criação">{{ formatarData(demand.creationDate) }}</p>
                         </div>
                         <h5 class="p-2"
-                            title="Tipo de contrato">{{getContractType(demand.propertyDemand.contractType) }}</h5>
+                            title="Tipo de contrato">{{ContractType(demand.propertyDemand.contractType) }}</h5>
                         <ul class="list-none p-0 m-0">
                             <span class="flex p-2 align-items-center mb-2" title="Tipo de propriedade">
                                 <img ngSrc="./assets/app/images/icons/house.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Tipo de imóvel - {{getPropertyType(demand.propertyDemand.propertyType) }}</span>
+                                <span>Tipo de imóvel - {{PropertyType(demand.propertyDemand.propertyType) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Localidade">
                                 <img ngSrc="./assets/app/images/icons/location_on.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Localidade - {{ getLocation(demand.propertyDemand.address) }}</span>
+                                <span>Localidade - {{ Location(demand.propertyDemand.address) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Valor desejado">
                                 <img ngSrc="./assets/app/images/icons/monetization_on.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Valor até - {{ getValue(demand.propertyDemand) }}</span>
+                                <span>Valor até - {{ Value(demand.propertyDemand) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Quantidade de quartos">
                                 <img ngSrc="./assets/app/images/icons/hotel.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Quartos - {{ getBedroomsNumber(demand.propertyDemand.bedroomsNumber) }}</span>
+                                <span>Quartos - {{ BedroomsNumber(demand.propertyDemand.bedroomsNumber) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Mobiliado">
                                 <img ngSrc="./assets/app/images/icons/kitchen.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Mobiliado - {{ getBolean(demand.propertyDemand.furnished) }}</span>
+                                <span>Mobiliado - {{ Bolean(demand.propertyDemand.furnished) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Permite animais">
                                 <img ngSrc="./assets/app/images/icons/pets.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Pet - {{ getBolean(demand.propertyDemand.petFriendly) }}</span>
+                                <span>Pet - {{ Bolean(demand.propertyDemand.petFriendly) }}</span>
                             </span>
                             <span class="flex p-2 align-items-center mb-2" title="Comentários">
                                 <img ngSrc="./assets/app/images/icons/comment.png"
