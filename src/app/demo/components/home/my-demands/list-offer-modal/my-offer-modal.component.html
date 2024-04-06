@@ -1,27 +1,31 @@
-<p-dialog header="Lista de Propostas" [(visible)]="visible" [modal]="true" [style]="{ width: '70%', margin: '10px'}" [draggable]="false" [resizable]="false">
+<p-dialog  [(visible)]="visible" [modal]="true"  [draggable]="false" [resizable]="false">
     <div>
         <div class="grid">
-            <div class="col-12 lg:col-12 md:col-12 sm:col-12  w-full flex justify-content-evenly">
-                <div class="grid formgrid p-fluid w-full">
-                    <div class="col-12 xl:col-12 lg:col-12 mb-4" *ngFor="let offer of offers">
-                        <div class="card h-full">
-                            <ul class="list-none p-0 m-0">
-                                <span class="flex p-2 align-items-center mb-2" title="Nome">
-                                    <i class="pi pi-user mr-2" style="font-size: 1.5rem; color: #585757"></i>
-                                    <span>Nome: {{offer.username}}</span>
-                                </span>
-                                <span class="flex p-2 align-items-center mb-2" title="Comentários">
-                                    <img src="./assets/app/images/icons/comment.png"
-                                         alt="house"
-                                         class="align-self-center mr-2" height="24" width="24">
-                                    <span class="text-overflow-ellipsis	white-space-nowrap overflow-hidden">Descrição: {{offer.text}}</span>
-                                </span>
-                                <div class="flex gap-2 width-full lg:justify-content-start sm:justify-content-center md:justify-content-center justify-content-center">
-                                    <p-button [style]="{width: '100%'}" label="Aceitar"></p-button>
-                                    <p-button label="Recusar" severity="danger"></p-button>
-                                </div>
-                            </ul>
+            <div class="col-8 lg:col-8 md:col-8 sm:col-12 w-full flex">
+                <div class="w-full align-items-center justify-content-center flex">
+                    <div class="col-12 xl:col-12 lg:col-12 md:col-12 sm:col-12 mb-4" *ngFor="let offer of offers">
+                        <div class="mt-4 flex align-items-center justify-content-center w-full sm:w-full">
+                            <p class="font-bold text-xl">{{offer.username}} enviou uma proposta</p>
                         </div>
+                        <div class="w-12 h-15rem p-4 mt-6 mb-6 border-round-lg surface-50">
+                            <span>{{offer.text}}</span>
+                        </div>
+                        <div class="flex-column sm:flex-column md:flex lg:flex">
+                            <div class="sm:w-12 md:w-12 lg:w-12 flex justify-content-between sm:justify-content-between md:justify-content-between lg:justify-content-between  mb-4">
+                              <p-button class="w-5 sm:w-5 md:w-5 lg:w-5" label="Aceitar"></p-button>
+                              <p-button class="w-5 sm:w-5 md:w-5 lg:w-5" label="Recusar" severity="danger"></p-button>
+                            </div>
+                            <div  class="sm:w-12 md:w-12 lg:w-12 justify-content-center sm:justify-content-center md:justify-content-between lg:justify-content-center">
+                              <a [href]="'https://api.whatsapp.com/send?phone=' + offer.contact" target="_blank">
+                                <p-button class="w-5 sm:w-12 md:w-12 lg:w-12" 
+                                          [style]="{background: 'var(--green-400)', color: 'white', border: '1px solid var(--green-400)'}"  
+                                          label="Falar com {{offer.username}}"
+                                          icon="pi pi-whatsapp" 
+                                          iconPos="right">
+                                </p-button>
+                              </a>
+                            </div>
+                          </div>
                     </div>
                 </div>
             </div>
