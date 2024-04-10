@@ -39,12 +39,18 @@ export class OffersService extends SharedService {
             }
         );
     }
+    
+    acceptOffer(offerId: number) {
+        const headers = this.setHeadersForBearer();
+        return this.http.post<any>(this.apiURL + 'offer/accept/' + offerId,  { headers });
+    }
+    
 
     editOffers(form: any, offerId: number){
         const headers = this.setHeadersForBearer();
         return this.http.put<any>(this.apiURL + 'offer/update/' + offerId, form, {headers}).subscribe(
             next => {
-                this.toastrService.success('Proposta enviada', 'Sucesso')
+                this.toastrService.success('Proposta Editada', 'Sucesso')
                 location.reload()
             },
             err => {
