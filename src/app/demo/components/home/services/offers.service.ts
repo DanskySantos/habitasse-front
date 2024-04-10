@@ -5,6 +5,7 @@ import {SharedService} from "../../shared/service/shared.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {PageModel} from "../../shared/models/page.model";
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +26,6 @@ export class OffersService extends SharedService {
         });
     }
 
-
     createOffers(form: any){
         const headers = this.setHeadersForBearer();
         return this.http.post<any>(this.apiURL + 'offer/save', form, {headers}).subscribe(
@@ -39,14 +39,13 @@ export class OffersService extends SharedService {
             }
         );
     }
-    
-    acceptOffer(offerId: number) {
-        const headers = this.setHeadersForBearer();
-        return this.http.post<any>(this.apiURL + 'offer/accept/' + offerId,  { headers });
-    }
-    
 
-    editOffers(form: any, offerId: number){
+    acceptOffer(offerId: number): Observable<any> {
+        const headers = this.setHeadersForBearer();
+        return this.http.put<any>(this.apiURL + 'offer/accept', offerId, {headers, observe: 'response'});
+    }
+
+    editOffers(form: any, offerId: number) {
         const headers = this.setHeadersForBearer();
         return this.http.put<any>(this.apiURL + 'offer/update/' + offerId, form, {headers}).subscribe(
             next => {
