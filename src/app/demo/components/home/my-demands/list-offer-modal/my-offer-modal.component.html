@@ -15,16 +15,16 @@
                               <p-button class="w-5 sm:w-5 md:w-5 lg:w-5" (onClick)="acceptOffer(offer.id)" label="Aceitar"></p-button>
                               <p-button class="w-5 sm:w-5 md:w-5 lg:w-5" label="Recusar" severity="danger"></p-button>
                             </div>
-                            <div  class="sm:w-12 md:w-12 lg:w-12 justify-content-center sm:justify-content-center md:justify-content-between lg:justify-content-center">
-                              <a [href]="'https://api.whatsapp.com/send?phone=' + offer.contact" target="_blank">
-                                <p-button class="w-5 sm:w-12 md:w-12 lg:w-12" 
-                                          [style]="{background: 'var(--green-400)', color: 'white', border: '1px solid var(--green-400)'}"  
-                                          label="Falar com {{offer.username}}"
-                                          icon="pi pi-whatsapp" 
-                                          iconPos="right">
-                                </p-button>
-                              </a>
-                            </div>
+                            <div class="flex justify-content-center sm:justify-content-center md:justify-content-between lg:justify-content-center">
+                                <a *ngIf="offerAccepted" [href]="'https://api.whatsapp.com/send?phone=' + offer.contact" target="_blank">
+                                    <p-button class="w-5 sm:w-12 md:w-12 lg:w-12" 
+                                              [style]="{background: 'var(--green-400)', color: 'white', border: '1px solid var(--green-400)'}"  
+                                              label="Falar com {{offer.username}}"
+                                              icon="pi pi-whatsapp" 
+                                              iconPos="right">
+                                    </p-button>
+                                </a>
+                            </div>                            
                           </div>
                     </div>
                 </div>
