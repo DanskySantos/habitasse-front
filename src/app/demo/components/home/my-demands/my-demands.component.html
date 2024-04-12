@@ -70,12 +70,12 @@
                                      class="align-self-center mr-2" height="24" width="24">
                                 <span>Pet - {{ demandService.getBoolean(demand.propertyDemand.petFriendly) }}</span>
                             </span>
-                            <span class="flex p-2 align-items-center mb-2 w-full" title="Comentários">
+                            <div class="flex surface-overlay border-round w-full overflow-auto mb-2 p-2" title="Comentários">
                                 <img ngSrc="./assets/app/images/icons/comment.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <span>Comentarios - {{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</span>
-                            </span>
+                                <p class="white-space-normal">Comentarios - {{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</p>
+                            </div>
                         </ul>
                         <button (click)="allOffersModal(modaloffer)" type="button" pButton pRipple class="w-full mt-3 "
                                 [disabled]="demand.offers.length == 0"
