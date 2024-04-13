@@ -18,10 +18,10 @@ export class ListOfferComponent implements OnInit {
 
     @Input('offers')
     offers?: any;
-
-    offerAccepted!: boolean;
+    
     loading: boolean = false;
     visible: boolean = false;
+    deletevisible: boolean = false;
     totalElements!: number;
     page: number = 0;
     size: number = 10;
@@ -43,6 +43,10 @@ export class ListOfferComponent implements OnInit {
         }, 2000);
     }
 
+    showdeletelog() {
+        this.deletevisible = true;
+    }
+
     onPageChange(event: PaginatorState) {
         this.first = event.first!
         this.page = event.page!
@@ -52,13 +56,15 @@ export class ListOfferComponent implements OnInit {
 
     acceptOffer(offerId: number) {
         this.offersService.acceptOffer(offerId).subscribe(
-            (data: any) => {
-                this.offerAccepted = data.body.accepted;
-            }
         );
     }
 
+    deleteOffer(offerId: number) {
+        this.offersService.deleteOffers(offerId).subscribe( 
+        );  
+    }
 
+   
     getOffers(first: number, rows: number) {
         this.offersService.getOffers(first, rows, this.demand?.id!).subscribe((data: PageModel) => {
                 this.offers = data.content

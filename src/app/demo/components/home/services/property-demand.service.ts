@@ -33,8 +33,7 @@ export class PropertyDemandService extends SharedService {
                 this.router.navigate(['/home/my-demands'])
             },
             err => {
-                this.toastrService.error(err.code, 'Erro')
-                console.log('error:', err)
+                this.toastrService.error(err.code, 'Não foi possivel cadastrar o imóvel')
             }
         );
     }

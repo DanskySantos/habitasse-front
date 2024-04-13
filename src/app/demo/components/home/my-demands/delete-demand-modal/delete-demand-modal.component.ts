@@ -4,8 +4,6 @@ import {ToastrService} from "ngx-toastr";
 import {Router} from '@angular/router';
 import { DemandService } from '../../services/demand.service';
 import { FormGroup } from '@angular/forms';
-import { DemandModel } from '../../../shared/models/demand.model';
-
 
 @Component({
     templateUrl: 'delete-demand-modal.component.html',
@@ -34,10 +32,16 @@ export class DeleteDemandModalComponent implements OnInit {
     }
 
     deleteDemand(propertyId: number, demandId: number) {
-        this.demandService.deleteDemand(propertyId, demandId).subscribe( data =>
-            location.reload()
+        this.demandService.deleteDemand(propertyId, demandId).subscribe(  
+            next => {
+                this.toastrService.success('Demanda excluída com sucesso!');
+                location.reload()
+            },
+            err => {
+                this.toastrService.error(err.code, 'Erro ao tentar excluir a demanda')
+            }
         )
-        this.toastrService.success('Demanda excluída com sucesso!');
+        
     }
 
     load() {

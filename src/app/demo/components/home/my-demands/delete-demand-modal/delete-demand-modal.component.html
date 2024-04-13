@@ -2,6 +2,13 @@
     header="Deseja realmente excluir esta demanda?"
     [(visible)]="visible"
     [modal]="true"
+    [style]="{width: '20vw'}" 
+        [breakpoints]=" 
+        { 
+            '900px': '20vw',  
+            '600px': '80vw' 
+        }"  
+        [style]="{width: '20vw'}"
     [draggable]="false"
     [resizable]="false">
     <div>
@@ -9,7 +16,7 @@
             type="submit"
             label="Excluir demanda"
             [loading]="loading"
-            class="w-auto mt-4"
+            class="w-auto  mt-4"
             (click)="deleteDemand(demand.propertyDemand.id, demand.id)">
         </p-button>
     </div>

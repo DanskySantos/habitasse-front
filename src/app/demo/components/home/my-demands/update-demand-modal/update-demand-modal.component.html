@@ -1,11 +1,16 @@
 <p-dialog
-    header="Editar Demanda"
     [(visible)]="visibleEdit"
+    [header]="'Atualizar Demanda'"
+    [style]="{width: '30vw'}" 
+        [breakpoints]=" 
+        { 
+            '900px': '50vw',  
+            '600px': '100vw' 
+        }"  
+        [style]="{width: '50vw'}"
     [modal]="true"
-    [style]="{ width: '75vw', margin: '10px' }"
     [draggable]="false"
     [resizable]="false">
-    <div class="sm:p-0 md:p-1 lg:p-1 p-4 ">
         <form
             [formGroup]="propertyForm"
             #formDir="ngForm"
@@ -13,7 +18,7 @@
             (ngSubmit)="updateDemand()">
             <div class="col-12 lg:col-12 sm:col-12 md:col-12">
                 <div class="grid formgrid p-fluid">
-                    <div class="mb-3 col-12 lg:col-6 md:col-12 sm:col-12">
+                    <div class="col-12 lg:col-6 md:col-12 sm:col-12 mb-3">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     [style]="{ width: '100%' }"
@@ -28,7 +33,7 @@
                                 >Tipo de Contrato</label>
                             </span>
                     </div>
-                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <div class="col-12 lg:col-6 md:col-6 sm:col-12 mb-3">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="propertyType"
@@ -42,7 +47,7 @@
                                 <label for="float-label">Tipo de Imóvel</label>
                             </span>
                     </div>
-                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <div class="col-12 lg:col-6 md:col-6 sm:col-12 mb-3">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="bedroomsNumber"
@@ -55,7 +60,7 @@
                                 <label for="float-label">Quantidade de Quartos</label>
                             </span>
                     </div>
-                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <div class="col-12 lg:col-6 md:col-6 sm:col-12 mb-3">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="furnished"
@@ -69,7 +74,7 @@
                             </span>
                     </div>
 
-                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <div class="col-12 lg:col-6 md:col-6 sm:col-12 mb-3">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="state"
@@ -84,7 +89,7 @@
                             </span>
                     </div>
 
-                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <div class="col-12 lg:col-6 md:col-6 sm:col-12 mb-3">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="petFriendly"
@@ -98,7 +103,7 @@
                             </span>
                     </div>
 
-                    <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                    <div class="col-12 lg:col-6 md:col-6 sm:col-12 mb-3">
                             <span class="field p-float-label">
                                 <p-dropdown
                                     formControlName="city"
@@ -114,7 +119,7 @@
                             </span>
                     </div>
                     <div
-                        class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                        class="col-12 lg:col-6 md:col-6 sm:col-12 mb-3"
                         *ngIf="selectedContractType.value === 'Locação'">
                             <span class="field p-float-label">
                                 <p-dropdown
@@ -129,7 +134,7 @@
                             </span>
                     </div>
                     <div
-                        class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                        class="col-12 lg:col-6 md:col-6 sm:col-12 mb-3"
                         *ngIf="selectedContractType.value === 'Venda'">
                             <span class="field p-float-label">
                                 <p-dropdown
@@ -144,7 +149,7 @@
                             </span>
                     </div>
                     <div
-                        class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                        class="col-12 lg:col-6 md:col-6 sm:col-12 mb-3"
                         *ngIf="selectedContractType.value === 'Temporada'">
                             <span class="field p-float-label">
                                 <p-dropdown
@@ -158,10 +163,11 @@
                                 <label for="float-label">Valor</label>
                             </span>
                     </div>
-                    <div class="mb-3 col-12">
-                        <div class="field w-full">
-                            <label>Anotações</label>
+                    <div class="col-12">
+                        <div class="w-full">
+                            <label class="ml-2">Anotações</label>
                             <textarea
+                                class="mt-1"
                                 [style]="{ width: '100%' }"
                                 rows="5"
                                 cols="30"
@@ -171,7 +177,7 @@
                                 </textarea>
                         </div>
                     </div>
-                    <div class="ml-3">
+                    <div class="w-12 p-3">
                         <p-button
                             [disabled]="this.propertyForm.untouched || this.propertyForm.invalid"
                             type="submit"
@@ -184,6 +190,5 @@
                 </div>
             </div>
         </form>
-    </div>
 </p-dialog>
 

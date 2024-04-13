@@ -30,34 +30,40 @@ export class OffersService extends SharedService {
         const headers = this.setHeadersForBearer();
         return this.http.post<any>(this.apiURL + 'offer/save', form, {headers}).subscribe(
             next => {
-                this.toastrService.success('Proposta enviada', 'Sucesso')
+                this.toastrService.success('Oferta enviada', 'Sucesso')
                 location.reload()
             },
             err => {
-                this.toastrService.error(err.code, 'Erro')
-                console.log('error:', err)
+                this.toastrService.error(err.code, 'Erro ao tentar enviar a oferta')
+                console.log('Erro ao tentar enviar a oferta:', err)
             }
         );
     }
 
-    acceptOffer(offerId: number): Observable<any> {
+    acceptOffer(offerId: number){
         const headers = this.setHeadersForBearer();
-        return this.http.put<any>(this.apiURL + 'offer/accept', offerId, {headers, observe: 'response'});
+        return this.http.put<any>(this.apiURL + 'offer/accept', offerId, {headers});
+    }
+
+    
+    deleteOffers(offerId: number){
+        const headers = this.setHeadersForBearer();
+        return this.http.delete<any>(this.apiURL + 'offer/delete/' + offerId, {headers})
     }
 
     editOffers(form: any, offerId: number) {
         const headers = this.setHeadersForBearer();
         return this.http.put<any>(this.apiURL + 'offer/update/' + offerId, form, {headers}).subscribe(
             next => {
-                this.toastrService.success('Proposta Editada', 'Sucesso')
+                this.toastrService.success('Oferta Editada', 'Sucesso')
                 location.reload()
             },
             err => {
-                this.toastrService.error(err.code, 'Erro')
-                console.log('error:', err)
+                this.toastrService.error(err.code, 'Não foi possivel editar a oferta')
             }
         );
     }
+
 
     getOffers(page: number, size: number, demandId: number){
         const headers = this.setHeadersForBearer();

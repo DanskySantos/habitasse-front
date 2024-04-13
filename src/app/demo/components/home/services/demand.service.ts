@@ -50,8 +50,7 @@ export class DemandService extends SharedService {
                 this.router.navigate(['/profile'])
             },
             err => {
-                this.toastrService.error(err.code, 'Erro')
-                console.log('error:', err)
+                this.toastrService.error(err.code, 'Não foi possivel salvar as alterações')
             }
         );
     }
@@ -66,7 +65,6 @@ export class DemandService extends SharedService {
             },
             err => {
                 this.toastrService.error(err.code, 'Não foi possivel editar a demanda')
-                console.log('error:', err)
             }
         );
     }
