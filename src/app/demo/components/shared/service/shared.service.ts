@@ -15,18 +15,6 @@ export class SharedService {
     constructor() {
     }
 
-    actionForSuccess(response: any) {
-        return response;
-    }
-
-    actionForError(error: any) {
-        return throwError(error);
-    }
-
-    finalAction() {
-        return;
-    }
-
     setHeaders() {
         return new HttpHeaders({
             'Authorization': 'Basic ' + btoa(`${this.clientID}:${this.clientSecret}`),

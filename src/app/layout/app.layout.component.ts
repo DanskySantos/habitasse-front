@@ -6,12 +6,13 @@ import {MenuService} from './menu/app.menu.service';
 import {AppSidebarComponent} from './sidebar/app.sidebar.component';
 import {AppTopBarComponent} from './topbar/app.topbar.component';
 import {LayoutService} from './service/app.layout.service';
+import {HomeComponent} from "../demo/components/home/home.component";
 
 @Component({
     selector: 'app-layout',
     templateUrl: './app.layout.component.html'
 })
-export class AppLayoutComponent implements OnDestroy, AfterViewInit {
+export class AppLayoutComponent implements OnDestroy {
 
     overlayMenuOpenSubscription: Subscription;
 
@@ -28,6 +29,7 @@ export class AppLayoutComponent implements OnDestroy, AfterViewInit {
     @ViewChild(AppTopBarComponent) appTopbar!: AppTopBarComponent;
 
     constructor(private menuService: MenuService, public layoutService: LayoutService, public renderer: Renderer2, public router: Router) {
+
         this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
             if (!this.menuOutsideClickListener) {
                 this.menuOutsideClickListener = this.renderer.listen('document', 'click', event => {
@@ -83,10 +85,6 @@ export class AppLayoutComponent implements OnDestroy, AfterViewInit {
 
             this.layoutService.closeTab(event.index);
         });
-    }
-
-    ngAfterViewInit(): void {
-        this.router.navigate(['/home'])
     }
 
     blockBodyScroll(): void {

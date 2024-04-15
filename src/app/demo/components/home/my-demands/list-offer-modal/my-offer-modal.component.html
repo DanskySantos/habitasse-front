@@ -1,9 +1,9 @@
-        
-        
-        <p-dialog [(visible)]="visible" [modal]="true" [draggable]="false"  [style]="{width: '40vw'}" [breakpoints]=" 
-        { 
-            '900px': '40vw',  
-            '600px': '80vw' 
+
+
+        <p-dialog [(visible)]="visible" [modal]="true" [draggable]="false"  [style]="{width: '40vw'}" [breakpoints]="
+        {
+            '900px': '40vw',
+            '600px': '80vw'
         }" [style]="{width: '25vw'}" [maximizable]="true" [resizable]="false">
             <div *ngFor="let offer of offers">
                 <p class="font-bold text-xl text-center">{{offer.username}} enviou uma proposta</p>
@@ -24,10 +24,10 @@
                             severity="danger"></p-button>
 
                         <p-dialog header="Você deseja realmente recusar essa proposta?" [(visible)]="deletevisible"
-                            [modal]="true" [style]="{width: '20vw'}" [breakpoints]=" 
-                            { 
-                                '900px': '20vw',  
-                                '600px': '80vw' 
+                            [modal]="true" [style]="{width: '20vw'}" [breakpoints]="
+                            {
+                                '900px': '20vw',
+                                '600px': '80vw'
                             }" [style]="{width: '22vw'}" [draggable]="false" [resizable]="false">
                             <p-button type="submit" (click)="deleteOffer(offer.id)" label="Recusar proposta" [raised]="true" severity="danger"
                                 [loading]="loading" class="w-6 mt-4"></p-button>

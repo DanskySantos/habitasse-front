@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {catchError, finalize, tap} from 'rxjs';
+import {catchError, finalize} from 'rxjs';
 import {Credentials} from 'src/app/demo/components/shared/models/credentials.model';
 import {HttpClient} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
@@ -29,20 +29,15 @@ export class AuthService extends SharedService {
         const headers = this.setHeaders();
         const body = JSON.stringify(credentials);
 
-        return this.http.post(this.apiURL + 'auth/authenticate', body, {headers})
-            .pipe(
-                tap(response => {
-                    this.setCookies(response);
+        return this.http.post(this.apiURL + 'auth/authenticate', body, {headers}).subscribe(
+                response => {
+                    this.setCookies(response)
+                    this.toastrService.success('Login Concluído', 'Sucesso')
                     this.router.navigate(['/home'])
-                    return this.actionForSuccess(response);
-                }),
-                catchError(error => {
-                    this.toastrService.error(error.error, 'Erro')
-                    return this.actionForError(error);
-                }),
-                finalize(() => {
-                    return this.finalAction();
-                })
+                },
+                error => {
+                    console.error('Error', error);
+                }
             );
     }
 
@@ -50,22 +45,15 @@ export class AuthService extends SharedService {
         const headers = this.setHeaders();
         const body = JSON.stringify(registerModel);
 
-        return this.http.post(this.apiURL + 'auth/register', body, {headers})
-            .pipe(
-                map(response => {
+        return this.http.post(this.apiURL + 'auth/register', body, {headers}).subscribe(
+            response => {
                     this.setCookies(response);
                     this.toastrService.success('Registro Concluído', 'Sucesso')
-                    this.actionForSuccess(response);
                     return this.router.navigate(['/home']);
-                }),
-                catchError(error => {
-                    this.toastrService.error(error.error, 'Erro')
-                    return this.actionForError(error);
-                }),
-                finalize(() => {
-                    return this.finalAction();
-                })
-            );
+                },
+            error => {
+                console.error('Error', error);
+            });
     }
 
     obterTokenUsuario() {
