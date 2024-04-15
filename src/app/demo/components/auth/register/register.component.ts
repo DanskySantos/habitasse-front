@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
             this.loading = false
         }, 2000);
         this.setRole(UserTypeEnum, this.userRoles.value)
-        this.authService.register(this.registerForm.value).subscribe();
+        this.authService.register(this.registerForm.value);
     }
 
     setRole(object: any, value: any) {

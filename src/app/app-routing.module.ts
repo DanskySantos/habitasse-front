@@ -10,6 +10,12 @@ const routes: Routes = [
         component: AppLayoutComponent,
         children: [
             {
+                path: 'home',
+                canActivate: [AuthGuard],
+                data: {breadcrumb: 'Home'},
+                loadChildren: () => import('./demo/components/home/home.module').then(m => m.HomeModule)
+            },
+            {
                 path: 'utilities',
                 canActivate: [AuthGuard],
                 data: {breadcrumb: 'Utilities'},
@@ -20,12 +26,6 @@ const routes: Routes = [
                 canActivate: [AuthGuard],
                 data: {breadcrumb: 'Pages'},
                 loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule)
-            },
-            {
-                path: 'home',
-                canActivate: [AuthGuard],
-                data: {breadcrumb: 'Home'},
-                loadChildren: () => import('./demo/components/home/home.module').then(m => m.HomeModule)
             },
             {
                 path: 'profile',

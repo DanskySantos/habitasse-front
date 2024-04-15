@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
             email: this.emailControl.value,
             password: this.passwordControl.value
         };
-        this.authService.login(credentials).subscribe();
+        this.authService.login(credentials);
     }
 
     get filledInput(): boolean {
