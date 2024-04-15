@@ -46,9 +46,9 @@ export class OffersService extends SharedService {
     }
 
     
-    deleteOffers(offerId: number){
+    deleteOffers(offerId: number): Observable<any>{
         const headers = this.setHeadersForBearer();
-        return this.http.delete<any>(this.apiURL + 'offer/delete/' + offerId, {headers})
+        return this.http.delete<any>(`${this.apiURL}offer/delete/${offerId}`, {headers});
     }
 
     editOffers(form: any, offerId: number) {

@@ -2,9 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {PaginatorState} from "primeng/paginator";
 import {PageModel} from "../../../shared/models/page.model";
 import {OffersService} from "../../services/offers.service";
-import {DemandModel} from "../../../shared/models/demand.model";
+
 import {ToastrService} from "ngx-toastr";
 import { CookieService } from 'ngx-cookie-service';
+import { DemandModel } from '../../../shared/models/demand.model';
+
 
 @Component({
     templateUrl: './my-offer-modal.component.html',
@@ -59,9 +61,16 @@ export class ListOfferComponent implements OnInit {
         );
     }
 
-    deleteOffer(offerId: number) {
-        this.offersService.deleteOffers(offerId).subscribe( 
-        );  
+    deleteOffer(offerId: number): void {
+        this.offersService.deleteOffers(offerId).subscribe(
+            next => {
+                this.toastrService.success('Oferta excluída com sucesso!');
+                location.reload()
+            },
+            err => {
+                this.toastrService.error(err.code, 'Erro ao tentar excluir a oferta')
+            }
+        )
     }
 
    

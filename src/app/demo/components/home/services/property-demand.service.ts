@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
-import {StateModel} from "../../shared/models/state.model";
 import {SharedService} from "../../shared/service/shared.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
