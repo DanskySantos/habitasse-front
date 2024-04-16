@@ -1,0 +1,8 @@
+<input type="hidden" id="user_avatar_url" name="user[avatar_url]" class="simple-file-upload"
+       (simple-file-upload)="onFileUploaded($event)">
+       
+<div *ngIf="uploadedFileUrl">
+  <img [src]="uploadedFileUrl" alt="Uploaded File">
+</div>
+
+ 

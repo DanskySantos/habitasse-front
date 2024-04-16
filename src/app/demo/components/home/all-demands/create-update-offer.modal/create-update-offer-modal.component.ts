@@ -21,7 +21,6 @@ export class CreateUpdateOfferModalComponent implements OnInit {
     visible: boolean = false;
     loading: boolean = false;
     submited: boolean = false;
-
     constructor(protected offersService: OffersService) {
     }
 
