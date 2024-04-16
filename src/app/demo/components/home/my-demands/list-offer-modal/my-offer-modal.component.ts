@@ -4,8 +4,8 @@ import {PageModel} from "../../../shared/models/page.model";
 import {OffersService} from "../../services/offers.service";
 
 import {ToastrService} from "ngx-toastr";
-import { CookieService } from 'ngx-cookie-service';
-import { DemandModel } from '../../../shared/models/demand.model';
+import {CookieService} from 'ngx-cookie-service';
+import {DemandModel} from '../../../shared/models/demand.model';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class ListOfferComponent implements OnInit {
 
     @Input('offers')
     offers?: any;
-    
+
     loading: boolean = false;
     visible: boolean = false;
     deletevisible: boolean = false;
@@ -29,9 +29,9 @@ export class ListOfferComponent implements OnInit {
     size: number = 10;
     first: number = 0;
 
-
-
-    constructor(public offersService: OffersService,  private toastrService: ToastrService, private cookieService: CookieService) {
+    constructor(public offersService: OffersService,
+                private toastrService: ToastrService,
+                private cookieService: CookieService) {
     }
 
     ngOnInit(): void {
@@ -73,12 +73,16 @@ export class ListOfferComponent implements OnInit {
         )
     }
 
-   
     getOffers(first: number, rows: number) {
         this.offersService.getOffers(first, rows, this.demand?.id!).subscribe((data: PageModel) => {
                 this.offers = data.content
                 this.totalElements = data.totalElements
             }
         );
+    }
+
+    getUsername(username: string) {
+        const nameArray = username.split(' ');
+        return nameArray[0]
     }
 }

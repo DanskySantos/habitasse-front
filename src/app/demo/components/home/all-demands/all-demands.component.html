@@ -223,11 +223,13 @@
                                 <span>Comentarios - {{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</span>
                             </span>
                         </ul>
-                        <button (click)="allDemandsModal(modal)" type="button" pButton pRipple class="w-full mt-3"
-                                [label]="findOffer(demand) ? 'Editar proposta' : 'Fazer proposta'"
+                        <button (click)="allDemandsModal(modal)"
+                                type="button"
+                                pButton pRipple
+                                class="{{findOffer(demand)?.deleted === true ? 'w-full mt-3 p-button-danger' : 'w-full mt-3'}}"
+                                [label]="getButtonLabel(findOffer(demand)!)!"
                                 icon="pi pi-arrow-right" iconPos="right">
-                            <img
-                                [ngSrc]="demand.offers.length == 0 ? './assets/app/images/icons/icons8-plus-24.png' : './assets/app/images/icons/Group.svg'"
+                            <img [ngSrc]="demand.offers.length == 0 ? './assets/app/images/icons/icons8-plus-24.png' : './assets/app/images/icons/Group.svg'"
                                 alt="house"
                                 style="color:white"
                                 class="align-self-center" height="19" width="19">

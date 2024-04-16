@@ -17,6 +17,8 @@ import {DemandModel} from "../../shared/models/demand.model";
 import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {CreateUpdateOfferModalComponent} from './create-update-offer.modal/create-update-offer-modal.component';
 import {OffersService} from '../services/offers.service';
+import {OffersModel} from "../../shared/models/offers.model";
+import {color} from "chart.js/helpers";
 
 @Component({
     templateUrl: './all-demands.component.html',
@@ -107,6 +109,17 @@ export class AllDemandsComponent implements OnInit {
         return null;
     }
 
+    getButtonLabel(offer: OffersModel) {
+        if (offer == null)
+            return 'Fazer proposta'
+        if (offer.deleted === false)
+            return 'Editar proposta'
+        if (offer.deleted === true)
+            return 'Proposta Recusada'
+
+        return null;
+    }
+
     startLists() {
         this.contractType = Object.values(ContractTypeEnum);
         this.bedroomsNumber = Object.values(BedroomsNumberEnum);
@@ -125,4 +138,6 @@ export class AllDemandsComponent implements OnInit {
     get selectedContractType() {
         return this.filterForm.get('contractType')!;
     }
+
+    protected readonly color = color;
 }

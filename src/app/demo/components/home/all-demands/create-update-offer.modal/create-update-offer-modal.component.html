@@ -83,7 +83,7 @@
                     <div class="col-12 lg:col-6 sm:col-12 md:col-12">
                         <p-button
                             type="submit"
-                            [label]="this.offer ? 'Editar proposta' : 'Fazer uma proposta'"
+                            [label]="getButtonLabel(this.offer)!"
                             [disabled]="allDemandsOffers.invalid || this.submited"
                             [loading]="loading"
                             class="w-auto mt-4">

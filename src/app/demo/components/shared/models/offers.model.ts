@@ -5,4 +5,6 @@ export class OffersModel {
     userEmail?: string;
     username?: string;
     contact?: string;
+    accepted?: boolean;
+    deleted?: boolean;
 }

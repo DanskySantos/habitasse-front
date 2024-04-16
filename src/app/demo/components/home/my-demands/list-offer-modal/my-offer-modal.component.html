@@ -1,42 +1,40 @@
-
-
-        <p-dialog [(visible)]="visible" [modal]="true" [draggable]="false"  [style]="{width: '40vw'}" [breakpoints]="
-        {
-            '900px': '40vw',
-            '600px': '80vw'
-        }" [style]="{width: '25vw'}" [maximizable]="true" [resizable]="false">
-            <div *ngFor="let offer of offers">
-                <p class="font-bold text-xl text-center">{{offer.username}} enviou uma proposta</p>
-                <div class="w-12 h-15rem p-4 mt-6 mb-6 border-round-lg surface-50 p-text-wrap">
-                    <span>{{offer.text}}</span>
-                </div>
-                <div class="flex justify-content-center gap-3 w-12">
-                    <div class="col-8 sm:w-8 md:w-8 lg:w-8 flex justify-content-center mb-4">
-                        <a class="w-12" [href]="'https://api.whatsapp.com/send?phone=' + offer.contact" target="_blank"
-                            (click)="acceptOffer(offer.id)">
-                            <p-button class="w-8 sm:w-12 md:w-8 lg:w-8" label="Falar com {{offer.username}}"
-                                icon="pi pi-whatsapp" iconPos="right">
-                            </p-button>
-                        </a>
-                    </div>
-                    <div class="w-5">
-                        <p-button (click)="showdeletelog()" class="w-5 sm:w-5 md:w-5 lg:w-5" label="Recusar" [raised]="true"
-                            severity="danger"></p-button>
-
-                        <p-dialog header="Você deseja realmente recusar essa proposta?" [(visible)]="deletevisible"
-                            [modal]="true" [style]="{width: '20vw'}" [breakpoints]="
-                            {
-                                '900px': '20vw',
-                                '600px': '80vw'
-                            }" [style]="{width: '22vw'}" [draggable]="false" [resizable]="false">
-                            <p-button type="submit" (click)="deleteOffer(offer.id)" label="Recusar proposta" [raised]="true" severity="danger"
-                                [loading]="loading" class="w-6 mt-4"></p-button>
-                        </p-dialog>
-                    </div>
-                </div>
+<p-dialog [(visible)]="visible"
+          [modal]="true"
+          [draggable]="false"
+          [style]="{width: '40vw'}"
+          [breakpoints]="{'900px': '60vw', '800px': '80vw', '500px': '100vw'}"
+          [maximizable]="true"
+          [resizable]="false">
+    <div *ngFor="let offer of offers" class="card">
+        <p class="font-bold text-xl text-center">{{ getUsername(offer.username) }} enviou uma proposta</p>
+        <div class="w-12 h-15rem p-4 mt-6 mb-6 border-round-lg surface-50 p-text-wrap overflow-hidden text-overflow-ellipsis">
+            <span>{{ offer.text }}</span>
+        </div>
+        <div class="flex justify-content-center gap-3 w-12">
+            <div class="col-8 sm:w-8 md:w-8 lg:w-8 flex justify-content-center mb-4">
+                <a class="w-12" [href]="'https://api.whatsapp.com/send?phone=' + offer.contact" target="_blank"
+                   (click)="acceptOffer(offer.id)">
+                    <p-button class="w-8 sm:w-12 md:w-8 lg:w-8" label="Falar com {{offer.username}}"
+                              icon="pi pi-whatsapp" iconPos="right">
+                    </p-button>
+                </a>
             </div>
-            <div class="card flex justify-content-center">
-                <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="size" [totalRecords]="totalElements">
-                </p-paginator>
+            <div class="w-5">
+                <p-button (click)="showdeletelog()" class="w-5 sm:w-5 md:w-5 lg:w-5" label="Recusar" [raised]="true"
+                          severity="danger"></p-button>
+                <p-dialog header="Você deseja realmente recusar essa proposta?"
+                          [(visible)]="deletevisible"
+                          [modal]="true" [style]="{width: '100vw'}"
+                          [draggable]="false" [resizable]="false">
+                    <p-button type="submit" (click)="deleteOffer(offer.id)" label="Recusar proposta" [raised]="true"
+                              severity="danger"
+                              [loading]="loading" class="w-6 mt-4"></p-button>
+                </p-dialog>
             </div>
-        </p-dialog>
+        </div>
+    </div>
+    <div class="card flex justify-content-center">
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="size" [totalRecords]="totalElements">
+        </p-paginator>
+    </div>
+</p-dialog>

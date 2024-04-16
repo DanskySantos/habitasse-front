@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OffersService} from '../../services/offers.service';
 import {DemandModel} from "../../../shared/models/demand.model";
+import {OffersModel} from "../../../shared/models/offers.model";
 
 @Component({
     templateUrl: './create-update-offer-modal.component.html',
@@ -62,5 +63,16 @@ export class CreateUpdateOfferModalComponent implements OnInit {
                 text: new FormControl(null, [Validators.required]),
             });
         }
+    }
+
+    getButtonLabel(offer: OffersModel) {
+        if (offer == null)
+            return 'Fazer proposta'
+        if (offer.deleted === false)
+            return 'Editar proposta'
+        if (offer.deleted === true)
+            return 'Reenviar proposta'
+
+        return null;
     }
 }

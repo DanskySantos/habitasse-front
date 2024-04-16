@@ -8,6 +8,7 @@ import {UpdateDemandModalComponent} from './update-demand-modal/update-demand-mo
 import {DemandModel} from '../../shared/models/demand.model';
 import {DeleteDemandModalComponent} from './delete-demand-modal/delete-demand-modal.component';
 import {ListOfferComponent} from './list-offer-modal/my-offer-modal.component';
+import {OffersModel} from "../../shared/models/offers.model";
 
 @Component({
     templateUrl: './my-demands.component.html',
@@ -66,5 +67,9 @@ export class MyDemandsComponent implements OnInit {
 
     navigateToCreateDemand() {
         this.router.navigate(['/home/property-demand'])
+    }
+
+    filterActiveOffers(offers: OffersModel[]) {
+        return offers.filter(offer => offer.deleted === false);
     }
 }
