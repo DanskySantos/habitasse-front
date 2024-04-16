@@ -83,6 +83,8 @@ export class ListOfferComponent implements OnInit {
 
     getUsername(username: string) {
         const nameArray = username.split(' ');
+        console.log(nameArray[0])
+        console.log(nameArray[1])
         return nameArray[0]
     }
 }

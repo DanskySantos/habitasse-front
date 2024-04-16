@@ -6,15 +6,16 @@
           [maximizable]="true"
           [resizable]="false">
     <div *ngFor="let offer of offers" class="card">
-        <p class="font-bold text-xl text-center">{{ getUsername(offer.username) }} enviou uma proposta</p>
-        <div class="w-12 h-15rem p-4 mt-6 mb-6 border-round-lg surface-50 p-text-wrap overflow-hidden text-overflow-ellipsis">
+        <p class="font-bold text-xl text-center">{{ offer.username }} enviou uma proposta</p>
+        <div
+            class="w-12 h-15rem p-4 mt-6 mb-6 border-round-lg surface-50 p-text-wrap overflow-hidden text-overflow-ellipsis">
             <span>{{ offer.text }}</span>
         </div>
         <div class="flex justify-content-center gap-3 w-12">
             <div class="col-8 sm:w-8 md:w-8 lg:w-8 flex justify-content-center mb-4">
                 <a class="w-12" [href]="'https://api.whatsapp.com/send?phone=' + offer.contact" target="_blank"
                    (click)="acceptOffer(offer.id)">
-                    <p-button class="w-8 sm:w-12 md:w-8 lg:w-8" label="Falar com {{offer.username}}"
+                    <p-button class="w-8 sm:w-12 md:w-8 lg:w-8" label="Falar com {{getUsername(offer.username)}}"
                               icon="pi pi-whatsapp" iconPos="right">
                     </p-button>
                 </a>
