@@ -30,17 +30,17 @@ export class AuthService extends SharedService {
         const body = JSON.stringify(credentials);
 
         return this.http.post(this.apiURL + 'auth/authenticate', body, {headers}).subscribe(
-                response => {
-                    this.setCookies(response)
-                    this.toastrService.success('Login Concluído', 'Sucesso')
-                    setTimeout(() => {
-                        this.navigate(response);
-                    }, 500);
-                },
-                error => {
-                    console.error('Error', error);
-                }
-            );
+            response => {
+                this.setCookies(response)
+                this.toastrService.success('Login Concluído', 'Sucesso')
+                setTimeout(() => {
+                    this.navigate(response);
+                }, 500);
+            },
+            error => {
+                console.error('Error', error);
+            }
+        );
     }
 
     register(registerModel: RegisterModel) {
@@ -49,11 +49,11 @@ export class AuthService extends SharedService {
 
         return this.http.post(this.apiURL + 'auth/register', body, {headers}).subscribe(
             response => {
-                    this.setCookies(response);
-                    this.toastrService.success('Registro Concluído', 'Sucesso')
-                    setTimeout(() => {
-                        this.navigate(response);
-                    }, 500);
+                this.setCookies(response);
+                this.toastrService.success('Registro Concluído', 'Sucesso')
+                setTimeout(() => {
+                    this.navigate(response);
+                }, 500);
             },
             error => {
                 console.error('Error', error);
@@ -62,10 +62,13 @@ export class AuthService extends SharedService {
 
     navigate(response: any) {
         const model = Object.assign(new AuthModel(), response);
+        console.log(model.userRole)
         if (model.userRole === 'USER_CO') {
-            this.router.navigate(['/home/all-demands'])
-        } else {
-            this.router.navigate(['/home'])
+            console.log('/home/all-demands')
+            this.router.navigateByUrl('/home/all-demands')
+        } if (model.userRole === 'USER_CD') {
+            console.log('/home/my-demands')
+            this.router.navigateByUrl('/home/my-demands')
         }
     }
 
