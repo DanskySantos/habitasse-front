@@ -17,7 +17,7 @@ export class AccessGuard implements CanActivate {
             if (this.accessService.hasAccessCO()) {
                 return true;
             } else {
-                this.router.navigate(['/home']);
+                this.router.navigateByUrl('/auth/login');
                 return false;
             }
         }
@@ -26,7 +26,7 @@ export class AccessGuard implements CanActivate {
             if (this.accessService.hasAccessCD()) {
                 return true;
             } else {
-                this.router.navigate(['/home']);
+                this.router.navigateByUrl('/auth/login');
                 return false;
             }
         }
@@ -35,7 +35,7 @@ export class AccessGuard implements CanActivate {
             if (this.accessService.hasAccessCD()) {
                 return true;
             } else {
-                this.router.navigate(['/home']);
+                this.router.navigateByUrl('/auth/login');
                 return false;
             }
         }
