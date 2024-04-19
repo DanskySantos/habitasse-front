@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {UserService} from "../profile/service/user-service";
 import {UserModel} from "../shared/models/user.model";
 import {Router} from "@angular/router";
 import {NgxUiLoaderService} from "ngx-ui-loader";
+import {catchError, finalize, of} from "rxjs";
 
 @Component({
     templateUrl: './home.component.html'
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements AfterViewInit {
 
     userData?: UserModel;
     loading: boolean = false;
@@ -16,31 +17,32 @@ export class HomeComponent implements OnInit {
     constructor(private userService: UserService,
                 private router: Router,
                 private ngxUiLoaderService: NgxUiLoaderService) {
-        this.getUserProfile();
     }
 
-    ngOnInit() {
+    ngAfterViewInit(): void {
+        this.getUserProfile();
     }
 
     getUserProfile() {
         this.ngxUiLoaderService.start();
-        this.userService.getUserProfile().subscribe(
-            data => {
-                this.userData = data;
+
+        this.userService.getUserProfile().pipe(
+            catchError((error) => {
+                console.error('Error', error);
+                return of(null); // Retorna um Observable nulo para continuar o fluxo
+            }),
+            finalize(() => {
                 this.ngxUiLoaderService.stop();
+            })
+        ).subscribe((data) => {
+            if (data) {
+                this.getHomePage(data.demandsQuantity, data.role);
+                this.userData = data;
                 if (this.userData && this.userData.birthday) {
                     this.userData.birthday = this.formatarData(this.userData.birthday);
                 }
-                setTimeout(() => {
-                    this.getHomePage(data.demandsQuantity, data.role);
-                }, 2000);
-            },
-            error => {
-                console.error('Error', error);
-                this.ngxUiLoaderService.stop();
             }
-        )
-        this.ngxUiLoaderService.stop();
+        });
     }
 
     formatarData(data: string): string {
