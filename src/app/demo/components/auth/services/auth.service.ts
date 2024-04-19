@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {catchError, finalize} from 'rxjs';
 import {Credentials} from 'src/app/demo/components/shared/models/credentials.model';
 import {HttpClient} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
@@ -32,13 +31,11 @@ export class AuthService extends SharedService {
             response => {
                 this.setCookies(response)
                 this.toastrService.success('Login Concluído', 'Sucesso')
-                setTimeout(() => {
-                    const model = Object.assign(new AuthModel(), response);
-                    this.navigate(model.userRole);
-                }, 2000);
+                const model = Object.assign(new AuthModel(), response);
+                this.navigate(model.userRole);
             },
             error => {
-                console.error('Error', error);
+                console.error('Error', error.error);
             }
         );
     }
@@ -51,21 +48,24 @@ export class AuthService extends SharedService {
             response => {
                 this.setCookies(response);
                 this.toastrService.success('Registro Concluído', 'Sucesso')
-                setTimeout(() => {
-                    const model = Object.assign(new AuthModel(), response);
-                    this.navigate(model.userRole);
-                }, 2000);
+                const model = Object.assign(new AuthModel(), response);
+                this.navigate(model.userRole);
             },
             error => {
-                console.error('Error', error);
+                console.error('Error', error.error);
             });
     }
 
     navigate(userRole: any) {
         if (userRole === 'USER_CO') {
-            this.router.navigateByUrl('/home/all-demands')
-        } if (userRole === 'USER_CD') {
-            this.router.navigateByUrl('/home/my-demands')
+            setTimeout(() => {
+                this.router.navigateByUrl('/home/all-demands')
+            }, 2000);
+        }
+        if (userRole === 'USER_CD') {
+            setTimeout(() => {
+                this.router.navigateByUrl('/home/my-demands');
+            }, 2000);
         }
     }
 
