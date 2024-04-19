@@ -33,7 +33,9 @@ export class AuthService extends SharedService {
                 response => {
                     this.setCookies(response)
                     this.toastrService.success('Login Concluído', 'Sucesso')
-                    this.router.navigate(['/home'])
+                    setTimeout(() => {
+                        this.navigate(response);
+                    }, 500);
                 },
                 error => {
                     console.error('Error', error);
@@ -49,11 +51,22 @@ export class AuthService extends SharedService {
             response => {
                     this.setCookies(response);
                     this.toastrService.success('Registro Concluído', 'Sucesso')
-                    return this.router.navigate(['/home']);
-                },
+                    setTimeout(() => {
+                        this.navigate(response);
+                    }, 500);
+            },
             error => {
                 console.error('Error', error);
             });
+    }
+
+    navigate(response: any) {
+        const model = Object.assign(new AuthModel(), response);
+        if (model.userRole === 'USER_CO') {
+            this.router.navigate(['/home/all-demands'])
+        } else {
+            this.router.navigate(['/home'])
+        }
     }
 
     obterTokenUsuario() {

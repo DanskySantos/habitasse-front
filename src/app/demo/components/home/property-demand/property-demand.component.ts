@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LayoutService} from 'src/app/layout/service/app.layout.service';
-import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ContractTypeEnum} from "../../enums/contract-type-enum";
 import {PropertyTypeEnum} from "../../enums/property-type-enum";
 import {BedroomsNumberEnum} from "../../enums/bedrooms-number-enum";
@@ -43,7 +43,7 @@ export class PropertyDemandComponent implements OnInit {
         this.createForm();
     }
 
-    startLists(){
+    startLists() {
         this.contractType = Object.values(ContractTypeEnum);
         this.bedroomsNumber = Object.values(BedroomsNumberEnum);
         this.propertyType = Object.values(PropertyTypeEnum);
