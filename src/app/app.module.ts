@@ -1,5 +1,5 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AppLayoutModule} from './layout/app.layout.module';
@@ -28,7 +28,7 @@ import {ToastrModule} from "ngx-toastr";
     providers: [
         CookieService,
         {provide: LOCALE_ID, useValue: 'pt-BR'},
-        {provide: LocationStrategy, useClass: HashLocationStrategy}
+        {provide: LocationStrategy, useClass: PathLocationStrategy}
     ],
     bootstrap: [AppComponent]
 })
