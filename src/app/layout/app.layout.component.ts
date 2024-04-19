@@ -6,7 +6,8 @@ import {MenuService} from './menu/app.menu.service';
 import {AppSidebarComponent} from './sidebar/app.sidebar.component';
 import {AppTopBarComponent} from './topbar/app.topbar.component';
 import {LayoutService} from './service/app.layout.service';
-import {HomeComponent} from "../demo/components/home/home.component";
+import {CookieService as NgxCookieService} from 'ngx-cookie-service';
+import {AuthService} from "../demo/components/auth/services/auth.service";
 
 @Component({
     selector: 'app-layout',
@@ -28,7 +29,12 @@ export class AppLayoutComponent implements OnDestroy {
 
     @ViewChild(AppTopBarComponent) appTopbar!: AppTopBarComponent;
 
-    constructor(private menuService: MenuService, public layoutService: LayoutService, public renderer: Renderer2, public router: Router) {
+    constructor(private menuService: MenuService,
+                public layoutService: LayoutService,
+                public renderer: Renderer2,
+                public router: Router,
+                public authService: AuthService,
+                private cookieService: NgxCookieService) {
 
         this.overlayMenuOpenSubscription = this.layoutService.overlayOpen$.subscribe(() => {
             if (!this.menuOutsideClickListener) {
@@ -85,6 +91,7 @@ export class AppLayoutComponent implements OnDestroy {
 
             this.layoutService.closeTab(event.index);
         });
+        authService.navigate(this.cookieService.get('userRole'))
     }
 
     blockBodyScroll(): void {
