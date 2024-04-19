@@ -35,7 +35,7 @@ export class AuthService extends SharedService {
                 setTimeout(() => {
                     const model = Object.assign(new AuthModel(), response);
                     this.navigate(model.userRole);
-                }, 500);
+                }, 2000);
             },
             error => {
                 console.error('Error', error);
@@ -54,7 +54,7 @@ export class AuthService extends SharedService {
                 setTimeout(() => {
                     const model = Object.assign(new AuthModel(), response);
                     this.navigate(model.userRole);
-                }, 500);
+                }, 2000);
             },
             error => {
                 console.error('Error', error);
