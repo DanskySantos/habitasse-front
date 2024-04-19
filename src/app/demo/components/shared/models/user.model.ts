@@ -15,4 +15,5 @@ export class UserModel {
     accountNonLocked!: boolean;
     accountNonExpired!: boolean;
     demandsQuantity!: number;
+    remainingDays!: number;
 }
