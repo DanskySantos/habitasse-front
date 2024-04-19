@@ -9,7 +9,6 @@ import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {Router} from "@angular/router";
 import {SharedService} from "../../shared/service/shared.service";
 import {ToastrService} from "ngx-toastr";
-import {map} from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -34,7 +33,8 @@ export class AuthService extends SharedService {
                 this.setCookies(response)
                 this.toastrService.success('Login Concluído', 'Sucesso')
                 setTimeout(() => {
-                    this.navigate(response);
+                    const model = Object.assign(new AuthModel(), response);
+                    this.navigate(model.userRole);
                 }, 500);
             },
             error => {
@@ -52,7 +52,8 @@ export class AuthService extends SharedService {
                 this.setCookies(response);
                 this.toastrService.success('Registro Concluído', 'Sucesso')
                 setTimeout(() => {
-                    this.navigate(response);
+                    const model = Object.assign(new AuthModel(), response);
+                    this.navigate(model.userRole);
                 }, 500);
             },
             error => {
@@ -60,14 +61,10 @@ export class AuthService extends SharedService {
             });
     }
 
-    navigate(response: any) {
-        const model = Object.assign(new AuthModel(), response);
-        console.log(model.userRole)
-        if (model.userRole === 'USER_CO') {
-            console.log('/home/all-demands')
+    navigate(userRole: any) {
+        if (userRole === 'USER_CO') {
             this.router.navigateByUrl('/home/all-demands')
-        } if (model.userRole === 'USER_CD') {
-            console.log('/home/my-demands')
+        } if (userRole === 'USER_CD') {
             this.router.navigateByUrl('/home/my-demands')
         }
     }
