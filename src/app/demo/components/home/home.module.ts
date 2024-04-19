@@ -18,6 +18,8 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { CreateUpdateOfferModalComponent } from './all-demands/create-update-offer.modal/create-update-offer-modal.component';
 import { ListOfferComponent } from './my-demands/list-offer-modal/my-offer-modal.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+ 
 
 @NgModule({
     imports: [
@@ -32,7 +34,7 @@ import { ListOfferComponent } from './my-demands/list-offer-modal/my-offer-modal
         PaginatorModule,
         ProfileModule,
         AccordionModule,
-        NgxUiLoaderModule
+        NgxUiLoaderModule,
     ],
     exports: [
         HomeComponent,
@@ -42,7 +44,8 @@ import { ListOfferComponent } from './my-demands/list-offer-modal/my-offer-modal
         DeleteDemandModalComponent,
         AllDemandsComponent,
         CreateUpdateOfferModalComponent,
-        ListOfferComponent
+        ListOfferComponent,
+        FileUploadComponent
     ],
     declarations: [
         HomeComponent,
@@ -52,7 +55,8 @@ import { ListOfferComponent } from './my-demands/list-offer-modal/my-offer-modal
         DeleteDemandModalComponent,
         AllDemandsComponent,
         CreateUpdateOfferModalComponent,
-        ListOfferComponent
+        ListOfferComponent,
+        FileUploadComponent
     ]
 })
 export class HomeModule {
