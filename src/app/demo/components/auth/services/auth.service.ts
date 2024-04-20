@@ -23,16 +23,17 @@ export class AuthService extends SharedService {
         super();
     }
 
-    login(credentials: Credentials) {
+    async login(credentials: Credentials) {
+        this.deleteCookies();
         const headers = this.setHeaders();
         const body = JSON.stringify(credentials);
 
-        return this.http.post(this.apiURL + 'auth/authenticate', body, {headers}).subscribe(
-            response => {
+        this.http.post(this.apiURL + 'auth/authenticate', body, {headers}).subscribe(
+            async response => {
                 this.setCookies(response)
                 this.toastrService.success('Login Concluído', 'Sucesso')
                 const model = Object.assign(new AuthModel(), response);
-                this.navigate(model.userRole);
+                await this.navigate(model.userRole);
             },
             error => {
                 console.error('Error', error.error);
@@ -40,33 +41,33 @@ export class AuthService extends SharedService {
         );
     }
 
-    register(registerModel: RegisterModel) {
+    async register(registerModel: RegisterModel) {
+        this.deleteCookies();
         const headers = this.setHeaders();
         const body = JSON.stringify(registerModel);
 
-        return this.http.post(this.apiURL + 'auth/register', body, {headers}).subscribe(
-            response => {
-                this.setCookies(response);
+        this.http.post(this.apiURL + 'auth/register', body, {headers}).subscribe(
+            async response => {
+                await this.setCookies(response);
                 this.toastrService.success('Registro Concluído', 'Sucesso')
                 const model = Object.assign(new AuthModel(), response);
-                this.navigate(model.userRole);
+                await this.navigate(model.userRole);
             },
             error => {
                 console.error('Error', error.error);
             });
     }
 
-    navigate(userRole: any) {
+    async navigate(userRole: any) {
         if (userRole === 'USER_CO') {
-            setTimeout(() => {
-                this.router.navigateByUrl('/home/all-demands')
-            }, 2000);
+            await this.router.navigateByUrl('/home/all-demands')
+        } if (userRole === 'USER_CD') {
+            await this.router.navigateByUrl('/home/my-demands')
         }
-        if (userRole === 'USER_CD') {
-            setTimeout(() => {
-                this.router.navigateByUrl('/home/my-demands');
-            }, 2000);
-        }
+    }
+
+    deleteCookies() {
+        this.cookieService.deleteAll();
     }
 
     obterTokenUsuario() {
@@ -86,7 +87,7 @@ export class AuthService extends SharedService {
         return false;
     }
 
-    setCookies(response: any) {
+    async setCookies(response: any) {
         const auth = Object.assign(new AuthModel(), response);
         this.cookieService.set('access_token', auth.access_token);
         this.cookieService.set('refresh_token', auth.refresh_token);

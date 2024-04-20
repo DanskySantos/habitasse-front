@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     constructor(private authService: AuthService) {}
 
     ngOnInit() {
+        this.authService.deleteCookies();
         this.loginForm = new FormGroup({
             email: new FormControl('', [Validators.required]),
             password: new FormControl('', [Validators.required]),
