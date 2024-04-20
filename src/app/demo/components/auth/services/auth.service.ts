@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {catchError, finalize} from 'rxjs';
 import {Credentials} from 'src/app/demo/components/shared/models/credentials.model';
 import {HttpClient} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
@@ -24,49 +23,51 @@ export class AuthService extends SharedService {
         super();
     }
 
-    login(credentials: Credentials) {
+    async login(credentials: Credentials) {
+        this.deleteCookies();
         const headers = this.setHeaders();
         const body = JSON.stringify(credentials);
 
-        return this.http.post(this.apiURL + 'auth/authenticate', body, {headers}).subscribe(
-            response => {
+        this.http.post(this.apiURL + 'auth/authenticate', body, {headers}).subscribe(
+            async response => {
                 this.setCookies(response)
                 this.toastrService.success('Login Concluído', 'Sucesso')
-                setTimeout(() => {
-                    const model = Object.assign(new AuthModel(), response);
-                    this.navigate(model.userRole);
-                }, 2000);
+                const model = Object.assign(new AuthModel(), response);
+                await this.navigate(model.userRole);
             },
             error => {
-                console.error('Error', error);
+                console.error('Error', error.error);
             }
         );
     }
 
-    register(registerModel: RegisterModel) {
+    async register(registerModel: RegisterModel) {
+        this.deleteCookies();
         const headers = this.setHeaders();
         const body = JSON.stringify(registerModel);
 
-        return this.http.post(this.apiURL + 'auth/register', body, {headers}).subscribe(
-            response => {
-                this.setCookies(response);
+        this.http.post(this.apiURL + 'auth/register', body, {headers}).subscribe(
+            async response => {
+                await this.setCookies(response);
                 this.toastrService.success('Registro Concluído', 'Sucesso')
-                setTimeout(() => {
-                    const model = Object.assign(new AuthModel(), response);
-                    this.navigate(model.userRole);
-                }, 2000);
+                const model = Object.assign(new AuthModel(), response);
+                await this.navigate(model.userRole);
             },
             error => {
-                console.error('Error', error);
+                console.error('Error', error.error);
             });
     }
 
-    navigate(userRole: any) {
+    async navigate(userRole: any) {
         if (userRole === 'USER_CO') {
-            this.router.navigateByUrl('/home/all-demands')
+            await this.router.navigateByUrl('/home/all-demands')
         } if (userRole === 'USER_CD') {
-            this.router.navigateByUrl('/home/my-demands')
+            await this.router.navigateByUrl('/home/my-demands')
         }
+    }
+
+    deleteCookies() {
+        this.cookieService.deleteAll();
     }
 
     obterTokenUsuario() {
@@ -86,7 +87,7 @@ export class AuthService extends SharedService {
         return false;
     }
 
-    setCookies(response: any) {
+    async setCookies(response: any) {
         const auth = Object.assign(new AuthModel(), response);
         this.cookieService.set('access_token', auth.access_token);
         this.cookieService.set('refresh_token', auth.refresh_token);

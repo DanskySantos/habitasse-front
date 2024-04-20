@@ -16,10 +16,12 @@ export class RegisterComponent implements OnInit {
     registerForm!: FormGroup;
     maxDate: Date = new Date();
 
-    constructor(private authService: AuthService, private route: ActivatedRoute) {
+    constructor(private authService: AuthService,
+                private route: ActivatedRoute) {
     }
 
     ngOnInit() {
+        this.authService.deleteCookies();
         this.createForm();
         this.startLists();
     }
