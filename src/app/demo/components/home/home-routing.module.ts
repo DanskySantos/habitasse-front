@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {inject, NgModule} from '@angular/core';
+import {ActivatedRouteSnapshot, RouterModule, RouterStateSnapshot} from '@angular/router';
 import { HomeComponent } from './home.component';
 import { PropertyDemandComponent } from './property-demand/property-demand.component';
 import {MyDemandsComponent} from "./my-demands/my-demands.component";
@@ -15,19 +15,19 @@ import {AccessGuard} from "../guards/access.guard";
         },
         {
             path: 'property-demand',
-            canActivate : [AccessGuard],
+            canActivate: [(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(AccessGuard).canActivate(next, state)],
             data: {breadcrumb: 'Cadastro de demandas'},
             component: PropertyDemandComponent
         },
         {
             path: 'my-demands',
-            canActivate : [AccessGuard],
+            canActivate: [(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(AccessGuard).canActivate(next, state)],
             data: {breadcrumb: 'Minhas Demandas'},
             component: MyDemandsComponent
         },
         {
             path: 'all-demands',
-            canActivate : [AccessGuard],
+            canActivate: [(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(AccessGuard).canActivate(next, state)],
             data: {breadcrumb: 'Todas Demandas'},
             component: AllDemandsComponent
         }

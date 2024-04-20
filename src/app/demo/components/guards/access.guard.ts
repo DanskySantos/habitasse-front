@@ -1,5 +1,12 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {
+    ActivatedRouteSnapshot,
+    CanActivate,
+    GuardResult,
+    MaybeAsync,
+    Router,
+    RouterStateSnapshot
+} from '@angular/router';
 import {AccessService} from "../auth/services/access.service";
 
 @Injectable({
@@ -10,8 +17,8 @@ export class AccessGuard implements CanActivate {
     constructor(private router: Router,
                 private accessService: AccessService) {
     }
-
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    canActivate(route: ActivatedRouteSnapshot,
+                state: RouterStateSnapshot): MaybeAsync<GuardResult> {
 
         if (route.routeConfig?.path === 'all-demands') {
             if (this.accessService.hasAccessCO()) {
@@ -39,6 +46,6 @@ export class AccessGuard implements CanActivate {
                 return false;
             }
         }
-        return false;
+        return true;
     }
 }
