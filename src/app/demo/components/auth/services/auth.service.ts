@@ -31,7 +31,7 @@ export class AuthService extends SharedService {
         this.http.post(this.apiURL + 'auth/authenticate', body, {headers}).subscribe(
             async response => {
                 await this.setCookies(response)
-                await this.toastrService.success('Login Concluído', 'Sucesso')
+                this.toastrService.success('Login Concluído', 'Sucesso')
                 const model = Object.assign(new AuthModel(), response);
                 await this.navigate(model.userRole);
             },
@@ -49,7 +49,7 @@ export class AuthService extends SharedService {
         this.http.post(this.apiURL + 'auth/register', body, {headers}).subscribe(
             async response => {
                 await this.setCookies(response);
-                await this.toastrService.success('Registro Concluído', 'Sucesso')
+                this.toastrService.success('Registro Concluído', 'Sucesso')
                 const model = Object.assign(new AuthModel(), response);
                 await this.navigate(model.userRole);
             },
