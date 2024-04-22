@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import {
     ActivatedRouteSnapshot,
     CanActivate,
-    GuardResult,
-    MaybeAsync,
     Router,
     RouterStateSnapshot
 } from '@angular/router';
@@ -17,8 +15,7 @@ export class AccessGuard implements CanActivate {
     constructor(private router: Router,
                 private accessService: AccessService) {
     }
-    canActivate(route: ActivatedRouteSnapshot,
-                state: RouterStateSnapshot): MaybeAsync<GuardResult> {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
         if (route.routeConfig?.path === 'all-demands') {
             if (this.accessService.hasAccessCO()) {
