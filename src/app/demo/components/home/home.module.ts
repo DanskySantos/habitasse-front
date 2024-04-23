@@ -19,6 +19,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { CreateUpdateOfferModalComponent } from './all-demands/create-update-offer.modal/create-update-offer-modal.component';
 import { ListOfferComponent } from './my-demands/list-offer-modal/my-offer-modal.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { HttpClientModule } from '@angular/common/http';
  
 
 @NgModule({
@@ -45,7 +46,8 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
         AllDemandsComponent,
         CreateUpdateOfferModalComponent,
         ListOfferComponent,
-        FileUploadComponent
+        FileUploadComponent,
+ 
     ],
     declarations: [
         HomeComponent,

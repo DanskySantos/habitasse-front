@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OffersService} from '../../services/offers.service';
 import {DemandModel} from "../../../shared/models/demand.model";
 import {OffersModel} from "../../../shared/models/offers.model";
+import { FileUploadComponent } from '../../file-upload/file-upload.component';
 
 @Component({
     templateUrl: './create-update-offer-modal.component.html',

@@ -1,12 +1,8 @@
-<div class="p-d-flex p-flex-column p-jc-center">
-  <h4 class="p-text-center">Adicione  imagens</h4>
-  <div class="p-d-flex p-flex-column p-jc-center p-mb-2">
-      <p-fileUpload mode="advanced" cancelLabel="Cancelar" chooseLabel="Escolher" name="user[avatar_url]" id="user_avatar_url" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*" [maxFileSize]="20000000">
-          <ng-template pTemplate="content">
-              <ul *ngIf="uploadedFiles.length">
-                  <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
-              </ul>
-          </ng-template>
-      </p-fileUpload>
-  </div>
+
+<div class="col-12 flex">
+    <p-fileUpload type="file" (change)="uploadFile($event)" class="w-full" name="myfile[]" chooseLabel="Selecionar imagem" [showUploadButton]="false"  url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*" [maxFileSize]="3000000">
+        <ng-template let-file pTemplate="file">
+            <div>{{file.name}}</div>
+        </ng-template>
+    </p-fileUpload>
 </div>

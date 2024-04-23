@@ -4,7 +4,6 @@ import {ToastrService} from "ngx-toastr";
 import {Router} from '@angular/router';
 import { DemandService } from '../../services/demand.service';
 import { FormGroup } from '@angular/forms';
-import { DemandModel } from '../../../shared/models/demand.model';
 
 @Component({
     templateUrl: 'delete-demand-modal.component.html',
