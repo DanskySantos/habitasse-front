@@ -22,6 +22,12 @@ export class AppMenuComponent implements OnInit {
         if (this.role == 'USER_CD') {
             this.model = [
                 {
+                    label: 'Perfil',
+                    icon: 'pi pi-fw pi-user',
+                    routerLink: ['/profile'],
+
+                },
+                {
                     label: 'Nova Demanda',
                     icon: 'pi pi-plus',
                     routerLink: ['/home/property-demand']
@@ -31,26 +37,20 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-fw pi-list',
                     routerLink: ['/home/my-demands'],
 
-                },
-                {
-                    label: 'Perfil',
-                    icon: 'pi pi-fw pi-user',
-                    routerLink: ['/profile'],
-
                 }
             ];
         } else {
             this.model = [
                 {
-                    label: 'Todas Demandas',
-                    icon: 'pi pi-list',
-                    routerLink: ['/home/all-demands']
-                },
-                {
                     label: 'Perfil',
                     icon: 'pi pi-fw pi-user',
                     routerLink: ['/profile'],
 
+                },
+                {
+                    label: 'Todas Demandas',
+                    icon: 'pi pi-list',
+                    routerLink: ['/home/all-demands']
                 }
             ];
         }

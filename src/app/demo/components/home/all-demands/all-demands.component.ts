@@ -26,6 +26,7 @@ import {color} from "chart.js/helpers";
 
 })
 export class AllDemandsComponent implements OnInit {
+
     visible: boolean = false;
     demands: any;
     filterForm!: FormGroup;
@@ -59,6 +60,7 @@ export class AllDemandsComponent implements OnInit {
 
     private createForm() {
         this.filterForm = new FormGroup({
+            id: new FormControl(null),
             contractType: new FormControl(null),
             propertyType: new FormControl(null),
             bedroomsNumber: new FormControl(null),
@@ -69,6 +71,10 @@ export class AllDemandsComponent implements OnInit {
             suggestedValueForSeasonal: new FormControl(null),
             state: new FormControl(null),
             city: new FormControl(null),
+        });
+        this.filterForm.get('id')?.valueChanges.subscribe((value) => {
+            this.filterForm.get('id')?.setValue(value, { emitEvent: false });
+            this.filter();
         });
     }
 
@@ -138,6 +144,4 @@ export class AllDemandsComponent implements OnInit {
     get selectedContractType() {
         return this.filterForm.get('contractType')!;
     }
-
-    protected readonly color = color;
 }
