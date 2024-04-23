@@ -9,11 +9,15 @@
             <h5 class="p-2" title="Tipo de contrato">{{
                 offersService.getContractType(demand.propertyDemand.contractType) }}</h5>
             <ul class="list-none p-0 m-0">
+                <span class="flex p-2 align-items-center mb-2" title="Id">
+                    <img ngSrc="./assets/app/images/icons/id.png" alt="id" class="align-self-center mr-2"
+                        height="24" width="24">
+                    <span>Id - {{ demand.id }}</span>
+                </span>
                 <span class="flex p-2 align-items-center mb-2" title="Tipo de propriedade">
                     <img ngSrc="./assets/app/images/icons/house.png" alt="house" class="align-self-center mr-2"
                         height="24" width="24">
-                    <span>Tipo de imóvel - {{ offersService.getPropertyType(demand.propertyDemand.propertyType)
-                        }}</span>
+                    <span>Tipo de imóvel - {{ offersService.getPropertyType(demand.propertyDemand.propertyType) }}</span>
                 </span>
                 <span class="flex p-2 align-items-center mb-2" title="Localidade">
                     <img ngSrc="./assets/app/images/icons/location_on.png" alt="house" class="align-self-center mr-2"

@@ -34,6 +34,12 @@
                         <h5 class="p-2"
                             title="Tipo de contrato">{{ demandService.getContractType(demand.propertyDemand.contractType) }}</h5>
                         <ul class="list-none p-0 m-0">
+                            <span class="flex p-2 align-items-center mb-2" title="Identificador">
+                                <img ngSrc="./assets/app/images/icons/id.png"
+                                     alt="house"
+                                     class="align-self-center mr-2" height="24" width="24">
+                                <span>Id - {{ demand.id }}</span>
+                            </span>
                             <span class="flex p-2 align-items-center mb-2" title="Tipo de propriedade">
                                 <img ngSrc="./assets/app/images/icons/house.png"
                                      alt="house"
@@ -70,11 +76,13 @@
                                      class="align-self-center mr-2" height="24" width="24">
                                 <span>Pet - {{ demandService.getBoolean(demand.propertyDemand.petFriendly) }}</span>
                             </span>
-                            <div class="flex surface-overlay border-round w-full overflow-auto mb-2 p-2" title="Comentários">
+                            <div class="flex surface-overlay border-round w-full overflow-auto mb-2 p-2"
+                                 title="Comentários">
                                 <img ngSrc="./assets/app/images/icons/comment.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
-                                <p class="white-space-normal">Comentarios - {{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</p>
+                                <p class="white-space-normal">Comentarios
+                                    - {{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</p>
                             </div>
                         </ul>
                         <button (click)="allOffersModal(modaloffer)" type="button" pButton pRipple class="w-full mt-3 "
