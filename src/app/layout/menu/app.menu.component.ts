@@ -36,7 +36,6 @@ export class AppMenuComponent implements OnInit {
                     label: 'Minhas Demandas',
                     icon: 'pi pi-fw pi-list',
                     routerLink: ['/home/my-demands'],
-
                 }
             ];
         } else {

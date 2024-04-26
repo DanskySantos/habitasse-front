@@ -1,8 +1,39 @@
-
-<div class="col-12 flex">
-    <p-fileUpload type="file" (change)="uploadFile($event)" class="w-full" name="myfile[]" chooseLabel="Selecionar imagem" [showUploadButton]="false"  url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*" [maxFileSize]="3000000">
-        <ng-template let-file pTemplate="file">
-            <div>{{file.name}}</div>
-        </ng-template>
-    </p-fileUpload>
+<div class="p-d-flex p-flex-column p-jc-center">
+    <h4 class="p-text-center">Adicione imagens</h4>
+    <div class="p-d-flex p-flex-column p-jc-center p-mb-2">
+        <p-fileUpload (onSelect)="onSelect($event)"
+                      (onBeforeUpload)="onUpload()"
+                      (onClear)="filesOnMemory = []"
+                      [showUploadButton]="this.files.length + this.filesOnMemory.length <= 5 || this.uploadedFiles.length === 5"
+                      chooseLabel="Selecionar"
+                      uploadLabel="Salvar"
+                      cancelLabel="Cancelar"
+                      [fileLimit]=5
+                      [multiple]="true"
+                      accept="image/*"
+                      [maxFileSize]="20000000">
+            <ng-template pTemplate="toolbar">
+                <div class="py-3">Cada oferta pode ter no máximo 5 fotos</div>
+            </ng-template>
+            <ng-template let-file pTemplate="file">
+                <div class="flex m-2 align-items-center" *ngIf="this.filesOnMemory.length > 0">
+                    <img class="mr-4" height="40px" width="40px" src="{{file.objectURL.changingThisBreaksApplicationSecurity}}" alt="">
+                    <span>{{file.name}}</span>
+                    <span>{{file.size}}</span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="content" let-files>
+            </ng-template>
+        </p-fileUpload>
+        <div *ngIf="this.files">
+            <div class="flex m-2 align-items-center justify-content-between	" *ngFor="let file of this.uploadedFiles">
+                <img class="mr-4" height="40px" width="40px" src="{{file.location}}" alt="">
+                <span>{{file.key}}</span>
+                <p-button (click)="removeFile(file)"
+                          [label]="'Excluir'"
+                          class="w-auto mt-4">
+                </p-button>
+            </div>
+        </div>
+    </div>
 </div>

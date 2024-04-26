@@ -1,30 +1,24 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SharedService } from '../../shared/service/shared.service';
-import { CookieService as NgxCookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {SharedService} from "../../shared/service/shared.service";
+import {environment} from "../../../../../environments/environments";
+import AWSS3UploadAshClient from "aws-s3-upload-ash";
 
 @Injectable({
     providedIn: 'root'
 })
-export class FileUploadService extends SharedService {
+export class UploadService extends SharedService {
 
-    constructor(private http: HttpClient,
-        private cookieService: NgxCookieService) {
+    config = {
+        bucketName: 'habitasse',
+        dirName: 'offers-img',
+        region: 'us-east-2',
+        accessKeyId: 'environment.awsAccessKey',
+        secretAccessKey: 'environment.awsSecretKey',
+        s3Url: 'https://habitasse.s3.amazonaws.com/'
+    }
+    S3CustomClient: AWSS3UploadAshClient = new AWSS3UploadAshClient(this.config);
+
+    constructor() {
         super();
-    }
-
-    setHeadersForBearer() {
-        return new HttpHeaders({
-            'Authorization': 'Bearer ' + this.cookieService.get('access_token'),
-            'Content-Type': 'application/json'
-        });
-    }
-
-    uploadFiles(file: File): Observable<any> {
-        const headers = this.setHeadersForBearer();
-        const formData = new FormData();
-        formData.append('file', file);
-        return this.http.post<any>(this.apiURL + 'files/upload', formData, { headers });
     }
 }
