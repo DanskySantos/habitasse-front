@@ -1,7 +1,7 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { LayoutService } from "../service/app.layout.service";
-import { Router } from '@angular/router';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {MenuItem} from 'primeng/api';
+import {LayoutService} from "../service/app.layout.service";
+import {Router} from '@angular/router';
 import {CookieService} from "ngx-cookie-service";
 
 @Component({
@@ -26,8 +26,8 @@ export class AppTopBarComponent {
     }
 
     goToProfileEdit() {
-        this.router.navigate(['/profile']);
-      }
+        this.router.navigateByUrl('/profile');
+    }
 
     onMenuButtonClick() {
         this.layoutService.onMenuToggle();
@@ -35,7 +35,7 @@ export class AppTopBarComponent {
 
     signOut() {
         this.cookieService.deleteAll();
-        this.router.navigate(['auth/login'])
+        this.router.navigateByUrl('auth/login')
     }
 
     activateSearch() {

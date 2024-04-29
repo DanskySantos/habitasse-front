@@ -7,35 +7,81 @@ import { MenuService } from './app.menu.service';
 import { LayoutService } from '../service/app.layout.service';
 import { AppSidebarComponent } from '../sidebar/app.sidebar.component';
 import {DomHandler} from 'primeng/dom';
+import {environment} from "../../../environments/environments";
+import * as url from "node:url";
 
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[app-menuitem]',
     template: `
-		<ng-container>
-            <div *ngIf="root && item.visible !== false" class="layout-menuitem-root-text">{{item.label}}</div>
-			<a *ngIf="(!item.routerLink || item.items) && item.visible !== false" [attr.href]="item.url" (click)="itemClick($event)" (mouseenter)="onMouseEnter()"
-			   [ngClass]="item.class" [attr.target]="item.target" tabindex="0" pRipple [pTooltip]="item.label" [tooltipDisabled]="!(isSlim && root && !active)">
-				<i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
-				<span class="layout-menuitem-text">{{item.label}}</span>
-				<i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
-			</a>
-			<a *ngIf="(item.routerLink && !item.items) && item.visible !== false" (click)="itemClick($event)" (mouseenter)="onMouseEnter()" [ngClass]="item.class"
-			   [routerLink]="item.routerLink" routerLinkActive="active-route" [routerLinkActiveOptions]="item.routerLinkActiveOptions||{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
-               [fragment]="item.fragment" [queryParamsHandling]="item.queryParamsHandling" [preserveFragment]="item.preserveFragment!"
-               [skipLocationChange]="item.skipLocationChange!" [replaceUrl]="item.replaceUrl!" [state]="item.state" [queryParams]="item.queryParams"
-               [attr.target]="item.target" tabindex="0" pRipple [pTooltip]="item.label" [tooltipDisabled]="!(isSlim && root)">
-				<i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
-				<span class="layout-menuitem-text">{{item.label}}</span>
-				<i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
-			</a>
+        <ng-container>
+            <div *ngIf="root && item.visible !== false" class="layout-menuitem-root-text">
+                <a *ngIf="(item.routerLink && !item.items) && item.visible !== false"
+                   (click)="itemClick($event)"
+                   (mouseenter)="onMouseEnter()"
+                   [ngClass]="item.class"
+                   [routerLink]="item.routerLink"
+                   routerLinkActive="active-route"
+                   [routerLinkActiveOptions]="item.routerLinkActiveOptions||{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
+                   [fragment]="item.fragment"
+                   [queryParamsHandling]="item.queryParamsHandling"
+                   [preserveFragment]="item.preserveFragment!"
+                   [skipLocationChange]="item.skipLocationChange!"
+                   [replaceUrl]="item.replaceUrl!"
+                   [state]="item.state"
+                   [queryParams]="item.queryParams"
+                   [attr.target]="item.target"
+                   tabindex="0" pRipple
+                   [pTooltip]="item.label"
+                   [tooltipDisabled]="!(isSlim && root)">
+                    <i [ngClass]="item.icon" class="layout-menuitem-icon" style="color:white"></i>
+                    <span class="layout-menuitem-text" style="color:white; margin-left: 5px;">{{ item.label }}</span>
+                    <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items" style="color:white"></i>
+                </a>
+            </div>
+            <a *ngIf="(!item.routerLink || item.items) && item.visible !== false"
+               [attr.href]="item.url"
+               (click)="itemClick($event)"
+               (mouseenter)="onMouseEnter()"
+               [ngClass]="item.class"
+               [attr.target]="item.target"
+               tabindex="0"
+               pRipple
+               [pTooltip]="item.label"
+               [tooltipDisabled]="!(isSlim && root && !active)">
+                <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
+                <span class="layout-menuitem-text">{{ item.label }}</span>
+                <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
+            </a>
+            <a *ngIf="(item.routerLink && !item.items) && item.visible !== false"
+               (click)="itemClick($event)"
+               (mouseenter)="onMouseEnter()"
+               [ngClass]="item.class"
+               [routerLink]="item.routerLink"
+               routerLinkActive="active-route"
+               [routerLinkActiveOptions]="item.routerLinkActiveOptions||{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
+               [fragment]="item.fragment"
+               [queryParamsHandling]="item.queryParamsHandling"
+               [preserveFragment]="item.preserveFragment!"
+               [skipLocationChange]="item.skipLocationChange!"
+               [replaceUrl]="item.replaceUrl!"
+               [state]="item.state"
+               [queryParams]="item.queryParams"
+               [attr.target]="item.target"
+               tabindex="0" pRipple
+               [pTooltip]="item.label"
+               [tooltipDisabled]="!(isSlim && root)">
+                <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
+                <span class="layout-menuitem-text">{{ item.label }}</span>
+                <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
+            </a>
 
-			<ul #submenu *ngIf="item.items && item.visible !== false" [@children]="submenuAnimation" (@children.done)="onSubmenuAnimated($event)">
-				<ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
-					<li app-menuitem [item]="child" [index]="i" [parentKey]="key" [class]="child.badgeClass"></li>
-				</ng-template>
-			</ul>
-		</ng-container>
+            <ul #submenu *ngIf="item.items && item.visible !== false" [@children]="submenuAnimation"
+                (@children.done)="onSubmenuAnimated($event)">
+                <ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
+                    <li app-menuitem [item]="child" [index]="i" [parentKey]="key" [class]="child.badgeClass"></li>
+                </ng-template>
+            </ul>
+        </ng-container>
     `,
     animations: [
         trigger('children', [
@@ -120,8 +166,6 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
         }
     }
 
-
-
     onSubmenuAnimated(event: AnimationEvent) {
         if (event.toState === 'visible' && this.layoutService.isDesktop() && ( this.layoutService.isSlim()|| this.layoutService.isSlimPlus())) {
             const el = <HTMLUListElement> event.element;
@@ -134,7 +178,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
         if (overlay) {
             const { left, top } = target.getBoundingClientRect();
             const vHeight = window.innerHeight;
-            const  oHeight = overlay.offsetHeight;
+            const oHeight = overlay.offsetHeight;
             const topbarEl = document.querySelector('.layout-topbar') as HTMLElement;
             const topbarHeight = topbarEl?.offsetHeight || 0;
             // reset

@@ -44,7 +44,6 @@ export class AppMenuComponent implements OnInit {
                     label: 'Perfil',
                     icon: 'pi pi-fw pi-user',
                     routerLink: ['/profile'],
-
                 },
                 {
                     label: 'Todas Demandas',
