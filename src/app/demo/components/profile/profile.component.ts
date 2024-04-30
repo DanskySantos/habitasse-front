@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
 import {UserService} from "./service/user-service";
 import {Router} from "@angular/router";
-import {Observable} from "rxjs";
-import { UserModel } from '../shared/models/user.model';
+import {UserModel} from '../shared/models/user.model';
 
 @Component({
     templateUrl: './profile.component.html'
@@ -63,5 +62,9 @@ export class ProfileComponent implements OnInit {
 
     navigateToUpdatePassword() {
         this.showUserPassword = true;
+    }
+
+    deleteAccount() {
+        this.userService.deleteAccount();
     }
 }

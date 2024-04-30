@@ -23,7 +23,6 @@ export class UserService extends SharedService  {
         super();
     }
 
-
     setHeadersForBearer() {
         return new HttpHeaders({
             'Authorization': 'Bearer ' + this.cookieService.get('access_token'),
@@ -59,7 +58,7 @@ export class UserService extends SharedService  {
 
         return this.http.put<any>(this.apiURL + 'user/password/' + id, body,  { headers }).subscribe(
             next => {
-                this.toastrService.success('Password salvo', 'Sucesso')
+                this.toastrService.success('Senha salva', 'Sucesso')
                 this.router.navigate(['/profile'])
             },
             err => {
@@ -67,5 +66,21 @@ export class UserService extends SharedService  {
                 console.log('error:', err)
             }
         )
-      }
+    }
+
+    deleteAccount(){
+        const headers = this.setHeadersForBearer();
+        let id = this.cookieService.get('userId');
+        return this.http.delete<any>(this.apiURL + 'user/delete/' + id, { headers }).subscribe(
+            next => {
+                this.cookieService.deleteAll();
+                this.toastrService.success('Conta excluída', 'Sucesso')
+                this.router.navigate(['/auth/login'])
+            },
+            err => {
+                this.toastrService.error(err.code, 'Erro')
+                console.log('error:', err)
+            }
+        )
+    }
 }
