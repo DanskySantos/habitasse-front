@@ -12,8 +12,8 @@ export class UploadService extends SharedService {
         bucketName: 'habitasse',
         dirName: 'offers-img',
         region: 'us-east-2',
-        accessKeyId: 'environment.awsAccessKey',
-        secretAccessKey: 'environment.awsSecretKey',
+        accessKeyId: environment.awsAccessKey,
+        secretAccessKey: environment.awsSecretKey,
         s3Url: 'https://habitasse.s3.amazonaws.com/'
     }
     S3CustomClient: AWSS3UploadAshClient = new AWSS3UploadAshClient(this.config);
