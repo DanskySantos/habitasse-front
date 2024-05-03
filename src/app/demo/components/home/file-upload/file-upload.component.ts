@@ -6,10 +6,11 @@ import {UploadResponse} from "aws-s3-upload-ash/dist/types";
     selector: 'app-file-upload',
     templateUrl: './file-upload.component.html',
 })
-export class FileUploadComponent implements OnInit{
+export class FileUploadComponent implements OnInit {
 
     uploadedFiles: any[] = [];
-    filesOnMemory: any[] = [];
+    fileOnMemory: any;
+    filesToSendToApi: any;
 
     @Input('files')
     files?: any;
@@ -26,7 +27,8 @@ export class FileUploadComponent implements OnInit{
     }
 
     onSelect(event: any) {
-        this.filesOnMemory = event.currentFiles;
+        this.fileOnMemory = event.target.files[0];
+        this.onUpload();
     }
 
     async removeFile(file: any) {
@@ -41,15 +43,14 @@ export class FileUploadComponent implements OnInit{
     }
 
     async onUpload() {
-        for (const file of this.filesOnMemory) {
-            await this.uploadService.S3CustomClient
-                .uploadFile(file, file.type, undefined, file.name, "public-read")
-                .then((data: UploadResponse) => {
-                    this.filesOnMemory = [];
-                    this.uploadedFiles.push(data)
-                })
-                .catch((err: any) => console.error(err))
-        }
-        this.uploadedFilesToSave.emit(this.uploadedFiles);
+        await this.uploadService.S3CustomClient
+            .uploadFile(this.fileOnMemory, this.fileOnMemory.type, undefined, this.fileOnMemory.name, "public-read")
+            .then((data: UploadResponse) => {
+                this.uploadedFiles.push(data)
+                this.filesToSendToApi = data
+            })
+            .catch((err: any) => console.error(err))
+
+        this.uploadedFilesToSave.emit(this.filesToSendToApi);
     }
 }

@@ -46,7 +46,6 @@ export class ProfileUpdateComponent implements OnInit {
     setMaxDate() {
         const currentDate: Date = new Date();
         this.maxDate = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
-        console.log(this.maxDate)
     }
 
     updateUserProfile() {

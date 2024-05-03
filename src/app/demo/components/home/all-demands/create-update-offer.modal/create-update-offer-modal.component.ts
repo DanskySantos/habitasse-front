@@ -38,7 +38,6 @@ export class CreateUpdateOfferModalComponent implements OnInit {
             this.submited = true;
             this.offersService.createOffers(this.allDemandsOffers.value)
         }
-        console.log(this.allDemandsOffers.value)
         this.loading = true;
         setTimeout(() => {
             this.loading = false
@@ -47,18 +46,17 @@ export class CreateUpdateOfferModalComponent implements OnInit {
 
     createForm() {
         if (this.offer) {
-            console.log(this.offer.files.length)
             this.allDemandsOffers = new FormGroup({
                 demandId: new FormControl(this.demand?.id),
                 text: new FormControl(this.offer.text, [Validators.required]),
                 files: this.offer.files.length == 0 ? new FormArray([]) : new FormArray(
                     this.offer.files.map((fileItem: any) => {
                         return new FormGroup({
-                            bucket: new FormControl(fileItem.bucket, [Validators.required]),
-                            key: new FormControl(fileItem.key, [Validators.required]),
-                            location: new FormControl(fileItem.location, [Validators.required]),
-                            status: new FormControl(fileItem.status, [Validators.required]),
-                            body: new FormControl(fileItem.body, [Validators.required])
+                            bucket: new FormControl(fileItem.bucket),
+                            key: new FormControl(fileItem.key),
+                            location: new FormControl(fileItem.location),
+                            status: new FormControl(fileItem.status),
+                            body: new FormControl(fileItem.body)
                         });
                     })
                 )
@@ -73,16 +71,12 @@ export class CreateUpdateOfferModalComponent implements OnInit {
     }
 
     putImagesOnForm(event: any) {
-        console.log(event)
         let fileGroup = new FormGroup({
-            bucket: new FormControl(),
-            key: new FormControl(),
-            location: new FormControl(),
-            status: new FormControl(),
-            body: new FormControl()
-        });
-        event.forEach((fileItem: any) => {
-            fileGroup.patchValue(fileItem);
+            bucket: new FormControl(event.bucket),
+            key: new FormControl(event.key),
+            location: new FormControl(event.location),
+            status: new FormControl(event.status),
+            body: new FormControl(event.body)
         });
         (this.allDemandsOffers.get('files') as FormArray).push(fileGroup);
     }
