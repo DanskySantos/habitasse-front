@@ -121,7 +121,6 @@ export class UpdateDemandModalComponent implements OnInit {
             this.propertyForm.get('suggestedValueForRent')?.reset();
             this.propertyForm.get('suggestedValueForSeasonal')?.reset();
             this.propertyForm.get('suggestedValueForSale')?.setValidators([Validators.required]);
-            console.log(this.propertyForm)
         } else {
             this.propertyForm.get('suggestedValueForSale')?.clearValidators();
         }

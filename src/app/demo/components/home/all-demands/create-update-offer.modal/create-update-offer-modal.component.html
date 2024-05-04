@@ -63,13 +63,14 @@
                             </textarea>
                         </div>
                         <div>
-                            <app-file-upload [files]="getFiles" (uploadedFilesToSave)="putImagesOnForm($event)"></app-file-upload>
+                            <app-file-upload [files]="getFiles" (uploadedFilesToSave)="putImagesOnForm($event)" (removeImagesOnForm)="removeImagesOnForm($event)">
+                            </app-file-upload>
                         </div>
 
                     </div>
                     <div class="col-12 lg:col-6 sm:col-12 md:col-12 pt-4">
                         <p-button type="submit" [label]="getButtonLabel(this.offer)!"
-                            [disabled]="!allDemandsOffers.touched || this.submited" [loading]="loading"
+                            [disabled]="allDemandsOffers.invalid || this.submited" [loading]="loading"
                             class="w-auto mt-4" (click)="saveOffers()">
                         </p-button>
                     </div>

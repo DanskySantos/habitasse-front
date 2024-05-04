@@ -3,7 +3,6 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {OffersService} from '../../services/offers.service';
 import {DemandModel} from "../../../shared/models/demand.model";
 import {OffersModel} from "../../../shared/models/offers.model";
-import { FileUploadComponent } from '../../file-upload/file-upload.component';
 
 @Component({
     templateUrl: './create-update-offer-modal.component.html',
@@ -70,14 +69,25 @@ export class CreateUpdateOfferModalComponent implements OnInit {
         }
     }
 
+    removeImagesOnForm(event: any) {
+        const filesArray = this.allDemandsOffers.get('files') as FormArray;
+        const index = filesArray.value.findIndex((file: any) => file.key === event.key);
+        if (index !== -1) {
+            filesArray.removeAt(index);
+        }
+    }
+
     putImagesOnForm(event: any) {
-        let fileGroup = new FormGroup({
-            bucket: new FormControl(event.bucket),
-            key: new FormControl(event.key),
-            location: new FormControl(event.location),
-            status: new FormControl(event.status),
-            body: new FormControl(event.body)
-        });
+        let fileGroup;
+        if (event.key != null) {
+            fileGroup = new FormGroup({
+                bucket: new FormControl(event.bucket),
+                key: new FormControl(event.key),
+                location: new FormControl(event.location),
+                status: new FormControl(event.status),
+                body: new FormControl(event.body)
+            });
+        }
         (this.allDemandsOffers.get('files') as FormArray).push(fileGroup);
     }
 

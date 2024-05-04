@@ -11,12 +11,16 @@
                       [label]="'Selecionar Foto'"
                       (click)="fileInput.click()">
             </p-button>
+            <p-button class="mt-4"
+                      [label]="'Salvar fotos'"
+                      (click)="onUpload()">
+            </p-button>
         </div>
         <div *ngIf="this.uploadedFiles" class="mt-4">
             <div class="flex m-2 align-items-center justify-content-between"
                  *ngFor="let file of this.uploadedFiles">
                 <img class="mr-4" height="40px" width="40px" src="{{file.location}}" alt="">
-                <span>{{ file.key }}</span>
+                <span class="overflow-hidden text-overflow-ellipsis">{{ file.key }}</span>
                 <p-button (click)="removeFile(file)"
                           [label]="'Excluir'"
                           class="w-auto mt-4">
