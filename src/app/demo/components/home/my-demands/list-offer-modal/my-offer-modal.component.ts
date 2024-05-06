@@ -4,7 +4,6 @@ import {PageModel} from "../../../shared/models/page.model";
 import {OffersService} from "../../services/offers.service";
 
 import {ToastrService} from "ngx-toastr";
-import {CookieService} from 'ngx-cookie-service';
 import {DemandModel} from '../../../shared/models/demand.model';
 
 
@@ -28,10 +27,27 @@ export class ListOfferComponent implements OnInit {
     page: number = 0;
     size: number = 10;
     first: number = 0;
+    galleriaResponsiveOptions: any[] = [
+        {
+            breakpoint: '1024px',
+            numVisible: 5
+        },
+        {
+            breakpoint: '960px',
+            numVisible: 4
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 3
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1
+        }
+    ];
 
     constructor(public offersService: OffersService,
-                private toastrService: ToastrService,
-                private cookieService: CookieService) {
+                private toastrService: ToastrService) {
     }
 
     ngOnInit(): void {

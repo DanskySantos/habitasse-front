@@ -1,7 +1,8 @@
 <div class="">
     <div class="flex-column mb-3">
-        <div class="flex justify-content-between w-full">
-            <span class="text-900 text-xl font-bold mb-5 block">Todas demandas</span>
+        <div class="flex justify-content-between w-full flex-column">
+            <span class="text-900 text-xl font-bold mb-2 block">Todas demandas</span>
+            <span class="text-600 text-sm font-bold mb-5 block">Quantidade de demandas: {{totalElements}}</span>
         </div>
         <p-accordion>
             <p-accordionTab header="Filtros" [selected]="false" class="line-height-3 m-0">
@@ -251,7 +252,6 @@
             </div>
         </div>
     </div>
-    
     <div class="card flex justify-content-center">
         <p-paginator (onPageChange)="onPageChange($event)"
                      [first]="first"

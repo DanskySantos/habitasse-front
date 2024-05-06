@@ -29,14 +29,15 @@ export class AuthService extends SharedService {
         const body = JSON.stringify(credentials);
 
         this.http.post(this.apiURL + 'auth/authenticate', body, {headers}).subscribe(
-            async response => {
-                await this.setCookies(response)
+            async (response: any) => {
+                await this.setCookies(response.body)
                 this.toastrService.success('Login Concluído', 'Sucesso')
-                const model = Object.assign(new AuthModel(), response);
+                const model = Object.assign(new AuthModel(), response.body);
                 await this.navigate(model.userRole);
             },
             error => {
-                console.error('Error', error.error);
+                this.toastrService.error(error.error, 'Erro')
+                console.error('Error', error);
             }
         );
     }
@@ -54,6 +55,7 @@ export class AuthService extends SharedService {
                 await this.navigate(model.userRole);
             },
             error => {
+                this.toastrService.error(error.error, 'Erro')
                 console.error('Error', error.error);
             });
     }

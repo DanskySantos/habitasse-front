@@ -16,11 +16,10 @@ import {AllDemandsComponent} from './all-demands/all-demands.component';
 import {DeleteDemandModalComponent} from './my-demands/delete-demand-modal/delete-demand-modal.component';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {NgxUiLoaderModule} from 'ngx-ui-loader';
-import {
-    CreateUpdateOfferModalComponent
-} from './all-demands/create-update-offer.modal/create-update-offer-modal.component';
+import {CreateUpdateOfferModalComponent} from './all-demands/create-update-offer.modal/create-update-offer-modal.component';
 import {ListOfferComponent} from './my-demands/list-offer-modal/my-offer-modal.component';
 import {FileUploadComponent} from './file-upload/file-upload.component';
+import {GalleriaModule} from "primeng/galleria";
 
 @NgModule({
     imports: [
@@ -36,6 +35,7 @@ import {FileUploadComponent} from './file-upload/file-upload.component';
         ProfileModule,
         AccordionModule,
         NgxUiLoaderModule,
+        GalleriaModule,
     ],
     exports: [
         HomeComponent,
