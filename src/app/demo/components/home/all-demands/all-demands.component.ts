@@ -18,12 +18,10 @@ import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {CreateUpdateOfferModalComponent} from './create-update-offer.modal/create-update-offer-modal.component';
 import {OffersService} from '../services/offers.service';
 import {OffersModel} from "../../shared/models/offers.model";
-import {color} from "chart.js/helpers";
 
 @Component({
     templateUrl: './all-demands.component.html',
-    selector: 'app-all-demands',
-
+    selector: 'app-all-demands'
 })
 export class AllDemandsComponent implements OnInit {
 
@@ -71,6 +69,7 @@ export class AllDemandsComponent implements OnInit {
             suggestedValueForSeasonal: new FormControl(null),
             state: new FormControl(null),
             city: new FormControl(null),
+            userId: new FormControl(false)
         });
         this.filterForm.get('id')?.valueChanges.subscribe((value) => {
             this.filterForm.get('id')?.setValue(value, { emitEvent: false });

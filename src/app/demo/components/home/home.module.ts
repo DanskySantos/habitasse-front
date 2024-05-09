@@ -20,6 +20,7 @@ import {CreateUpdateOfferModalComponent} from './all-demands/create-update-offer
 import {ListOfferComponent} from './my-demands/list-offer-modal/my-offer-modal.component';
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {GalleriaModule} from "primeng/galleria";
+import {InputSwitchModule} from "primeng/inputswitch";
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import {GalleriaModule} from "primeng/galleria";
         AccordionModule,
         NgxUiLoaderModule,
         GalleriaModule,
+        InputSwitchModule,
     ],
     exports: [
         HomeComponent,
