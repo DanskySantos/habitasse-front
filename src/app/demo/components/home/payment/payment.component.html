@@ -1,0 +1,26 @@
+<div class="grid">
+    <div class="col-12 lg: mt-2">
+        <div class=" grid formgrid p-fluid m-2 h-full">
+            <div class="col-12 xl:col-3 lg:col-6 md:h-auto mb-5" *ngFor="let plan of plans">
+                <div style="background: var(--primary-color);"
+                     class="card flex flex-column justify-content-between cursor-pointer"
+                     (click)="buyPlan(plan.link + '?prefilled_email=' + userEmail + '&client_reference_id=' + userId)">
+                    <div>
+                        <h5 class="text-0">{{ plan.name }}</h5>
+                        <span class="text-0">{{ plan.description }}</span>
+                        <div class="flex flex-column justify-content-center align-items-center mt-4 mb-4">
+                            <h4 class="text-0 m-0">Valor: {{ plan.value }}</h4>
+                            <h6 class="text-0 m-0">Duração: {{ plan.period }}</h6>
+                            <h5 class="text-0 m-0 mt-2" *ngIf="plan.discount">{{ plan.discount }}</h5>
+                        </div>
+                        <div class="flex flex-column card">
+                            <div *ngFor="let benefit of plan.benefits">
+                                <span>{{ benefit.text }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

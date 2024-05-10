@@ -5,6 +5,7 @@ import { PropertyDemandComponent } from './property-demand/property-demand.compo
 import {MyDemandsComponent} from "./my-demands/my-demands.component";
 import {AllDemandsComponent} from "./all-demands/all-demands.component";
 import {AccessGuard} from "../guards/access.guard";
+import {PaymentComponent} from "./payment/payment.component";
 
 @NgModule({
     imports: [RouterModule.forChild([
@@ -30,6 +31,12 @@ import {AccessGuard} from "../guards/access.guard";
             canActivate: [(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(AccessGuard).canActivate(next, state)],
             data: {breadcrumb: 'Todas Demandas'},
             component: AllDemandsComponent
+        },
+        {
+            path: 'payments',
+            canActivate: [(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(AccessGuard).canActivate(next, state)],
+            data: {breadcrumb: 'Pagamento'},
+            component: PaymentComponent
         }
     ])],
     exports: [RouterModule]

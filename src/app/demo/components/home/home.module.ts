@@ -21,6 +21,7 @@ import {ListOfferComponent} from './my-demands/list-offer-modal/my-offer-modal.c
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {GalleriaModule} from "primeng/galleria";
 import {InputSwitchModule} from "primeng/inputswitch";
+import {PaymentComponent} from "./payment/payment.component";
 
 @NgModule({
     imports: [
@@ -49,7 +50,7 @@ import {InputSwitchModule} from "primeng/inputswitch";
         CreateUpdateOfferModalComponent,
         ListOfferComponent,
         FileUploadComponent,
-
+        PaymentComponent
     ],
     declarations: [
         HomeComponent,
@@ -60,7 +61,8 @@ import {InputSwitchModule} from "primeng/inputswitch";
         AllDemandsComponent,
         CreateUpdateOfferModalComponent,
         ListOfferComponent,
-        FileUploadComponent
+        FileUploadComponent,
+        PaymentComponent
     ]
 })
 export class HomeModule {

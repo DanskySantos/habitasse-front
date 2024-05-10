@@ -43,6 +43,15 @@ export class AccessGuard implements CanActivate {
                 return false;
             }
         }
+
+        if (route.routeConfig?.path === 'payments') {
+            if (this.accessService.hasAccessCO()) {
+                return true;
+            } else {
+                this.router.navigateByUrl('/auth/login');
+                return false;
+            }
+        }
         return true;
     }
 }

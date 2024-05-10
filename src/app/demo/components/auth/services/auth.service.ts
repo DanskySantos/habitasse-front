@@ -31,8 +31,8 @@ export class AuthService extends SharedService {
         this.http.post(this.apiURL + 'auth/authenticate', body, {headers}).subscribe(
             async (response: any) => {
                 await this.setCookies(response.body)
-                this.toastrService.success('Login Concluído', 'Sucesso')
-                const model = Object.assign(new AuthModel(), response.body);
+                await this.toastrService.success('Login Concluído', 'Sucesso')
+                const model = await Object.assign(new AuthModel(), response.body);
                 await this.navigate(model.userRole);
             },
             error => {
@@ -50,8 +50,8 @@ export class AuthService extends SharedService {
         this.http.post(this.apiURL + 'auth/register', body, {headers}).subscribe(
             async response => {
                 await this.setCookies(response);
-                this.toastrService.success('Registro Concluído', 'Sucesso')
-                const model = Object.assign(new AuthModel(), response);
+                await this.toastrService.success('Registro Concluído', 'Sucesso')
+                const model = await Object.assign(new AuthModel(), response);
                 await this.navigate(model.userRole);
             },
             error => {
@@ -90,12 +90,14 @@ export class AuthService extends SharedService {
     }
 
     async setCookies(response: any) {
+        this.cookieService.deleteAll();
         const auth = Object.assign(new AuthModel(), response);
         this.cookieService.set('access_token', auth.access_token);
         this.cookieService.set('refresh_token', auth.refresh_token);
         this.cookieService.set('username', auth.username);
         this.cookieService.set('userId', auth.userId);
         this.cookieService.set('userRole', auth.userRole);
+        this.cookieService.set('remainingDays', String(response.remainingDays));
         return auth;
     }
 }
