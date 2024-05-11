@@ -4,7 +4,7 @@
             <span class="text-900 text-xl font-bold mb-2 block">Todas demandas</span>
             <span class="text-600 text-sm font-bold mb-5 block">Quantidade de demandas: {{ totalElements }}</span>
         </div>
-        <p-accordion *ngIf="remainingDays != null && remainingDays > 0">
+        <p-accordion *ngIf="remainingDays != 'null' && remainingDays != '0'">
             <p-accordionTab header="Filtros" [selected]="false" class="line-height-3 m-0">
                 <form [formGroup]="filterForm" class="mt-3 flex justify-content-between grid formgrid p-fluid">
                     <div class="flex mb-5 col-12 md:col-6 field">
@@ -179,7 +179,7 @@
         </p-accordion>
         <div class="cursor-pointer card flex justify-content-between w-full flex-column"
              style="background: var(--primary-color)"
-             *ngIf="remainingDays == null || remainingDays == 0"
+             *ngIf="remainingDays == 'null' || remainingDays == '0'"
              (click)="navigateToPayment()">
             <span class="text-0 text-xl font-bold mb-2 block">Clique aqui para ativar seu plano e tenha acesso as últimas demandas do mercado!</span>
         </div>
@@ -250,21 +250,24 @@
                                 pButton pRipple
                                 class="{{findOffer(demand)?.deleted === true ? 'w-full mt-3 p-button-danger' : 'w-full mt-3'}}"
                                 [label]="getButtonLabel(findOffer(demand)!)!"
-                                icon="pi pi-arrow-right" iconPos="right">
-                            <img
-                                [ngSrc]="demand.offers.length == 0 ? './assets/app/images/icons/icons8-plus-24.png' : './assets/app/images/icons/Group.svg'"
-                                alt="house"
-                                style="color:white"
-                                class="align-self-center" height="19" width="19">
+                                icon="pi pi-arrow-right" iconPos="right"
+                                [disabled]="remainingDays == 'null' || remainingDays == '0'">
+                            <img [ngSrc]="demand.offers.length == 0
+                                 ? './assets/app/images/icons/icons8-plus-24.png'
+                                 : './assets/app/images/icons/Group.svg'"
+                                 alt="house"
+                                 style="color:white"
+                                 class="align-self-center" height="19" width="19">
                         </button>
                     </div>
                     <app-create-update-offer-modal #modal [demand]="demand"
-                                                   [offer]="findOffer(demand)"></app-create-update-offer-modal>
+                                                   [offer]="findOffer(demand)">
+                    </app-create-update-offer-modal>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card flex justify-content-center" *ngIf="remainingDays != null && remainingDays > 0">
+    <div class="card flex justify-content-center" *ngIf="remainingDays != 'null' && remainingDays != '0'">
         <p-paginator (onPageChange)="onPageChange($event)"
                      [first]="first"
                      [rows]="size"

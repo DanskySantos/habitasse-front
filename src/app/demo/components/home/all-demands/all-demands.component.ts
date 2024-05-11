@@ -46,7 +46,7 @@ export class AllDemandsComponent implements OnInit {
     states?: any;
     cities?: any;
     user?: UserModel;
-    remainingDays: number = parseInt(this.cookieService.get('remainingDays'));
+    remainingDays: any;
 
     constructor(public layoutService: LayoutService,
                 private addressService: AddressService,
@@ -68,6 +68,7 @@ export class AllDemandsComponent implements OnInit {
             this.user = data;
             this.cookieService.set('remainingDays', String(data.remainingDays));
             this.cookieService.set('userEmail', data.email);
+            this.remainingDays = this.cookieService.get('remainingDays')
             await this.getFilteredDemands(this.page, this.size);
         });
     }
