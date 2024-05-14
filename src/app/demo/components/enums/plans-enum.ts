@@ -37,6 +37,7 @@ export const benefits = {
 
 export const PlansEnum = {
     BASICO: {
+        id: 1,
         name: "Plano Básico",
         link: "https://buy.stripe.com/28oeXo1AFddR18s3cg",
         value: "R$ 69,99",
@@ -46,6 +47,7 @@ export const PlansEnum = {
         discount: null
     },
     ESSENCIAL: {
+        id: 2,
         name: "Plano Essencial",
         link: "https://buy.stripe.com/5kA16y9377TxdVe005",
         value: "R$ 119,99",
@@ -55,6 +57,7 @@ export const PlansEnum = {
         discount: null
     },
     PRO: {
+        id: 3,
         name: "Plano Pro",
         link: "https://buy.stripe.com/7sIaH8frva1FaJ28wC",
         value: "R$ 575,99",
@@ -64,6 +67,7 @@ export const PlansEnum = {
         discount: "Desconto de 20%"
     },
     PREMIUM: {
+        id: 4,
         name: "Plano Premium",
         link: "https://buy.stripe.com/cN202u1AFgq3eZi5kr",
         value: "R$ 1.150,99",
