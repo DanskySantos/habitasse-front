@@ -1,15 +1,17 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UploadService} from "../services/upload.service";
 import {UploadResponse} from "aws-s3-upload-ash/dist/types";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-file-upload',
     templateUrl: './file-upload.component.html',
 })
-export class FileUploadComponent implements OnInit{
+export class FileUploadComponent implements OnInit {
 
     uploadedFiles: any[] = [];
     filesOnMemory: any[] = [];
+    filesToSendToApi: any;
 
     @Input('files')
     files?: any;
@@ -17,7 +19,11 @@ export class FileUploadComponent implements OnInit{
     @Output('uploadedFilesToSave')
     uploadedFilesToSave = new EventEmitter<any>();
 
-    constructor(private uploadService: UploadService) {
+    @Output('removeImagesOnForm')
+    removeImagesOnForm = new EventEmitter<any>();
+
+    constructor(private uploadService: UploadService,
+                private toastrService: ToastrService) {
     }
 
     ngOnInit() {
@@ -26,7 +32,8 @@ export class FileUploadComponent implements OnInit{
     }
 
     onSelect(event: any) {
-        this.filesOnMemory = event.currentFiles;
+        this.toastrService.success('Clique em Salvar fotos e depois salve a proposta', 'Foto adicionada')
+        this.filesOnMemory.push(event.target.files[0]);
     }
 
     async removeFile(file: any) {
@@ -35,9 +42,10 @@ export class FileUploadComponent implements OnInit{
             .deleteFile(newStr)
             .then((data: UploadResponse) => {
                 this.uploadedFiles = this.uploadedFiles.filter((uploadedFile: any) => uploadedFile.key !== file.key);
+                console.log(this.uploadedFiles)
             })
             .catch((err: any) => console.error(err))
-        this.uploadedFilesToSave.emit(this.uploadedFiles);
+        this.removeImagesOnForm.emit(file);
     }
 
     async onUpload() {
@@ -45,11 +53,11 @@ export class FileUploadComponent implements OnInit{
             await this.uploadService.S3CustomClient
                 .uploadFile(file, file.type, undefined, file.name, "public-read")
                 .then((data: UploadResponse) => {
-                    this.filesOnMemory = [];
+                    this.filesOnMemory = []
                     this.uploadedFiles.push(data)
+                    this.uploadedFilesToSave.emit(data);
                 })
                 .catch((err: any) => console.error(err))
         }
-        this.uploadedFilesToSave.emit(this.uploadedFiles);
     }
 }

@@ -18,12 +18,13 @@ import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 import {CreateUpdateOfferModalComponent} from './create-update-offer.modal/create-update-offer-modal.component';
 import {OffersService} from '../services/offers.service';
 import {OffersModel} from "../../shared/models/offers.model";
-import {color} from "chart.js/helpers";
+import {UserService} from "../../profile/service/user-service";
+import {UserModel} from "../../shared/models/user.model";
+import {Router} from "@angular/router";
 
 @Component({
     templateUrl: './all-demands.component.html',
-    selector: 'app-all-demands',
-
+    selector: 'app-all-demands'
 })
 export class AllDemandsComponent implements OnInit {
 
@@ -44,18 +45,32 @@ export class AllDemandsComponent implements OnInit {
     suggestedValueForSeasonal?: string[];
     states?: any;
     cities?: any;
+    user?: UserModel;
+    remainingDays: any;
 
     constructor(public layoutService: LayoutService,
                 private addressService: AddressService,
                 private demandService: DemandService,
                 private cookieService: NgxCookieService,
-                protected offersService: OffersService) {
+                protected offersService: OffersService,
+                protected userService: UserService,
+                private router: Router) {
         this.createForm();
+        this.getRemainingDays();
         this.startLists();
-        this.getFilteredDemands(this.page, this.size);
     }
 
     ngOnInit(): void {
+    }
+
+    async getRemainingDays() {
+        this.userService.getUserProfile().subscribe(async data => {
+            this.user = data;
+            this.cookieService.set('remainingDays', String(data.remainingDays));
+            this.cookieService.set('userEmail', data.email);
+            this.remainingDays = this.cookieService.get('remainingDays')
+            await this.getFilteredDemands(this.page, this.size);
+        });
     }
 
     private createForm() {
@@ -71,9 +86,10 @@ export class AllDemandsComponent implements OnInit {
             suggestedValueForSeasonal: new FormControl(null),
             state: new FormControl(null),
             city: new FormControl(null),
+            userId: new FormControl(false)
         });
         this.filterForm.get('id')?.valueChanges.subscribe((value) => {
-            this.filterForm.get('id')?.setValue(value, { emitEvent: false });
+            this.filterForm.get('id')?.setValue(value, {emitEvent: false});
             this.filter();
         });
     }
@@ -85,8 +101,8 @@ export class AllDemandsComponent implements OnInit {
         this.getFilteredDemands(event.page!, event.rows!)
     }
 
-    private getFilteredDemands(first: number, rows: number) {
-        this.demandService.getFilteredDemands(first, rows, this.filterForm.value).subscribe((data: PageModel) => {
+    private async getFilteredDemands(first: number, rows: number) {
+        this.demandService.getFilteredDemands(first, rows, this.filterForm.value).subscribe(async (data: PageModel) => {
                 this.demands = data.content
                 this.totalElements = data.totalElements
             }
@@ -143,5 +159,9 @@ export class AllDemandsComponent implements OnInit {
 
     get selectedContractType() {
         return this.filterForm.get('contractType')!;
+    }
+
+    navigateToPayment() {
+        this.router.navigateByUrl('home/payments');
     }
 }

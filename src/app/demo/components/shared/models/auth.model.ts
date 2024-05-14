@@ -4,6 +4,7 @@ export class AuthModel {
     username!: string;
     userId!: string;
     userRole!: string;
+    remainingDays!: number;
 
     constructor() {
     }
