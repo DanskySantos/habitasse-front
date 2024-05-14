@@ -38,7 +38,7 @@ export const benefits = {
 export const PlansEnum = {
     BASICO: {
         name: "Plano Básico",
-        link: "https://buy.stripe.com/test_bIYeW34wP3neblufZ4",
+        link: "https://buy.stripe.com/28oeXo1AFddR18s3cg",
         value: "R$ 69,99",
         period: "15 dias",
         description: "Ideal para proprietários de múltiplos imóveis que ocasionalmente precisam aluga-los.",
