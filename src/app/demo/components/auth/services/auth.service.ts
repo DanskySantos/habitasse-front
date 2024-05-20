@@ -64,7 +64,7 @@ export class AuthService extends SharedService {
         if (userRole === 'USER_CO') {
             await this.router.navigateByUrl('/home/all-demands')
         } if (userRole === 'USER_CD') {
-            await this.router.navigateByUrl('/home/my-demands')
+            await this.router.navigateByUrl('/home')
         }
     }
 

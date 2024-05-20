@@ -23,10 +23,12 @@ export class SharedService {
     }
 
     getBoolean(boolean: any): any {
-        if (boolean == true)
+        if (boolean == 'YES')
             return "Sim"
-        if (boolean == false)
+        if (boolean == 'NO')
             return "Não"
+        if (boolean == 'INDIFFERENT')
+            return "Indiferente"
     }
 
     getformatData(dataString: string) {
