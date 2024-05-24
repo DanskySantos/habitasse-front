@@ -1,5 +1,5 @@
 export const environment = {
-    apiUrl: 'https://habitasse-back-c34b7e694c02.herokuapp.com/api/v1/',
+    apiUrl: 'http://localhost:8080/api/v1/',
     clientId: 'qwsdfgsdfgsdetersadf',
     clientSecret: '@20242opasijopdjoipfasdjpio3%',
     awsAccessKey: 'AKIAQ3EGVHXCMI5HLS7M',
