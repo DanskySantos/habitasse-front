@@ -15,76 +15,81 @@
         <div class="col-12 lg:col-10 w-full flex justify-content-evenly">
             <div class="grid formgrid p-fluid w-full">
                 <div class="col-12 xl:col-3 lg:col-6 mb-4" *ngFor="let demand of demands">
-                    <div class="card h-full">
-                        <div class="flex align-items-center mb-4 justify-content-between">
-                            <p class="m-0" style="color: #9E9E9E"
-                               title="Data de criação">{{ demandService.getformatData(demand.creationDate) }}</p>
-                            <div class="flex flex-row">
-                                <img (click)="modalExcluir(modaldelete)" ngSrc="./assets/app/images/icons/delete.png"
-                                     alt="delete"
-                                     title="Deletar"
-                                     class="align-self-center mr-4 cursor-pointer" height="24" width="24">
-                                <img (click)="editModal(modal)" ngSrc="./assets/app/images/icons/edit.png"
-                                     alt="edit"
-                                     title="Editar"
-                                     class="align-self-center cursor-pointer" height="24" width="24">
+                    <div class="card h-full flex flex-column justify-content-between">
+                        <div>
+                            <div class="flex align-items-center mb-4 justify-content-between">
+                                <p class="m-0" style="color: #9E9E9E"
+                                   title="Data de criação">{{ demandService.getformatData(demand.creationDate) }}</p>
+                                <div class="flex flex-row">
+                                    <img (click)="modalExcluir(modaldelete)" ngSrc="./assets/app/images/icons/delete.png"
+                                         alt="delete"
+                                         title="Deletar"
+                                         class="align-self-center mr-4 cursor-pointer" height="24" width="24">
+                                    <img (click)="editModal(modal)" ngSrc="./assets/app/images/icons/edit.png"
+                                         alt="edit"
+                                         title="Editar"
+                                         class="align-self-center cursor-pointer" height="24" width="24">
 
+                                </div>
                             </div>
-                        </div>
-                        <h5 class="p-2"
-                            title="Tipo de contrato">{{ demandService.getContractType(demand.propertyDemand.contractType) }}</h5>
-                        <ul class="list-none p-0 m-0">
+                            <h5 class="p-2"
+                                title="Tipo de contrato">{{ demandService.getContractType(demand.propertyDemand.contractType) }}</h5>
+                            <ul class="list-none p-0 m-0">
                             <span class="flex p-2 align-items-center mb-2" title="Identificador">
                                 <img ngSrc="./assets/app/images/icons/id.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
                                 <span>Id - {{ demand.id }}</span>
                             </span>
-                            <span class="flex p-2 align-items-center mb-2" title="Tipo de propriedade">
+                                <span class="flex p-2 align-items-center mb-2" title="Tipo de propriedade">
                                 <img ngSrc="./assets/app/images/icons/house.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
                                 <span>Tipo de imóvel - {{ demandService.getPropertyType(demand.propertyDemand.propertyType) }}</span>
                             </span>
-                            <span class="flex p-2 align-items-center mb-2" title="Localidade">
+                                <span class="flex p-2 align-items-center mb-2" title="Localidade">
                                 <img ngSrc="./assets/app/images/icons/location_on.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
                                 <span>Localidade - {{ demandService.getLocation(demand.propertyDemand.address) }}</span>
                             </span>
-                            <span class="flex p-2 align-items-center mb-2" title="Valor desejado">
+                                <span class="flex p-2 align-items-center mb-2" title="Valor desejado">
                                 <img ngSrc="./assets/app/images/icons/monetization_on.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
                                 <span>Valor até - {{ demandService.getValue(demand.propertyDemand) }}</span>
                             </span>
-                            <span class="flex p-2 align-items-center mb-2" title="Quantidade de quartos">
+                                <span class="flex p-2 align-items-center mb-2" title="Quantidade de quartos"
+                                      *ngIf="demandService.getBedroomsNumber(demand.propertyDemand.bedroomsNumber) != null">
                                 <img ngSrc="./assets/app/images/icons/hotel.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
                                 <span>Quartos - {{ demandService.getBedroomsNumber(demand.propertyDemand.bedroomsNumber) }}</span>
                             </span>
-                            <span class="flex p-2 align-items-center mb-2" title="Mobiliado">
+                                <span class="flex p-2 align-items-center mb-2" title="Mobiliado"
+                                      *ngIf="demandService.getBoolean(demand.propertyDemand.furnished) != null">
                                 <img ngSrc="./assets/app/images/icons/kitchen.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
                                 <span>Mobiliado - {{ demandService.getBoolean(demand.propertyDemand.furnished) }}</span>
                             </span>
-                            <span class="flex p-2 align-items-center mb-2" title="Permite animais">
+                                <span class="flex p-2 align-items-center mb-2" title="Permite animais"
+                                      *ngIf="demandService.getBoolean(demand.propertyDemand.furnished) != null">
                                 <img ngSrc="./assets/app/images/icons/pets.png"
                                      alt="house"
                                      class="align-self-center mr-2" height="24" width="24">
                                 <span>Pet - {{ demandService.getBoolean(demand.propertyDemand.petFriendly) }}</span>
                             </span>
-                            <div class="flex surface-overlay border-round w-full overflow-auto mb-2 p-2"
-                                 title="Comentários">
-                                <img ngSrc="./assets/app/images/icons/comment.png"
-                                     alt="house"
-                                     class="align-self-center mr-2" height="24" width="24">
-                                <p class="white-space-normal">Comentarios
-                                    - {{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</p>
-                            </div>
-                        </ul>
+                                <div class="flex surface-overlay border-round w-full overflow-auto mb-2 p-2"
+                                     title="Comentários">
+                                    <img ngSrc="./assets/app/images/icons/comment.png"
+                                         alt="house"
+                                         class="align-self-center mr-2" height="24" width="24">
+                                    <p class="white-space-normal">Comentarios
+                                        - {{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</p>
+                                </div>
+                            </ul>
+                        </div>
                         <button (click)="allOffersModal(modaloffer)" type="button" pButton pRipple class="w-full mt-3 "
                                 [disabled]="demand.offers.length == 0"
                                 label="{{demand.offers.length > 0 ? filterActiveOffers(demand.offers).length + ' proposta(s)' : 'Sem propostas'}}"

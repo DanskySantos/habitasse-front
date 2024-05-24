@@ -74,19 +74,23 @@ export class UpdateDemandModalComponent implements OnInit {
             id: new FormControl(this.demandData?.id, [Validators.required]),
             contractType: new FormControl(this.demandService.getContractType(this.demandData!.propertyDemand!.contractType), [Validators.required]),
             propertyType: new FormControl(this.demandService.getPropertyType(this.demandData!.propertyDemand!.propertyType), [Validators.required]),
-            bedroomsNumber: new FormControl(this.demandService.getBedroomsNumber(this.demandData!.propertyDemand!.bedroomsNumber), [Validators.required]),
-            furnished: new FormControl(this.demandService.getBoolean(this.demandData!.propertyDemand!.furnished), [Validators.required]),
-            petFriendly: new FormControl(this.demandService.getBoolean(this.demandData!.propertyDemand!.petFriendly), [Validators.required]),
+            bedroomsNumber: new FormControl(this.demandService.getBedroomsNumber(this.demandData!.propertyDemand!.bedroomsNumber ? this.demandData!.propertyDemand!.bedroomsNumber : '')),
+            furnished: new FormControl(this.demandService.getBoolean(this.demandData!.propertyDemand!.furnished ? this.demandData!.propertyDemand!.furnished : '')),
+            petFriendly: new FormControl(this.demandService.getBoolean(this.demandData!.propertyDemand!.petFriendly ? this.demandData!.propertyDemand!.petFriendly : '')),
             suggestedValueForRent: new FormControl(this.demandService.getValueForRent(this.demandData!.propertyDemand!.suggestedValueForRent ? this.demandData!.propertyDemand!.suggestedValueForRent : '')),
             suggestedValueForSale: new FormControl(this.demandService.getValueForSale(this.demandData!.propertyDemand!.suggestedValueForSale ? this.demandData!.propertyDemand!.suggestedValueForSale : '')),
             suggestedValueForSeasonal: new FormControl(this.demandService.getValueForSeasonal(this.demandData!.propertyDemand!.suggestedValueForSeasonal ? this.demandData!.propertyDemand!.suggestedValueForSeasonal : '')),
             state: new FormControl(this.demandData!.propertyDemand!.address!.state, [Validators.required]),
             city: new FormControl(this.demandData!.propertyDemand!.address!.city, [Validators.required]),
-            annotation: new FormControl(this.demandData!.annotation ? this.demandData!.annotation : '', [Validators.required]),
+            annotation: new FormControl(this.demandData!.annotation ? this.demandData!.annotation : ''),
         });
         this.propertyForm.get('contractType')?.valueChanges.subscribe(contractType => {
             this.setValidatorsBasedOnContractType(contractType);
         });
+        this.propertyForm.get('propertyType')?.valueChanges.subscribe(propertyType => {
+            this.setValidatorsBasedOnPropertyType(propertyType);
+        });
+        this.propertyForm.markAllAsTouched()
     }
 
     filterCities(event: any) {
@@ -138,7 +142,30 @@ export class UpdateDemandModalComponent implements OnInit {
         this.propertyForm.get('suggestedValueForSeasonal')?.updateValueAndValidity();
     }
 
+    private setValidatorsBasedOnPropertyType(propertyType: string | null) {
+        if (propertyType !== 'Loteamento') {
+            this.propertyForm.get('bedroomsNumber')?.setValidators([Validators.required]);
+            this.propertyForm.get('furnished')?.setValidators([Validators.required]);
+            this.propertyForm.get('petFriendly')?.setValidators([Validators.required]);
+        } else {
+            this.propertyForm.get('bedroomsNumber')?.clearValidators();
+            this.propertyForm.get('furnished')?.clearValidators();
+            this.propertyForm.get('petFriendly')?.clearValidators();
+        }
+
+        this.propertyForm.get('bedroomsNumber')?.reset()
+        this.propertyForm.get('furnished')?.reset()
+        this.propertyForm.get('petFriendly')?.reset()
+        this.propertyForm.get('bedroomsNumber')?.updateValueAndValidity();
+        this.propertyForm.get('furnished')?.updateValueAndValidity();
+        this.propertyForm.get('petFriendly')?.updateValueAndValidity();
+    }
+
     get selectedContractType() {
         return this.propertyForm.get('contractType')!;
+    }
+
+    get selectedPropertyType() {
+        return this.propertyForm.get('propertyType')!.value;
     }
 }

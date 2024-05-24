@@ -73,9 +73,9 @@ export class PropertyDemandComponent implements OnInit {
         this.propertyForm = new FormGroup({
             contractType: new FormControl(null, [Validators.required]),
             propertyType: new FormControl(null, [Validators.required]),
-            bedroomsNumber: new FormControl(null, [Validators.required]),
-            furnished: new FormControl(null, [Validators.required]),
-            petFriendly: new FormControl(null, [Validators.required]),
+            bedroomsNumber: new FormControl(null),
+            furnished: new FormControl(null),
+            petFriendly: new FormControl(null),
             suggestedValueForRent: new FormControl(null),
             suggestedValueForSale: new FormControl(null),
             suggestedValueForSeasonal: new FormControl(null),
@@ -85,6 +85,9 @@ export class PropertyDemandComponent implements OnInit {
         });
         this.propertyForm.get('contractType')?.valueChanges.subscribe(contractType => {
             this.setValidatorsBasedOnContractType(contractType);
+        });
+        this.propertyForm.get('propertyType')?.valueChanges.subscribe(propertyType => {
+            this.setValidatorsBasedOnPropertyType(propertyType);
         });
     }
 
@@ -110,6 +113,22 @@ export class PropertyDemandComponent implements OnInit {
         this.propertyForm.get('suggestedValueForRent')?.updateValueAndValidity();
         this.propertyForm.get('suggestedValueForSale')?.updateValueAndValidity();
         this.propertyForm.get('suggestedValueForSeasonal')?.updateValueAndValidity();
+    }
+
+    private setValidatorsBasedOnPropertyType(propertyType: string | null) {
+        if (propertyType !== 'Loteamento') {
+            this.propertyForm.get('bedroomsNumber')?.setValidators([Validators.required]);
+            this.propertyForm.get('furnished')?.setValidators([Validators.required]);
+            this.propertyForm.get('petFriendly')?.setValidators([Validators.required]);
+        } else {
+            this.propertyForm.get('bedroomsNumber')?.clearValidators();
+            this.propertyForm.get('furnished')?.clearValidators();
+            this.propertyForm.get('petFriendly')?.clearValidators();
+        }
+
+        this.propertyForm.get('bedroomsNumber')?.updateValueAndValidity();
+        this.propertyForm.get('furnished')?.updateValueAndValidity();
+        this.propertyForm.get('petFriendly')?.updateValueAndValidity();
     }
 
     get selectedContractType() {

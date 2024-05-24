@@ -34,7 +34,8 @@
                         <label for="float-label">Tipo de Imóvel</label>
                     </span>
                 </div>
-                <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                     *ngIf="selectedPropertyType.value !== 'Loteamento'">
                     <span class="field p-float-label">
                         <p-dropdown
                             formControlName="bedroomsNumber"
@@ -47,7 +48,8 @@
                         <label for="float-label">Quantidade de Quartos</label>
                     </span>
                 </div>
-                <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                     *ngIf="selectedPropertyType.value !== 'Loteamento'">
                     <span class="field p-float-label">
                         <p-dropdown
                             formControlName="furnished"
@@ -89,7 +91,8 @@
                         <label for="float-label">Cidade</label>
                     </span>
                 </div>
-                <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12">
+                <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                     *ngIf="selectedPropertyType.value !== 'Loteamento'">
                     <span class="field p-float-label">
                         <p-dropdown
                             formControlName="petFriendly"
@@ -102,9 +105,7 @@
                         <label for="float-label">Permite Pet</label>
                     </span>
                 </div>
-                
-                <div
-                    class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
                     *ngIf="selectedContractType.value === 'Locação'">
                     <span class="field p-float-label">
                         <p-dropdown
@@ -118,8 +119,7 @@
                         <label for="float-label">Valor até</label>
                     </span>
                 </div>
-                <div
-                    class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
                     *ngIf="selectedContractType.value === 'Venda'">
                     <span class="field p-float-label">
                         <p-dropdown
@@ -133,8 +133,7 @@
                         <label for="float-label">Valor até</label>
                     </span>
                 </div>
-                <div
-                    class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
+                <div class="mb-3 col-12 lg:col-6 md:col-6 sm:col-12"
                     *ngIf="selectedContractType.value === 'Temporada'">
                     <span class="field p-float-label">
                         <p-dropdown
