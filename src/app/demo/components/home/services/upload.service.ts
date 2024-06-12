@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SharedService} from "../../shared/service/shared.service";
 import {environment} from "../../../../../environments/environments";
-import AWSS3UploadAshClient from "aws-s3-upload-ash/src/aws-s3-upload-ash";
+import AWSS3UploadAshClient from "aws-s3-upload-ash";
 
 @Injectable({
     providedIn: 'root'

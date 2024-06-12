@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UploadService} from "../services/upload.service";
-import {UploadResponse} from "aws-s3-upload-ash/src/types";
+import {UploadResponse} from "aws-s3-upload-ash/dist/types";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
