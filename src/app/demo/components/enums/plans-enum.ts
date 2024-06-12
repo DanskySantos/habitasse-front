@@ -8,30 +8,19 @@ export const benefits = {
     ],
     ESSENCIAL: [
         {text: "* Acesso ao Habitasse por 1 mês."},
-        {text: "* Ofertas a vontade."},
-        {text: "* Filtro de Pesquisa rápida."},
-        {text: "* Contato direto com o cliente."},
-        {text: "* Integração com Whatsapp."}
+        {text: "* Todos os benefícios do plano básico."},
+        {text: "* Suporte personalizado."},
+        {text: "* Desconto de R$ 19,99."}
     ],
     PRO: [
         {text: "* Acesso ao Habitasse por 6 meses."},
-        {text: "* Ofertas a vontade."},
-        {text: "* Filtro de Pesquisa rápida."},
-        {text: "* Contato direto com o cliente."},
-        {text: "* Integração com Whatsapp."},
-        {text: "* Acesso a comunidade Habitasse."},
-        {text: "* Suporte Vip via Whatsapp."},
-        {text: "* Desconto de R$ 143,99."}
+        {text: "* Todos os benefícios do Plano Essencial."},
+        {text: "* Desconto de R$ 107,99."}
     ],
     PREMIUM: [
-        {text: "* Acesso ao Habitasse por 6 meses."},
-        {text: "* Ofertas a vontade."},
-        {text: "* Filtro de Pesquisa rápida."},
-        {text: "* Contato direto com o cliente."},
-        {text: "* Integração com Whatsapp."},
-        {text: "* Acesso a comunidade Habitasse."},
-        {text: "* Suporte Vip via Whatsapp."},
-        {text: "* Desconto de R$ 288,99."}
+        {text: "* Acesso ao Habitasse por 1 ano."},
+        {text: "* Todos os benefícios do Plano Pro."},
+        {text: "* Desconto de 287,98."}
     ]
 };
 
@@ -42,7 +31,7 @@ export const PlansEnum = {
         link: "https://buy.stripe.com/28oeXo1AFddR18s3cg",
         value: "R$ 69,99",
         period: "15 dias",
-        description: "Ideal para proprietários de múltiplos imóveis que ocasionalmente precisam aluga-los.",
+        description: null,
         benefits: benefits.BASICO,
         discount: null
     },
@@ -51,29 +40,29 @@ export const PlansEnum = {
         name: "Plano Essencial",
         link: "https://buy.stripe.com/5kA16y9377TxdVe005",
         value: "R$ 119,99",
-        period: "1 mes",
-        description: "Ideal para aqueles que trabalham diretamente com comercialização de imóveis.",
+        period: "1 mês",
+        description: null,
         benefits: benefits.ESSENCIAL,
         discount: null
     },
     PRO: {
         id: 3,
         name: "Plano Pro",
-        link: "https://buy.stripe.com/7sIaH8frva1FaJ28wC",
-        value: "R$ 575,99",
+        link: "https://buy.stripe.com/eVacPg5QV0r5cRa8wE",
+        value: "R$ 611,95",
         period: "6 meses",
-        description: "Ideal para aqueles que trabalham diretamente com comercialização de imóveis de médio e alto padrão.",
+        description: null,
         benefits: benefits.PRO,
-        discount: "Desconto de 20%"
+        discount: null
     },
     PREMIUM: {
         id: 4,
         name: "Plano Premium",
-        link: "https://buy.stripe.com/cN202u1AFgq3eZi5kr",
-        value: "R$ 1.150,99",
+        link: "https://buy.stripe.com/3cscPg1AFgq32cw3cl",
+        value: "R$ 1.151,90",
         period: "1 ano",
-        description: "Ideal para aqueles que trabalham diretamente com comercialização de imóveis de médio e alto padrão.",
+        description: null,
         benefits: benefits.PREMIUM,
-        discount: "Desconto de 20%"
+        discount: null
     }
 };
