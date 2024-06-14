@@ -46,7 +46,7 @@ export class AllDemandsComponent implements OnInit {
     states?: any;
     cities?: any;
     user?: UserModel;
-    remainingDays: any;
+    remainingDays: number = 0;
 
     constructor(public layoutService: LayoutService,
                 private addressService: AddressService,
@@ -68,7 +68,8 @@ export class AllDemandsComponent implements OnInit {
             this.user = data;
             this.cookieService.set('remainingDays', String(data.remainingDays));
             this.cookieService.set('userEmail', data.email);
-            this.remainingDays = this.cookieService.get('remainingDays')
+            this.remainingDays = Number(this.cookieService.get('remainingDays'))
+            console.log(Number(this.cookieService.get('remainingDays')))
             await this.getFilteredDemands(this.page, this.size);
         });
     }
@@ -164,4 +165,7 @@ export class AllDemandsComponent implements OnInit {
     navigateToPayment() {
         this.router.navigateByUrl('home/payments');
     }
+
+    protected readonly NaN = NaN;
+    protected readonly isNaN = isNaN;
 }
