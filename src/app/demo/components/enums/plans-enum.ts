@@ -15,12 +15,14 @@ export const benefits = {
     PRO: [
         {text: "* Acesso ao Habitasse por 6 meses."},
         {text: "* Todos os benefícios do Plano Essencial."},
+        {text: "* Suporte premium."},
         {text: "* Desconto de R$ 107,99."}
     ],
     PREMIUM: [
         {text: "* Acesso ao Habitasse por 1 ano."},
-        {text: "* Todos os benefícios do Plano Pro."},
-        {text: "* Desconto de 287,98."}
+        {text: "* Todos os benefícios da Plataforma."},
+        {text: "* Suporte premium."},
+        {text: "* Desconto de R$ 287,98."}
     ]
 };
 
@@ -43,7 +45,7 @@ export const PlansEnum = {
         period: "1 mês",
         description: null,
         benefits: benefits.ESSENCIAL,
-        discount: null
+        discount: true
     },
     PRO: {
         id: 3,

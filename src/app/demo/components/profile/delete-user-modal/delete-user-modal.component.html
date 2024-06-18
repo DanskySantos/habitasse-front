@@ -1,5 +1,5 @@
 <p-dialog
-    header="Deseja realmente excluir esta demanda?"
+    header="Deseja realmente excluir seu usuário?"
     [(visible)]="visible"
     [modal]="true"
     [breakpoints]=
@@ -12,10 +12,11 @@
     <div>
         <p-button
             type="submit"
-            label="Excluir demanda"
+            label="Excluir usuário"
             [loading]="loading"
-            class="w-auto mt-4"
-            (click)="deleteDemand(demand.propertyDemand.id, demand.id)">
+            [style]="{display: 'grid', width: '100%'}"
+            class="mt-4"
+            (click)="deleteAccount()">
         </p-button>
     </div>
 </p-dialog>

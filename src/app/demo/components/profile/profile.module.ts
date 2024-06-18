@@ -11,6 +11,7 @@ import {DialogModule} from 'primeng/dialog';
 import {ProfileComponent} from "./profile.component";
 import {AvatarModule} from "primeng/avatar";
 import { PasswordUpdateComponent } from './update-password/password-update.component';
+import {DeleteUserModalComponent} from "./delete-user-modal/delete-user-modal.component";
 
 @NgModule({
     imports: [
@@ -27,12 +28,14 @@ import { PasswordUpdateComponent } from './update-password/password-update.compo
     exports: [
         ProfileUpdateComponent,
         PasswordUpdateComponent,
-        ProfileComponent
+        ProfileComponent,
+        DeleteUserModalComponent
     ],
     declarations: [
         ProfileUpdateComponent,
         PasswordUpdateComponent,
-        ProfileComponent
+        ProfileComponent,
+        DeleteUserModalComponent
     ]
 })
 export class ProfileModule {

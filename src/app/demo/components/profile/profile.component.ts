@@ -3,6 +3,8 @@ import {ToastrService} from "ngx-toastr";
 import {UserService} from "./service/user-service";
 import {Router} from "@angular/router";
 import {UserModel} from '../shared/models/user.model';
+import {DeleteUserModalComponent} from "./delete-user-modal/delete-user-modal.component";
+import {CookieService as NgxCookieService} from 'ngx-cookie-service';
 
 @Component({
     templateUrl: './profile.component.html'
@@ -12,15 +14,21 @@ export class ProfileComponent implements OnInit {
     userData?: UserModel;
     showUserUpdate: boolean = false;
     showUserPassword: boolean = false;
+    isCO: boolean = this.cookieService.get('userRole') === 'USER_CO';
 
     constructor(
         private userService: UserService,
         private router: Router,
-        private toastrService: ToastrService) {
+        private toastrService: ToastrService,
+        private cookieService: NgxCookieService) {
         this.getUserProfile();
     }
 
     ngOnInit() {
+    }
+
+    modalExcluir(modaldelete: DeleteUserModalComponent) {
+        modaldelete.visible = true;
     }
 
     getUserProfile() {
@@ -62,9 +70,5 @@ export class ProfileComponent implements OnInit {
 
     navigateToUpdatePassword() {
         this.showUserPassword = true;
-    }
-
-    deleteAccount() {
-        this.userService.deleteAccount();
     }
 }
