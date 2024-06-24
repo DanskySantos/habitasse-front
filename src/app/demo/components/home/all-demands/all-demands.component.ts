@@ -29,6 +29,7 @@ import {Router} from "@angular/router";
 export class AllDemandsComponent implements OnInit {
 
     visible: boolean = false;
+    isWarnVisible: boolean = true;
     demands: any;
     filterForm!: FormGroup;
     totalElements!: number;

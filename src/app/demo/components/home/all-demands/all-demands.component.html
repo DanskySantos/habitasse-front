@@ -274,4 +274,23 @@
                      [totalRecords]="totalElements">
         </p-paginator>
     </div>
+    <p-dialog [(visible)]="isWarnVisible"
+              [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+              [style]="{ width: '30vw' }"
+              [modal]="true"
+              [draggable]="false"
+              [resizable]="false">
+        <div class="flex flex-column">
+            <h2 style="color:#46BB95">Parabéns! Agora você tem acesso à maior plataforma de demandas imobiliárias do Brasil!</h2>
+            <div class="flex justify-content-center align-items-center">
+                <h3>Aproveite 30 dias grátis no Habitasse.</h3>
+                <img ngSrc="assets/app/images/others/rocket.jpeg" height="200" width="200" alt="Rocket Image">
+            </div>
+            <div class="flex w-full justify-content-center mt-4">
+                <h5 class="w-9 text-center">Após período de teste, assine um plano em
+                    <a href="http://www.habitasse.com.br" target="_blank" style="cursor:pointer">www.habitasse.com.br</a>
+                    para continuar usando os serviços.</h5>
+            </div>
+        </div>
+    </p-dialog>
 </div>

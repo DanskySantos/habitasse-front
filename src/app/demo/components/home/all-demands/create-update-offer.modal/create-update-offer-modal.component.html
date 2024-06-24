@@ -1,52 +1,51 @@
-<p-dialog header="Proposta" [(visible)]="visible" [modal]="true" [breakpoints]="{'900px': '60vw', '800px': '80vw', '500px': '100vw'}"
-    class="sm:p-0 md:p-0 lg:p-2 p-0" [draggable]="false" [resizable]="false">
+<p-dialog header="Proposta" [(visible)]="visible" [modal]="true"
+          [breakpoints]="{'900px': '60vw', '800px': '80vw', '500px': '100vw'}"
+          class="sm:p-0 md:p-0 lg:p-2 p-0" [draggable]="false" [resizable]="false">
     <div class="flex-column sm:flex  md:flex-column lg:flex-row  justify-content-evenly">
         <div class="surface-100 p-3 shadow-2 border-round-lg mb-3">
             <div class="flex align-items-center mb-4 justify-content-between">
-                <p class="m-0" style="color: #222222" title="Data de criação">{{
-                    offersService.getformatData(demand.creationDate) }}</p>
+                <p class="m-0" style="color: #222222" title="Data de criação">{{offersService.getformatData(demand.creationDate) }}</p>
             </div>
-            <h5 class="p-2" title="Tipo de contrato">{{
-                offersService.getContractType(demand.propertyDemand.contractType) }}</h5>
+            <h5 class="p-2" title="Tipo de contrato">{{offersService.getContractType(demand.propertyDemand.contractType) }}</h5>
             <ul class="list-none p-0 m-0">
                 <span class="flex p-2 align-items-center mb-2" title="Id">
                     <img ngSrc="./assets/app/images/icons/id.png" alt="id" class="align-self-center mr-2"
-                        height="24" width="24">
+                         height="24" width="24">
                     <span>Id - {{ demand.id }}</span>
                 </span>
                 <span class="flex p-2 align-items-center mb-2" title="Tipo de propriedade">
                     <img ngSrc="./assets/app/images/icons/house.png" alt="house" class="align-self-center mr-2"
-                        height="24" width="24">
+                         height="24" width="24">
                     <span>Tipo de imóvel - {{ offersService.getPropertyType(demand.propertyDemand.propertyType) }}</span>
                 </span>
                 <span class="flex p-2 align-items-center mb-2" title="Localidade">
                     <img ngSrc="./assets/app/images/icons/location_on.png" alt="house" class="align-self-center mr-2"
-                        height="24" width="24">
+                         height="24" width="24">
                     <span>Localidade - {{ offersService.getLocation(demand.propertyDemand.address) }}</span>
                 </span>
                 <span class="flex p-2 align-items-center mb-2" title="Valor desejado">
                     <img ngSrc="./assets/app/images/icons/monetization_on.png" alt="house"
-                        class="align-self-center mr-2" height="24" width="24">
+                         class="align-self-center mr-2" height="24" width="24">
                     <span>Valor até - {{ offersService.getValue(demand.propertyDemand) }}</span>
                 </span>
                 <span class="flex p-2 align-items-center mb-2" title="Quantidade de quartos">
                     <img ngSrc="./assets/app/images/icons/hotel.png" alt="house" class="align-self-center mr-2"
-                        height="24" width="24">
+                         height="24" width="24">
                     <span>Quartos - {{ offersService.getBedroomsNumber(demand.propertyDemand.bedroomsNumber) }}</span>
                 </span>
                 <span class="flex p-2 align-items-center mb-2" title="Mobiliado">
                     <img ngSrc="./assets/app/images/icons/kitchen.png" alt="house" class="align-self-center mr-2"
-                        height="24" width="24">
+                         height="24" width="24">
                     <span>Mobiliado - {{ offersService.getBoolean(demand.propertyDemand.furnished) }}</span>
                 </span>
                 <span class="flex p-2 align-items-center mb-2" title="Permite animais">
                     <img ngSrc="./assets/app/images/icons/pets.png" alt="house" class="align-self-center mr-2"
-                        height="24" width="24">
+                         height="24" width="24">
                     <span>Pet - {{ offersService.getBoolean(demand.propertyDemand.petFriendly) }}</span>
                 </span>
                 <span class="flex p-2 align-items-center mb-2" title="Comentários">
                     <img ngSrc="./assets/app/images/icons/comment.png" alt="house" class="align-self-center mr-2"
-                        height="24" width="24">
+                         height="24" width="24">
                     <span>Comentarios - {{ demand.annotation == '' ? 'Sem comentários' : demand.annotation }}</span>
                 </span>
             </ul>
@@ -58,20 +57,21 @@
                     <div class="mb-3 col-12">
                         <div class="field w-full">
                             <textarea [style]="{ width: '100%' }" rows="17" cols="30" formControlName="text"
-                                minlength="50" placeholder="Use esse espaço para especificar a oferta..."
-                                pInputTextarea>
+                                      minlength="50" placeholder="Use esse espaço para especificar a oferta..."
+                                      pInputTextarea>
                             </textarea>
                         </div>
                         <div>
-                            <app-file-upload [files]="getFiles" (uploadedFilesToSave)="putImagesOnForm($event)" (removeImagesOnForm)="removeImagesOnForm($event)">
+                            <app-file-upload [files]="getFiles" (uploadedFilesToSave)="putImagesOnForm($event)"
+                                             (removeImagesOnForm)="removeImagesOnForm($event)">
                             </app-file-upload>
                         </div>
 
                     </div>
                     <div class="col-12 lg:col-6 sm:col-12 md:col-12 pt-4">
                         <p-button type="submit" [label]="getButtonLabel(this.offer)!"
-                            [disabled]="allDemandsOffers.invalid || this.submited" [loading]="loading"
-                            class="w-auto mt-4" (click)="saveOffers()">
+                                  [disabled]="allDemandsOffers.invalid || this.submited" [loading]="loading"
+                                  class="w-auto mt-4" (click)="saveOffers()">
                         </p-button>
                     </div>
                 </div>
