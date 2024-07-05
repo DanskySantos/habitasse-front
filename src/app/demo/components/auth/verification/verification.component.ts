@@ -3,6 +3,9 @@ import {LayoutService} from 'src/app/layout/service/app.layout.service';
 import {InputNumber} from 'primeng/inputnumber';
 import {AuthService} from "../services/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {UserService} from "../../profile/service/user-service";
+import {NgxUiLoaderService} from "ngx-ui-loader";
+import {UserModel} from "../../shared/models/user.model";
 
 @Component({
     templateUrl: './verification.component.html'
@@ -11,9 +14,13 @@ export class VerificationComponent {
 
     loading: boolean = false;
     verificationForm!: FormGroup;
+    userData?: UserModel;
 
     constructor(private authService: AuthService,
-                private layoutService: LayoutService) {
+                private layoutService: LayoutService,
+                private userService: UserService,
+                private ngxUiLoaderService: NgxUiLoaderService) {
+        this.getUserProfile();
         this.createForm();
     }
 
@@ -25,6 +32,34 @@ export class VerificationComponent {
             number4: new FormControl(null, Validators.required),
             number5: new FormControl(null, Validators.required),
             number6: new FormControl(null, Validators.required)
+        });
+    }
+
+    getUserProfile() {
+        this.ngxUiLoaderService.start();
+        this.userService.getUserProfile().subscribe(
+            data => {
+                this.userData = data;
+                this.ngxUiLoaderService.stop();
+                console.log(data)
+                if (this.userData && this.userData.birthday) {
+                    this.userData.birthday = this.formatarData(this.userData.birthday);
+                }
+            },
+            error => {
+                console.error('Error', error);
+                this.ngxUiLoaderService.stop();
+            }
+        )
+        this.ngxUiLoaderService.stop();
+    }
+
+    formatarData(data: string): string {
+        const dataNascimento = new Date(data);
+        return dataNascimento.toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
         });
     }
 
