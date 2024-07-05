@@ -51,7 +51,7 @@ export class VerificationComponent {
             error => {
                 console.error('Error', error);
                 this.ngxUiLoaderService.stop();
-                this.router.navigateByUrl('/profile');
+                this.router.navigateByUrl('/auth/login');
             }
         )
         this.ngxUiLoaderService.stop();
