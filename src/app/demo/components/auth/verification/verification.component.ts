@@ -6,6 +6,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../profile/service/user-service";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import {UserModel} from "../../shared/models/user.model";
+import {Router} from "@angular/router";
 
 @Component({
     templateUrl: './verification.component.html'
@@ -18,6 +19,7 @@ export class VerificationComponent {
 
     constructor(private authService: AuthService,
                 private layoutService: LayoutService,
+                private router: Router,
                 private userService: UserService,
                 private ngxUiLoaderService: NgxUiLoaderService) {
         this.getUserProfile();
@@ -49,6 +51,7 @@ export class VerificationComponent {
             error => {
                 console.error('Error', error);
                 this.ngxUiLoaderService.stop();
+                this.router.navigateByUrl('/profile');
             }
         )
         this.ngxUiLoaderService.stop();
