@@ -70,7 +70,6 @@ export class AllDemandsComponent implements OnInit {
             this.cookieService.set('remainingDays', String(data.remainingDays));
             this.cookieService.set('userEmail', data.email);
             this.remainingDays = Number(this.cookieService.get('remainingDays'))
-            console.log(Number(this.cookieService.get('remainingDays')))
             await this.getFilteredDemands(this.page, this.size);
         });
     }

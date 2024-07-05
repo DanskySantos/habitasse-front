@@ -5,6 +5,7 @@ export class AuthModel {
     userId!: string;
     userRole!: string;
     remainingDays!: number;
+    isAccountConfirmed!: boolean;
 
     constructor() {
     }

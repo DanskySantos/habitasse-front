@@ -66,6 +66,7 @@ export class RegisterComponent implements OnInit {
         setTimeout(() => {
             this.loading = false
         }, 2000);
+        localStorage.setItem('userEmail', this.email.value)
         this.setRole(UserTypeEnum, this.userRoles.value)
         this.authService.register(this.registerForm.value);
     }
