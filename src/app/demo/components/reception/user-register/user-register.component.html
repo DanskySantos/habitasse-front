@@ -1,0 +1,51 @@
+<form [formGroup]="registerForm" #formDir="ngForm"
+      style="background: #46BB95"
+      class="h-screen w-screen flex align-items-center justify-content-center">
+    <div class="flex flex-column align-items-center">
+        <img src="./assets/app/images/auth/logo_habitasse_fundo_verde.png"
+             alt="logo-habitasse"
+             style="width: 65%; height: 65%"
+             class="mb-4 align-self-center">
+        <div class="surface-card py-5 px-5 sm:px-7 shadow-2 flex flex-column w-11 sm:w-9"
+             style="border-radius:14px">
+            <div class="flex align-items-start flex-column mb-2 mt-6">
+                <h3 class="text-primary mb-5"><strong>Cadastre seu usuário</strong></h3>
+            </div>
+            <div class="mb-4 field p-float-label w-full">
+                <input class="w-full surface-50" id="name" type="text" autocomplete="off" pInputText
+                       formControlName="name">
+                <label for="name" class="w-full font-medium text-base">Nome Completo</label>
+            </div>
+            <div class="mb-4 field p-float-label w-full">
+                <input class="w-full surface-50" id="email" type="text" autocomplete="off" pInputText
+                       formControlName="email">
+                <label for="email" class="w-full font-medium text-base">Email</label>
+            </div>
+            <div class="mb-4 field p-float-label w-full">
+                <input class="w-full surface-50" id="password" type="password" autocomplete="off" pInputText
+                       formControlName="password">
+                <label for="password" class="w-full font-medium text-base">Senha</label>
+            </div>
+            <div class="mb-4 field p-float-label w-full" *ngIf="userRoles.value === 'Quero fazer ofertas'">
+                <input class="w-full surface-50" id="phone" type="tel" pInputText formControlName="phone" maxlength="11"
+                       minlength="11">
+                <label for="phone" class="w-full font-medium text-base">Celular (whatsapp)</label>
+            </div>
+            <p-button type="submit"
+                      (click)="submit()"
+                      (keyup.enter)="submit()"
+                      [disabled]="registerForm.invalid"
+                      label="CRIAR CONTA"
+                      [loading]="loading"
+                      [style]="{'width': '100%', 'border-radius': '10px'}"
+                      class="mb-4 w-full max-w-full">
+            </p-button>
+            <span class="text-color-secondary text-center mb-4">Ao criar a conta você concorda com os nossos
+            <a class="text-primary text-center mb-4"
+               target="_blank"
+               href="https://www.habitasse.com.br/termos-e-condicoes-de-uso-habitasse#termosdeuso"><strong>Termos de uso</strong>
+            </a>
+        </span>
+        </div>
+    </div>
+</form>

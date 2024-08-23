@@ -32,4 +32,14 @@ export class AddressService extends SharedService {
         const headers = this.setHeadersForBearer();
         return this.http.get<CityModel[]>(this.apiURL + 'address/filter-cities/' + uf, {headers});
     }
+
+    getAllStatesBasic(): Observable<StateModel[]> {
+        const headers = this.setHeaders();
+        return this.http.get<StateModel[]>(this.apiURL + 'new-demand/states', {headers});
+    }
+
+    getFilteredCitiesBasic(uf: string): Observable<CityModel[]> {
+        const headers = this.setHeaders();
+        return this.http.get<CityModel[]>(this.apiURL + 'new-demand/filter-cities/' + uf, {headers});
+    }
 }

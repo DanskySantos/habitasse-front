@@ -36,19 +36,4 @@ export class PropertyDemandService extends SharedService {
             }
         );
     }
-
-    saveNewDemand(form: any){
-        const headers = this.setHeaders();
-        return this.http.post<any[]>(this.apiURL + 'new-demand/save', form, {headers}).subscribe(
-            (next : any) => {
-                this.toastrService.success('Imóvel Cadastrado', 'Sucesso')
-                this.router.navigate(['/reception/user-register'])
-                localStorage.setItem('propertyDemandId', next.id)
-                console.log('localstorage', localStorage.getItem('propertyDemandId'))
-            },
-            err => {
-                this.toastrService.error(err.code, 'Não foi possivel cadastrar o imóvel')
-            }
-        );
-    }
 }

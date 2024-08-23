@@ -40,6 +40,11 @@ const routes: Routes = [
         data: {breadcrumb: 'Autenticação'},
         loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule)
     },
+    {
+        path: 'reception',
+        data: {breadcrumb: 'Recepção'},
+        loadChildren: () => import('./demo/components/reception/reception.module').then(m => m.ReceptionModule)
+    },
     {path: '**', redirectTo: '/auth/login'}
 ];
 

@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {throwError} from "rxjs";
 import {HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../../../environments/environments";
 
@@ -52,6 +51,7 @@ export class SharedService {
         if (bedroomsNumber == 'FIVE_OR_MORE')
             return "5 ou mais"
     }
+
     getContractType(contractType: string): any {
         if (contractType == 'RENT')
             return 'Locação'

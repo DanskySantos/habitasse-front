@@ -61,6 +61,25 @@ export class AuthService extends SharedService {
             });
     }
 
+    async registerNewUser(registerModel: RegisterModel) {
+        console.log(registerModel)
+        this.deleteCookies();
+        const headers = this.setHeaders();
+        const body = JSON.stringify(registerModel);
+
+        this.http.post(this.apiURL + 'auth/registerNewUser', body, {headers}).subscribe(
+            async response => {
+                await this.setCookies(response);
+                this.toastrService.success('Registro Concluído', 'Sucesso')
+                const model = Object.assign(new AuthModel(), response);
+                await this.router.navigateByUrl('/auth/verification')
+            },
+            error => {
+                this.toastrService.error(error.error, 'Erro')
+                console.error('Error', error.error);
+            });
+    }
+
     async authorizeAccount(verificationModel: VerificationModel) {
         const headers = this.setHeaders();
         const body = JSON.stringify(verificationModel);

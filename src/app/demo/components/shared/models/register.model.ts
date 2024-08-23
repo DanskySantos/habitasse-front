@@ -5,4 +5,5 @@ export interface RegisterModel {
     password: string;
     birthday: string;
     userRoles: string;
+    demandId: string;
 }
