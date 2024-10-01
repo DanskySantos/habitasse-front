@@ -4,7 +4,7 @@
             <div class="col-12 xl:col-3 lg:col-6 md:h-auto mb-5" *ngFor="let plan of plans">
                 <div [style]="{width: '90px', height: '90px', padding: '0 0 0 5px', top: '30px', left: '65%'}"
                      class="flex flex-column justify-content-center border-circle bg-green-300 relative" *ngIf="plan.discount">
-                    <span class="text-0">30 dias grátis</span>
+                    <span class="text-0">7 dias grátis</span>
                 </div>
                 <div style="background: var(--primary-color);" class="card flex flex-column justify-content-between cursor-pointer"
                      (click)="buyPlan(plan.link + '?prefilled_email=' + userEmail + '&client_reference_id=' + plan.id)">
